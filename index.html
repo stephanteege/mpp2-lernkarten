@@ -231,6 +231,28 @@ unternehmensformen: `<svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/sv
 <line x1="395" y1="106" x2="395" y2="118" stroke="#c7c4b8"/>
 </svg>`,
 
+organigramm: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
+<rect x="180" y="10" width="100" height="28" rx="6" fill="#E6F1FB" stroke="#185FA5"/>
+<text x="230" y="28" font-size="9" text-anchor="middle" fill="#0C447C">Geschäftsführung</text>
+<g font-size="8.5" fill="#085041">
+<rect x="10" y="90" width="95" height="26" rx="5" fill="#E1F5EE" stroke="#0F6E56"/><text x="57" y="107" text-anchor="middle">Abteilung A (IT)</text>
+<rect x="130" y="90" width="95" height="26" rx="5" fill="#E1F5EE" stroke="#0F6E56"/><text x="177" y="107" text-anchor="middle">Abteilung B (Personal)</text>
+<rect x="250" y="90" width="95" height="26" rx="5" fill="#E1F5EE" stroke="#0F6E56"/><text x="297" y="107" text-anchor="middle">Abteilung C (Finanzen)</text>
+<rect x="370" y="90" width="80" height="26" rx="5" fill="#E1F5EE" stroke="#0F6E56"/><text x="410" y="107" text-anchor="middle">Stabsstelle</text>
+</g>
+<g font-size="8" fill="#633806">
+<rect x="10" y="160" width="95" height="24" rx="5" fill="#FAEEDA" stroke="#854F0B"/><text x="57" y="176" text-anchor="middle">Team 1</text>
+<rect x="130" y="160" width="95" height="24" rx="5" fill="#FAEEDA" stroke="#854F0B"/><text x="177" y="176" text-anchor="middle">Team 2</text>
+</g>
+<line x1="230" y1="38" x2="57" y2="90" stroke="#c7c4b8"/>
+<line x1="230" y1="38" x2="177" y2="90" stroke="#c7c4b8"/>
+<line x1="230" y1="38" x2="297" y2="90" stroke="#c7c4b8"/>
+<line x1="230" y1="38" x2="410" y2="90" stroke="#c7c4b8" stroke-dasharray="3,2"/>
+<line x1="57" y1="116" x2="57" y2="160" stroke="#c7c4b8"/>
+<line x1="177" y1="116" x2="177" y2="160" stroke="#c7c4b8"/>
+<text x="230" y="215" font-size="7.5" text-anchor="middle" fill="#6b6a63">Linienbeziehung (durchgezogen) vs. Stabsstelle ohne Weisungsbefugnis (gestrichelt)</text>
+</svg>`,
+
 bcgmatrix: `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
 <line x1="40" y1="30" x2="40" y2="280" stroke="#1f1e1c" stroke-width="1.5"/>
 <line x1="40" y1="280" x2="300" y2="280" stroke="#1f1e1c" stroke-width="1.5"/>
@@ -488,6 +510,33 @@ raid: `<svg viewBox="0 0 380 140" xmlns="http://www.w3.org/2000/svg">
 <rect x="10" y="94" width="60" height="30" fill="#E1F5EE" stroke="#0F6E56"/><text x="40" y="113" font-size="9" text-anchor="middle" fill="#085041">Daten</text>
 <rect x="80" y="94" width="60" height="30" fill="#E1F5EE" stroke="#0F6E56"/><text x="110" y="113" font-size="9" text-anchor="middle" fill="#085041">Daten</text>
 <rect x="150" y="94" width="60" height="30" fill="#FAEEDA" stroke="#854F0B"/><text x="180" y="113" font-size="9" text-anchor="middle" fill="#633806">Parität</text>
+</svg>`,
+
+raidstufen: `<svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="16" font-size="10" font-weight="600" fill="#1f1e1c">RAID 0 (Striping) — kein Ausfallschutz</text>
+<rect x="10" y="24" width="70" height="26" fill="#FAECE7" stroke="#B5341A"/><text x="45" y="41" font-size="9" text-anchor="middle" fill="#712B13">Block 1</text>
+<rect x="90" y="24" width="70" height="26" fill="#FAECE7" stroke="#B5341A"/><text x="125" y="41" font-size="9" text-anchor="middle" fill="#712B13">Block 2</text>
+<text x="170" y="41" font-size="8" fill="#6b6a63">volle Kapazität, volle Geschwindigkeit, 1 Ausfall = Datenverlust</text>
+
+<text x="10" y="76" font-size="10" font-weight="600" fill="#1f1e1c">RAID 1 (Spiegelung) — hohe Ausfallsicherheit</text>
+<rect x="10" y="84" width="70" height="26" fill="#E6F1FB" stroke="#185FA5"/><text x="45" y="101" font-size="9" text-anchor="middle" fill="#0C447C">Disk A</text>
+<rect x="90" y="84" width="70" height="26" fill="#E6F1FB" stroke="#185FA5"/><text x="125" y="101" font-size="9" text-anchor="middle" fill="#0C447C">Disk B (Kopie)</text>
+<text x="170" y="101" font-size="8" fill="#6b6a63">nur 50% Nutzkapazität, 1 Platte darf ausfallen</text>
+
+<text x="10" y="136" font-size="10" font-weight="600" fill="#1f1e1c">RAID 5 (Striping + Parität) — Kompromiss</text>
+<rect x="10" y="144" width="70" height="26" fill="#E1F5EE" stroke="#0F6E56"/><text x="45" y="161" font-size="9" text-anchor="middle" fill="#085041">Daten</text>
+<rect x="90" y="144" width="70" height="26" fill="#E1F5EE" stroke="#0F6E56"/><text x="125" y="161" font-size="9" text-anchor="middle" fill="#085041">Daten</text>
+<rect x="170" y="144" width="70" height="26" fill="#FAEEDA" stroke="#854F0B"/><text x="205" y="161" font-size="9" text-anchor="middle" fill="#633806">Parität</text>
+<text x="250" y="161" font-size="8" fill="#6b6a63">ab 3 Platten, 1 darf ausfallen</text>
+
+<text x="10" y="196" font-size="10" font-weight="600" fill="#1f1e1c">RAID 10 (1+0) — Spiegelung + Striping</text>
+<rect x="10" y="204" width="55" height="26" fill="#F1EBFB" stroke="#6E3FA3"/><text x="37" y="221" font-size="9" text-anchor="middle" fill="#3E2568">A</text>
+<rect x="70" y="204" width="55" height="26" fill="#F1EBFB" stroke="#6E3FA3"/><text x="97" y="221" font-size="9" text-anchor="middle" fill="#3E2568">A′</text>
+<rect x="135" y="204" width="55" height="26" fill="#F1EBFB" stroke="#6E3FA3"/><text x="162" y="221" font-size="9" text-anchor="middle" fill="#3E2568">B</text>
+<rect x="195" y="204" width="55" height="26" fill="#F1EBFB" stroke="#6E3FA3"/><text x="222" y="221" font-size="9" text-anchor="middle" fill="#3E2568">B′</text>
+<text x="260" y="221" font-size="8" fill="#6b6a63">schnell + ausfallsicher, hoher Plattenbedarf</text>
+
+<text x="10" y="260" font-size="8" fill="#6b6a63">Merke: 0 = Speed, 1 = Sicherheit, 5 = Kompromiss (Parität), 10 = beides (teuer)</text>
 </svg>`,
 
 listevsbaum: `<svg viewBox="0 0 380 150" xmlns="http://www.w3.org/2000/svg">
@@ -972,7 +1021,8 @@ week1: {
       { q: "Was ist das Hauptproblem der Stern-Topologie?", a: "Single Point of Failure (SPoF): fällt der zentrale Knoten (Switch/Hub) aus, ist das gesamte Netzwerk betroffen.", svg: DIAGRAMS.sterntopologie },
       { q: "Was ist der Vorteil der Bus-Topologie und was ihr Nachteil?", a: "Vorteil: geringer Verkabelungsaufwand. Nachteil: bei Kabelbruch fällt das gesamte Segment aus, Kollisionsgefahr bei gleichzeitiger Übertragung.", svg: DIAGRAMS.bustopologie },
       { q: "Was zeichnet die Masch-Topologie aus?", a: "Jeder Knoten ist (teilweise oder vollständig) mit mehreren anderen verbunden → hohe Ausfallsicherheit durch redundante Wege, aber hoher Verkabelungsaufwand.", svg: DIAGRAMS.maschtopologie },
-      { q: "Nach welchen Kriterien wählt man eine Netzwerktopologie?", a: "Kosten, Ausfallsicherheit, Skalierbarkeit, Verwaltungsaufwand, benötigte Übertragungsgeschwindigkeit." }
+      { q: "Nach welchen Kriterien wählt man eine Netzwerktopologie?", a: "Kosten, Ausfallsicherheit, Skalierbarkeit, Verwaltungsaufwand, benötigte Übertragungsgeschwindigkeit." },
+      { q: "Was bedeutet CSMA und wofür wird es eingesetzt?", a: "Carrier Sense Multiple Access: Verfahren, bei dem ein Gerät vor dem Senden prüft, ob das gemeinsame Übertragungsmedium (z. B. bei Bus-Topologie/Ethernet) frei ist, um Kollisionen zu vermeiden. Wichtige Varianten: CSMA/CD (Collision Detection, klassisches Ethernet – Kollision wird erkannt, danach neu gesendet) und CSMA/CA (Collision Avoidance, z. B. WLAN – Kollision wird durch Reservierung des Mediums von vornherein vermieden)." }
     ]},
     { name: "OSI-Schichtenmodell", prio: "hoch", cards: [
       { q: "Nenne die 7 Schichten des OSI-Modells in der richtigen Reihenfolge.", a: "1. Physikalisch (Bitübertragung), 2. Sicherung (MAC/Ethernet), 3. Netzwerk (Routing, IP), 4. Transport (TCP/UDP), 5. Sitzung, 6. Darstellung (Verschlüsselung, Formate), 7. Anwendung (HTTP, FTP, DNS).", svg: DIAGRAMS.osi },
@@ -1011,10 +1061,12 @@ week1: {
     ]},
     { name: "Unternehmens-/Rechtsformen", prio: "hoch", cards: [
       { q: "Nenne die Hauptgruppen der Unternehmensformen.", a: "Einzelunternehmen, Personengesellschaften (GbR, OHG, KG), Kapitalgesellschaften (GmbH, UG, AG), Sonderformen (Genossenschaften, Körperschaften des öffentlichen Rechts, Stiftungen).", svg: DIAGRAMS.unternehmensformenliste },
+      { q: "Schreibe die Abkürzungen GbR, OHG, KG, UG, AG und SE aus.", a: "GbR = Gesellschaft bürgerlichen Rechts. OHG = Offene Handelsgesellschaft. KG = Kommanditgesellschaft. UG = Unternehmergesellschaft (haftungsbeschränkt, 'Mini-GmbH'). AG = Aktiengesellschaft. SE = Societas Europaea (Europäische Gesellschaft)." },
       { q: "Was unterscheidet Personengesellschaften von Kapitalgesellschaften bei der Haftung?", a: "Personengesellschaften: meist unbeschränkte persönliche Haftung der Gesellschafter. Kapitalgesellschaften: Haftung i. d. R. auf das Gesellschaftsvermögen beschränkt." },
       { q: "Was sind die Kernmerkmale einer GmbH?", a: "Kapitalgesellschaft, Mindestkapital 25.000€, beschränkte Haftung der Gesellschafter, Organe: Geschäftsführung und Gesellschafterversammlung." },
       { q: "Zeichne die Unternehmensformen als Baumdiagramm (grobe Struktur).", a: "Unternehmensformen → Einzelunternehmen | Personengesellschaften (GbR, OHG, KG, PartG) | Kapitalgesellschaften (GmbH, UG, AG, SE) | Sonderformen (Genossenschaft, Körperschaft d. ö. Rechts, Stiftung).", svg: DIAGRAMS.unternehmensformen },
-      { q: "Nach welchen Kriterien wählt man eine Rechtsform aus?", a: "Haftung (persönlich/beschränkt), Kapitalbedarf, steuerliche Belastung, Mitbestimmung/Entscheidungsfreiheit, Publizitäts- und Berichtspflichten." }
+      { q: "Nach welchen Kriterien wählt man eine Rechtsform aus?", a: "Haftung (persönlich/beschränkt), Kapitalbedarf, steuerliche Belastung, Mitbestimmung/Entscheidungsfreiheit, Publizitäts- und Berichtspflichten." },
+      { q: "Was zeigt ein Organigramm und welche Grundtypen gibt es?", a: "Ein Organigramm stellt die Aufbauorganisation eines Unternehmens grafisch dar: Hierarchieebenen, Abteilungen/Stellen und ihre Weisungsbeziehungen. Grundtypen: Linienorganisation (klare 1:1-Weisungslinien von oben nach unten), Stab-Linien-Organisation (zusätzliche beratende Stabsstellen ohne eigene Weisungsbefugnis), Matrixorganisation (Mitarbeitende unterstehen zwei Leitungslinien gleichzeitig, z. B. fachlich und projektbezogen).", svg: DIAGRAMS.organigramm }
     ]},
     { name: "Rechtsformwahl begründen", prio: "hoch", cards: [
       { q: "Welche Rechtsform würdest du mit 50.000€ Startkapital wählen und warum?", a: "Z. B. GmbH: Mindestkapital (25.000€) ist gedeckt, Haftung ist auf das Gesellschaftsvermögen beschränkt (persönliches Risiko begrenzt), professionelles Auftreten am Markt. Alternative: UG bei geringerem Kapitalbedarf und Wunsch nach schnellerer/günstigerer Gründung." },
@@ -1040,7 +1092,8 @@ week1: {
       { q: "Was ist das Ziel des Onlinezugangsgesetzes (OZG) und seit wann gilt es?", a: "Seit 2017: Verpflichtung von Bund, Ländern und Kommunen, Verwaltungsleistungen digital über Verwaltungsportale anzubieten. Umfasst rund 575 Leistungen in 14 Lebens- und 5 Geschäftslagen." },
       { q: "Was ist der 'Einer-für-alle' (EfA)-Ansatz beim OZG?", a: "Ein Bundesland entwickelt eine digitale Lösung für eine Verwaltungsleistung, andere Länder können diese Lösung nachnutzen, statt jeweils eigene zu bauen." },
       { q: "Was regelt das E-Government-Gesetz (EGovG) und seit wann?", a: "Seit 2013: fördert elektronische Verwaltung, u. a. elektronische Aktenführung (E-Akte), elektronische Kommunikation (De-Mail), einheitliche Schnittstellen zwischen Behörden." },
-      { q: "Was ist das Ziel des Registermodernisierungsgesetzes (RegMoG) und welches Prinzip steht dahinter?", a: "Seit 2021: Vernetzung/Modernisierung der Register zur effizienteren Datennutzung. Zentrales Prinzip: 'Once-Only' – Bürger geben Daten nur einmal an, Verwaltung nutzt sie mehrfach (über die Steuer-ID als Ordnungsmerkmal)." }
+      { q: "Was ist das Ziel des Registermodernisierungsgesetzes (RegMoG) und welches Prinzip steht dahinter?", a: "Seit 2021: Vernetzung/Modernisierung der Register zur effizienteren Datennutzung. Zentrales Prinzip: 'Once-Only' – Bürger geben Daten nur einmal an, Verwaltung nutzt sie mehrfach (über die Steuer-ID als Ordnungsmerkmal)." },
+      { q: "Was besagt das EVA-Prinzip und wo ordnet es sich europarechtlich ein?", a: "EVA = Eingabe – Verarbeitung – Ausgabe: Grundprinzip der Datenverarbeitung, wonach jedes System Daten entgegennimmt (Eingabe), diese verarbeitet und ein Ergebnis liefert (Ausgabe). Im Verwaltungskontext ist es die technische Grundlage automatisierter Bescheide/Verfahren. Europarechtlicher Bezug: bei vollautomatisierten Entscheidungen (reine EVA-Verarbeitung ohne menschliches Zutun) greifen die Vorgaben aus Art. 22 DSGVO – Betroffene haben das Recht, nicht ausschließlich einer automatisierten Entscheidung mit rechtlicher Wirkung unterworfen zu werden, sofern keine Ausnahme (z. B. gesetzliche Grundlage, Einwilligung) vorliegt." }
     ]},
     { name: "Digitale Souveränität, eIDAS, Once-Only", prio: "mittel", cards: [
       { q: "Was bedeutet digitale Souveränität für die Verwaltung?", a: "Unabhängigkeit von großen internationalen IT-Anbietern, Förderung europäischer Cloud-Initiativen (z. B. GAIA-X) und Nutzung offener Standards/Open-Source-Software." },
@@ -1058,7 +1111,8 @@ week1: {
       { q: "Was unterscheidet Pools von Lanes in BPMN?", a: "Pools stellen ganze Organisationen/Systeme dar, Lanes darin repräsentieren Rollen, Abteilungen oder Funktionseinheiten innerhalb eines Pools.", svg: DIAGRAMS.bpmnpoolslanes }
     ]},
     { name: "RAID, Datenstrukturen", prio: "niedrig", cards: [
-      { q: "Was ist der Zweck von RAID-Systemen?", a: "Zusammenschluss mehrerer Festplatten zur Erhöhung von Datensicherheit (Redundanz) und/oder Geschwindigkeit, z. B. RAID 1 (Spiegelung) oder RAID 5 (Striping mit Parität).", svg: DIAGRAMS.raid },
+      { q: "Was ist der Zweck von RAID-Systemen? (RAID ausschreiben)", a: "RAID = Redundant Array of Independent Disks. Zusammenschluss mehrerer Festplatten zur Erhöhung von Datensicherheit (Redundanz) und/oder Geschwindigkeit, z. B. RAID 1 (Spiegelung) oder RAID 5 (Striping mit Parität).", svg: DIAGRAMS.raid },
+      { q: "Nenne die wichtigsten RAID-Stufen und erkläre kurz ihr Prinzip.", a: "RAID 0 (Striping): Daten werden ohne Redundanz auf mehrere Platten verteilt → hohe Geschwindigkeit, aber kein Ausfallschutz. RAID 1 (Spiegelung): identische Daten auf zwei Platten → hohe Ausfallsicherheit, halbierte Nutzkapazität. RAID 5 (Striping + Parität): Daten und Prüfsummen (Parität) verteilt über mind. 3 Platten → guter Kompromiss aus Geschwindigkeit und Redundanz, eine Platte darf ausfallen. RAID 10 (1+0): Kombination aus Spiegelung und Striping → hohe Geschwindigkeit und Ausfallsicherheit, aber hoher Plattenbedarf.", svg: DIAGRAMS.raidstufen },
       { q: "Was ist der Unterschied zwischen einer verketteten Liste und einem Binärbaum bezüglich der Suche?", a: "Liste: lineare Suche, im schlechtesten Fall O(n). Binärer Suchbaum: bei ausgeglichenem Baum O(log n), da bei jedem Schritt die Suchmenge halbiert wird.", svg: DIAGRAMS.listevsbaum }
     ]},
     { name: "Lasten-/Pflichtenheft, Systemanalyse", prio: "niedrig", cards: [
@@ -1160,6 +1214,7 @@ week3: {
   label: "Woche 3", range: "17.–21.8. (Mo–Fr)", color: "teal",
   topics: [
     { name: "OOP-Säulen", prio: "hoch", cards: [
+      { q: "Wofür steht die Abkürzung OOP?", a: "Objektorientierte Programmierung: Programmierparadigma, bei dem Daten und zugehörige Funktionen in Objekten (Instanzen von Klassen) gebündelt werden." },
       { q: "Was ist Kapselung (Encapsulation)?", a: "Bündelung von Daten und Methoden in einer Klasse, Zugriff von außen wird über definierte Schnittstellen (z. B. public/private) kontrolliert." },
       { q: "Was ist Vererbung (Inheritance)?", a: "Eine Klasse (Subklasse) übernimmt Eigenschaften und Methoden einer anderen Klasse (Superklasse) und kann sie erweitern oder überschreiben." },
       { q: "Was ist Polymorphie (Polymorphism)?", a: "Objekte unterschiedlicher Klassen können über dieselbe Schnittstelle angesprochen werden, verhalten sich aber je nach tatsächlichem Typ unterschiedlich (z. B. überschriebene Methoden)." },
@@ -1167,6 +1222,7 @@ week3: {
       { q: "Wie hängen die vier Säulen zusammen?", a: "Abstraktion definiert das Wesentliche, Kapselung schützt die Umsetzung, Vererbung ermöglicht Wiederverwendung, Polymorphie erlaubt flexible Nutzung verschiedener Implementierungen über eine gemeinsame Schnittstelle." }
     ]},
     { name: "UML-Klassendiagramm", prio: "hoch", cards: [
+      { q: "Wofür steht die Abkürzung UML?", a: "Unified Modeling Language: standardisierte, grafische Modellierungssprache zur Darstellung von Strukturen (z. B. Klassendiagramm) und Abläufen (z. B. Sequenzdiagramm) in der Softwareentwicklung." },
       { q: "Aus welchen drei Bereichen besteht eine Klasse im UML-Klassendiagramm?", a: "Klassenname (oben), Attribute (Mitte), Methoden/Operationen (unten).", svg: DIAGRAMS.klassendiagramm },
       { q: "Wie werden Sichtbarkeiten im Klassendiagramm notiert?", a: "+ = public, − = private, # = protected, ~ = package/paket-sichtbar.", svg: DIAGRAMS.sichtbarkeiten },
       { q: "Welche Beziehungsarten gibt es im Klassendiagramm und wie sehen sie aus?", a: "Assoziation (einfache Linie), Aggregation (Linie mit leerer Raute, 'hat-ein', lose Beziehung), Komposition (Linie mit gefüllter Raute, starke Abhängigkeit), Vererbung/Generalisierung (Linie mit leerem Dreieck-Pfeil).", svg: DIAGRAMS.beziehungsarten },
@@ -1195,6 +1251,7 @@ week3: {
       { q: "Was passiert, wenn nur die Verfügbarkeit, aber nicht die Integrität geschützt ist?", a: "Das System bleibt erreichbar, aber Daten könnten unbemerkt manipuliert werden (z. B. durch einen Man-in-the-Middle-Angriff) – der Nutzer erhält falsche, aber verfügbare Informationen." }
     ]},
     { name: "DSGVO, Datenschutz vs. Datensicherheit", prio: "hoch", cards: [
+      { q: "Wofür steht die Abkürzung DSGVO und seit wann gilt sie?", a: "Datenschutz-Grundverordnung. EU-weit unmittelbar geltende Verordnung zum Schutz personenbezogener Daten, in Kraft seit 25. Mai 2018." },
       { q: "Was ist der Unterschied zwischen Datenschutz und Datensicherheit?", a: "Datenschutz: Schutz personenbezogener Daten vor missbräuchlicher Verwendung (rechtlicher Fokus, z. B. DSGVO). Datensicherheit: technischer Schutz aller Daten vor Verlust, Manipulation, unbefugtem Zugriff (unabhängig vom Personenbezug)." },
       { q: "Was sind zentrale Grundsätze der DSGVO?", a: "Rechtmäßigkeit, Zweckbindung, Datenminimierung, Richtigkeit, Speicherbegrenzung, Integrität/Vertraulichkeit, Rechenschaftspflicht.", svg: DIAGRAMS.dsgvo },
       { q: "Welche Rechte haben Betroffene nach der DSGVO?", a: "Auskunftsrecht, Recht auf Berichtigung, Recht auf Löschung ('Recht auf Vergessenwerden'), Recht auf Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruchsrecht." },
@@ -1266,7 +1323,8 @@ optional: {
     ]},
     { name: "Volkswirtschaftslehre", prio: "niedrig", cards: [
       { q: "Was zeigt der einfache Wirtschaftskreislauf?", a: "Den Güter- und Geldfluss zwischen den Wirtschaftssubjekten, z. B. Haushalte liefern Produktionsfaktoren an Unternehmen und erhalten dafür Einkommen, Unternehmen liefern Güter gegen Konsumausgaben." },
-      { q: "Nenne die drei klassischen Marktformen.", a: "Polypol (viele Anbieter, viele Nachfrager), Oligopol (wenige Anbieter), Monopol (ein Anbieter)." }
+      { q: "Nenne die drei klassischen Marktformen.", a: "Polypol (viele Anbieter, viele Nachfrager), Oligopol (wenige Anbieter), Monopol (ein Anbieter)." },
+      { q: "Erkläre die drei Marktformen jeweils mit einem Beispiel und ihrer Preiswirkung.", a: "Polypol: viele kleine Anbieter, kein Einzelner beeinflusst den Preis, z. B. Wochenmarkt/Landwirtschaft → Preis bildet sich frei über Angebot/Nachfrage. Oligopol: wenige große Anbieter mit gegenseitiger Abhängigkeit, z. B. Mobilfunkanbieter/Tankstellen → Preise oft ähnlich, Gefahr von Absprachen. Monopol: ein einziger Anbieter ohne Konkurrenz, z. B. früher Deutsche Bahn im Fernverkehr, heute z. B. lokale Netzbetreiber → Anbieter kann Preis weitgehend selbst bestimmen (daher oft reguliert)." }
     ]},
     { name: "Corporate Governance / Controlling", prio: "niedrig", cards: [
       { q: "Was versteht man unter Corporate Governance?", a: "Rahmenwerk aus Regeln und Prozessen zur verantwortungsvollen Leitung und Kontrolle eines Unternehmens, mit Fokus auf Transparenz und Interessenausgleich der Stakeholder." },
@@ -1286,6 +1344,7 @@ optional: {
     ]},
     { name: "Sonstige Einzelthemen", prio: "niedrig", cards: [
       { q: "Was bedeutet Normalisierung in Datenbanken?", a: "Strukturierung von Tabellen zur Vermeidung von Redundanzen und Anomalien, in aufeinander aufbauenden Normalformen (1NF, 2NF, 3NF)." },
+      { q: "Erkläre die ersten drei Normalformen (1NF, 2NF, 3NF) jeweils kurz.", a: "1. Normalform (1NF): jedes Attribut enthält nur atomare (unteilbare) Werte, keine Wiederholungsgruppen/Listen in einer Zelle. 2. Normalform (2NF): erfüllt 1NF, zusätzlich müssen Nicht-Schlüsselattribute voll funktional vom gesamten Primärschlüssel abhängen (keine partielle Abhängigkeit bei zusammengesetzten Schlüsseln). 3. Normalform (3NF): erfüllt 2NF, zusätzlich dürfen Nicht-Schlüsselattribute nicht transitiv von anderen Nicht-Schlüsselattributen abhängen (kein Attribut hängt von einem anderen Nicht-Schlüsselattribut ab)." },
       { q: "Was besagt das Liskov Substitution Principle (LSP)?", a: "Objekte einer Subklasse müssen sich anstelle von Objekten der Superklasse einsetzen lassen, ohne die Korrektheit des Programms zu beeinträchtigen." }
     ]}
   ]
@@ -1316,6 +1375,18 @@ function cardId(wk, ti, ci){ return wk+'-'+ti+'-'+ci; }
 function getStatus(wk, ti, ci){ return cardStatus[cardId(wk,ti,ci)] || 'neu'; }
 function setStatus(wk, ti, ci, status){
   cardStatus[cardId(wk,ti,ci)] = status;
+  saveStatus();
+}
+
+// scope === 'all' -> gesamten Fortschritt löschen; scope === weekKey -> nur diese Woche
+function resetStatus(scope){
+  if(scope === 'all'){
+    cardStatus = {};
+  } else {
+    Object.keys(cardStatus).forEach(key=>{
+      if(key.indexOf(scope + '-') === 0) delete cardStatus[key];
+    });
+  }
   saveStatus();
 }
 
@@ -1391,6 +1462,7 @@ function render(){
   else if(view.screen==='topics') renderTopics();
   else if(view.screen==='filter') renderFilterPicker();
   else if(view.screen==='cards') renderCards();
+  else if(view.screen==='settings') renderSettings();
 }
 
 function statusBar(counts, total){
@@ -1405,7 +1477,10 @@ function statusBar(counts, total){
 
 function renderHome(){
   const keys = ['week1','week2','week3','optional'];
-  let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
+  let html = `<div style="display:flex;justify-content:flex-end;margin-bottom:6px;">
+    <button id="settings-btn" style="padding:6px 12px;font-size:12px;display:flex;align-items:center;gap:6px;">&#9881; Fortschritt zurücksetzen</button>
+  </div>`;
+  html += '<div style="display:flex;flex-direction:column;gap:10px;">';
   keys.forEach(k=>{
     const w = DATA[k];
     const total = countCards(w.topics);
@@ -1430,6 +1505,77 @@ function renderHome(){
     el.addEventListener('click', ()=>{ view = { screen:'topics', weekKey: el.dataset.key }; render(); });
   });
   document.getElementById('mix-btn').addEventListener('click', ()=>{ view = { screen:'filter', weekKey:'mix', topicIdx:null }; render(); });
+  document.getElementById('settings-btn').addEventListener('click', ()=>{ view = { screen:'settings', confirmScope: null }; render(); });
+}
+
+function renderSettings(){
+  const keys = ['week1','week2','week3','optional'];
+  const confirmScope = view.confirmScope || null;
+
+  let html = `<button id="back-home" class="back-btn">&larr; Übersicht</button>`;
+  html += `<div style="font-size:18px;font-weight:600;margin-bottom:4px;">Fortschritt zurücksetzen</div>`;
+  html += `<div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">Setzt den gespeicherten Lernstatus (bekannt/in Arbeit) zurück. Die Karten selbst bleiben erhalten.</div>`;
+  html += '<div style="display:flex;flex-direction:column;gap:10px;">';
+
+  keys.forEach(k=>{
+    const w = DATA[k];
+    const counts = statusCounts(w.topics, k);
+    const total = countCards(w.topics);
+    const isConfirming = confirmScope === k;
+    html += `<div style="border:1px solid var(--gray-50);border-radius:10px;padding:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:14px;font-weight:500;">${w.label}</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${counts.bekannt} bekannt &middot; ${counts.lernen} in Arbeit &middot; ${counts.neu} neu (von ${total})</div>
+        </div>
+        ${isConfirming
+          ? `<div style="display:flex;gap:6px;">
+              <button id="cancel-${k}" style="padding:6px 10px;font-size:12px;">Abbrechen</button>
+              <button id="confirm-${k}" class="btn-no" style="padding:6px 10px;font-size:12px;">Wirklich löschen</button>
+            </div>`
+          : `<button id="reset-${k}" style="padding:6px 10px;font-size:12px;" ${total===0?'disabled':''}>Zurücksetzen</button>`
+        }
+      </div>
+    </div>`;
+  });
+
+  const isConfirmingAll = confirmScope === 'all';
+  html += `<div style="border:1px solid var(--coral-50);border-radius:10px;padding:12px;margin-top:6px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:14px;font-weight:500;">Gesamter Fortschritt</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Setzt alle Wochen und den Optional-Block zurück.</div>
+      </div>
+      ${isConfirmingAll
+        ? `<div style="display:flex;gap:6px;">
+            <button id="cancel-all" style="padding:6px 10px;font-size:12px;">Abbrechen</button>
+            <button id="confirm-all" class="btn-no" style="padding:6px 10px;font-size:12px;">Wirklich alles löschen</button>
+          </div>`
+        : `<button id="reset-all" style="padding:6px 10px;font-size:12px;">Alles zurücksetzen</button>`
+      }
+    </div>
+  </div>`;
+
+  html += '</div>';
+  root.innerHTML = html;
+
+  document.getElementById('back-home').addEventListener('click', ()=>{ view = { screen:'home' }; render(); });
+
+  keys.forEach(k=>{
+    const resetBtn = document.getElementById('reset-'+k);
+    if(resetBtn) resetBtn.addEventListener('click', ()=>{ view = { screen:'settings', confirmScope: k }; render(); });
+    const cancelBtn = document.getElementById('cancel-'+k);
+    if(cancelBtn) cancelBtn.addEventListener('click', ()=>{ view = { screen:'settings', confirmScope: null }; render(); });
+    const confirmBtn = document.getElementById('confirm-'+k);
+    if(confirmBtn) confirmBtn.addEventListener('click', ()=>{ resetStatus(k); view = { screen:'settings', confirmScope: null }; render(); });
+  });
+
+  const resetAllBtn = document.getElementById('reset-all');
+  if(resetAllBtn) resetAllBtn.addEventListener('click', ()=>{ view = { screen:'settings', confirmScope: 'all' }; render(); });
+  const cancelAllBtn = document.getElementById('cancel-all');
+  if(cancelAllBtn) cancelAllBtn.addEventListener('click', ()=>{ view = { screen:'settings', confirmScope: null }; render(); });
+  const confirmAllBtn = document.getElementById('confirm-all');
+  if(confirmAllBtn) confirmAllBtn.addEventListener('click', ()=>{ resetStatus('all'); view = { screen:'settings', confirmScope: null }; render(); });
 }
 
 function renderTopics(){
