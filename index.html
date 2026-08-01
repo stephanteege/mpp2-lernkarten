@@ -1326,7 +1326,7 @@ function buildSessionCards(weekKey, topicIdx){
 }
 
 function startSession(weekKey, topicIdx){
-  session = { cards: buildSessionCards(weekKey, topicIdx), queue: [], pos: 0, flipped: false };
+  session = { cards: buildSessionCards(weekKey, topicIdx), queue: [], pos: 0, flipped: false, weekKey: weekKey };
   session.queue = session.cards.map((_,i)=>i);
   view = { screen: 'cards' };
   render();
@@ -1417,8 +1417,9 @@ function renderCards(){
   const openCount = session.queue.length - session.pos;
   const doneCount = session.cards.filter(c=>c.status==='done').length;
   const retryCount = session.cards.filter(c=>c.status==='retry').length;
+  const backLabel = (session.weekKey && session.weekKey !== 'mix') ? 'Themen' : 'Übersicht';
 
-  let html = `<button id="back-btn" class="back-btn">&larr; Übersicht</button>`;
+  let html = `<button id="back-btn" class="back-btn">&larr; ${backLabel}</button>`;
   html += `<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">${item.topicName}</div>`;
   html += `<div class="stat-row"><span>${openCount} offen</span><span>${retryCount} in Wiederholung</span><span>${doneCount} geschafft</span></div>`;
   const showSvg = session.flipped && item.card.svg;
@@ -1437,7 +1438,7 @@ function renderCards(){
     html += `<div style="margin-top:14px;"><button id="flip-hint-btn" style="width:100%;">Karte umdrehen</button></div>`;
   }
   root.innerHTML = html;
-  document.getElementById('back-btn').addEventListener('click', ()=>{ view={screen:'home'}; render(); });
+  document.getElementById('back-btn').addEventListener('click', goBackFromSession);
   document.getElementById('flip-card').addEventListener('click', flipCard);
   const flipHintBtn = document.getElementById('flip-hint-btn');
   if(flipHintBtn) flipHintBtn.addEventListener('click', flipCard);
@@ -1448,6 +1449,15 @@ function renderCards(){
 }
 
 function flipCard(){ session.flipped = !session.flipped; render(); }
+
+function goBackFromSession(){
+  if(session && session.weekKey && session.weekKey !== 'mix'){
+    view = { screen: 'topics', weekKey: session.weekKey };
+  } else {
+    view = { screen: 'home' };
+  }
+  render();
+}
 
 function answer(knew){
   const idx = session.queue[session.pos];
@@ -1466,7 +1476,8 @@ function answer(knew){
 
 function renderSessionDone(){
   const total = session.cards.length;
-  let html = `<button id="back-btn" class="back-btn">&larr; Übersicht</button>`;
+  const backLabel = (session.weekKey && session.weekKey !== 'mix') ? 'Themen' : 'Übersicht';
+  let html = `<button id="back-btn" class="back-btn">&larr; ${backLabel}</button>`;
   html += `<div class="done-box">
     <div style="font-size:28px;">&#10003;</div>
     <div style="font-size:16px;font-weight:600;margin-top:10px;">Durchgang abgeschlossen</div>
@@ -1474,7 +1485,7 @@ function renderSessionDone(){
   </div>`;
   html += `<button id="restart-btn" style="margin-top:16px;width:100%;">Nochmal von vorn</button>`;
   root.innerHTML = html;
-  document.getElementById('back-btn').addEventListener('click', ()=>{ view={screen:'home'}; render(); });
+  document.getElementById('back-btn').addEventListener('click', goBackFromSession);
   document.getElementById('restart-btn').addEventListener('click', ()=>{
     session.queue = session.cards.map((_,i)=>i);
     session.cards.forEach(c=>c.status='open');
