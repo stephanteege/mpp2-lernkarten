@@ -1302,7 +1302,7 @@ let session = null;
 function buildSessionCards(weekKey, topicIdx){
   const cards = [];
   if(weekKey === 'mix'){
-    ['week1','week2','week3','week4','optional'].forEach(wk=>{
+    ['week1','week2','week3','optional'].forEach(wk=>{
       DATA[wk].topics.forEach((t,ti)=>t.cards.forEach((c,ci)=>{
         cards.push({ wk, ti, ci, topicName: t.name, card: c, status: 'open' });
       }));
@@ -1346,7 +1346,7 @@ function render(){
 }
 
 function renderHome(){
-  const keys = ['week1','week2','week3','week4','optional'];
+  const keys = ['week1','week2','week3','optional'];
   let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
   keys.forEach(k=>{
     const w = DATA[k];
