@@ -1319,12 +1319,20 @@ function setStatus(wk, ti, ci, status){
   saveStatus();
 }
 
-function statusCounts(topics, weekKey){
+function statusCounts(topics, weekKey, topicIndices){
   const counts = { neu: 0, lernen: 0, bekannt: 0 };
-  topics.forEach((t,ti)=>t.cards.forEach((c,ci)=>{
-    counts[getStatus(weekKey,ti,ci)]++;
-  }));
+  topics.forEach((t,i)=>{
+    const ti = topicIndices ? topicIndices[i] : i;
+    t.cards.forEach((c,ci)=>{
+      counts[getStatus(weekKey,ti,ci)]++;
+    });
+  });
   return counts;
+}
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+  return arr;
 }
 
 function buildSessionCards(weekKey, topicIdx, filter){
@@ -1335,7 +1343,6 @@ function buildSessionCards(weekKey, topicIdx, filter){
         cards.push({ wk, ti, ci, topicName: t.name, card: c, status: 'open' });
       }));
     });
-    for(let i=cards.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [cards[i],cards[j]]=[cards[j],cards[i]]; }
   } else {
     const w = DATA[weekKey];
     const topicIndices = topicIdx===null ? w.topics.map((_,i)=>i) : [topicIdx];
@@ -1345,12 +1352,17 @@ function buildSessionCards(weekKey, topicIdx, filter){
       });
     });
   }
+  // Shuffle whenever a session spans more than one topic, so repeated
+  // starts of "alle Karten" don't always present the same fixed order.
+  const spansMultipleTopics = weekKey === 'mix' || topicIdx === null;
+  let result = cards;
   if(filter === 'unbekannt'){
-    return cards.filter(c => getStatus(c.wk,c.ti,c.ci) !== 'bekannt');
+    result = cards.filter(c => getStatus(c.wk,c.ti,c.ci) !== 'bekannt');
   } else if(filter === 'bekannt'){
-    return cards.filter(c => getStatus(c.wk,c.ti,c.ci) === 'bekannt');
+    result = cards.filter(c => getStatus(c.wk,c.ti,c.ci) === 'bekannt');
   }
-  return cards;
+  if(spansMultipleTopics) shuffle(result);
+  return result;
 }
 
 function startSession(weekKey, topicIdx, filter){
@@ -1428,7 +1440,7 @@ function renderTopics(){
   html += `<button id="start-week" style="margin:8px 0 16px;width:100%;">&#9654; Alle Karten dieser Woche starten</button>`;
   html += '<div>';
   w.topics.forEach((t,ti)=>{
-    const counts = statusCounts([t], view.weekKey);
+    const counts = statusCounts([t], view.weekKey, [ti]);
     html += `<div class="topic-row" data-ti="${ti}">
       <div style="width:100%;">
         <div style="display:flex;justify-content:space-between;align-items:center;">
