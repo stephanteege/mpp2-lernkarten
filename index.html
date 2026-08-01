@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MPP2 Lernkarten</title>
+<style>
+  :root{
+    --bg:#f5f4f0; --surface:#ffffff; --border:#dedcd4; --border-strong:#c7c4b8;
+    --text:#1f1e1c; --text-secondary:#6b6a63; --text-muted:#9a988f;
+    --blue-50:#E6F1FB; --blue-600:#185FA5; --blue-800:#0C447C;
+    --purple-50:#EEEDFE; --purple-600:#534AB7; --purple-800:#3C3489;
+    --teal-50:#E1F5EE; --teal-600:#0F6E56; --teal-800:#085041;
+    --coral-50:#FAECE7; --coral-600:#993C1D; --coral-800:#712B13;
+    --amber-50:#FAEEDA; --amber-600:#854F0B; --amber-800:#633806;
+    --gray-50:#F1EFE8; --gray-600:#5F5E5A; --gray-800:#444441;
+    --radius:10px;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  body{ padding:1rem; max-width:680px; margin:0 auto; padding-bottom:3rem; }
+  h1{ font-size:18px; font-weight:600; margin:0.5rem 0 1rem; }
+  button{
+    font-family:inherit; font-size:14px; background:var(--surface);
+    border:1px solid var(--border-strong); border-radius:var(--radius);
+    padding:10px 14px; cursor:pointer; color:var(--text);
+  }
+  button:active{ transform:scale(0.98); }
+  button:hover{ background:var(--gray-50); }
+  .icon{ font-size:16px; line-height:1; }
+  .wk-card{ cursor:pointer; border-radius:12px; padding:1rem 1.25rem; display:flex;
+    justify-content:space-between; align-items:center; border:1px solid transparent; }
+  .wk-title{ font-size:16px; font-weight:600; }
+  .wk-sub{ font-size:13px; margin-top:2px; }
+  .wk-range{ font-weight:400; font-size:13px; margin-left:8px; }
+  .c-blue{ background:var(--blue-50); color:var(--blue-800); }
+  .c-purple{ background:var(--purple-50); color:var(--purple-800); }
+  .c-teal{ background:var(--teal-50); color:var(--teal-800); }
+  .c-coral{ background:var(--coral-50); color:var(--coral-800); }
+  .c-gray{ background:var(--gray-50); color:var(--gray-800); }
+  .badge{ font-size:11px; padding:3px 9px; border-radius:var(--radius); font-weight:500; }
+  .badge-hoch{ background:var(--coral-50); color:var(--coral-800); }
+  .badge-mittel{ background:var(--amber-50); color:var(--amber-800); }
+  .badge-niedrig{ background:var(--teal-50); color:var(--teal-800); }
+  .topic-row{ cursor:pointer; border:1px solid var(--border); border-radius:var(--radius);
+    padding:10px 14px; display:flex; justify-content:space-between; align-items:center;
+    background:var(--surface); margin-bottom:8px; }
+  .topic-row:hover{ border-color:var(--border-strong); }
+  .flip-card{ cursor:pointer; border:1px solid var(--border); border-radius:12px;
+    background:var(--surface); min-height:220px; padding:1.5rem; display:flex;
+    flex-direction:column; justify-content:center; }
+  .stat-row{ display:flex; gap:14px; font-size:12px; color:var(--text-muted); margin-bottom:10px; }
+  .btn-row{ display:flex; gap:10px; margin-top:14px; }
+  .btn-row button{ flex:1; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .btn-yes{ background:var(--teal-50); color:var(--teal-800); border:1px solid var(--teal-50); font-weight:500; }
+  .btn-no{ background:var(--coral-50); color:var(--coral-800); border:1px solid var(--coral-50); font-weight:500; }
+  .back-btn{ margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+  .done-box{ border-radius:12px; padding:2rem 1.25rem; text-align:center; background:var(--teal-50); color:var(--teal-800); }
+</style>
+</head>
+<body>
+<h1>MPP2 Lernkarten</h1>
+<div id="app"></div>
+<script>
+const DATA = {
+week1: {
+  label: "Woche 1", range: "1.–9.8.", color: "blue",
+  topics: [
+    { name: "Scrum", prio: "hoch", cards: [
+      { q: "Welche Rollen gibt es in Scrum und was ist ihre Aufgabe?", a: "Product Owner: verantwortet das Product Backlog und Priorisierung. Scrum Master: sorgt für Einhaltung des Scrum-Prozesses, beseitigt Hindernisse. Entwicklungsteam: setzt die Arbeit im Sprint um." },
+      { q: "Was sind die Artefakte in Scrum?", a: "Product Backlog (priorisierte Gesamtliste der Anforderungen), Sprint Backlog (Aufgaben für den aktuellen Sprint), Increment (fertiges Produktinkrement am Sprintende)." },
+      { q: "Welche Events (Meetings) gibt es in Scrum?", a: "Sprint Planning (Sprintstart, Ziel & Aufgaben festlegen), Daily Scrum (tägliches 15-Min-Stand-up), Sprint Review (Ergebnispräsentation), Sprint Retrospective (Prozessreflexion im Team)." },
+      { q: "Wie lange dauert typischerweise ein Sprint?", a: "Meist 2–4 Wochen, fest getaktet und über das gesamte Projekt konstant." },
+      { q: "Wann sollte man Scrum statt Wasserfall wählen?", a: "Scrum bei dynamischen Projekten mit unsicheren/sich ändernden Anforderungen und frühem Feedback-Bedarf; Wasserfall bei stabilen, klar definierten Anforderungen." }
+    ]},
+    { name: "Wasserfallmodell", prio: "hoch", cards: [
+      { q: "Wie ist das Wasserfallmodell aufgebaut?", a: "Lineares, sequenzielles Vorgehen in Phasen: Analyse, Design, Implementierung, Test, Betrieb. Jede Phase muss abgeschlossen sein, bevor die nächste beginnt." },
+      { q: "Was sind Vor- und Nachteile des Wasserfallmodells?", a: "Vorteile: klare Struktur, einfache Planung, gute Dokumentation. Nachteile: geringe Flexibilität, spätes Erkennen von Fehlern, schwierig bei sich ändernden Anforderungen." },
+      { q: "Wo wird das Wasserfallmodell typischerweise eingesetzt?", a: "Bei Projekten mit stabilen Anforderungen, z. B. standardisierte Verwaltungssoftware." }
+    ]},
+    { name: "V-Modell / V-Modell XT", prio: "hoch", cards: [
+      { q: "Wie ist das V-Modell aufgebaut?", a: "Darstellung in V-Form: linke Seite = Spezifikation (Anforderungen, Architektur, Design), rechte Seite = Testen/Validieren auf jeder Spezifikationsebene." },
+      { q: "Welche Phasen umfasst das V-Modell?", a: "Anforderungsanalyse, System- und Softwaredesign, Implementierung, Modultests, Integrationstests, Systemtests, Abnahmetests." },
+      { q: "Was ist das V-Modell XT und wo wird es verpflichtend eingesetzt?", a: "Weiterentwicklung/Standardisierung des klassischen V-Modells, modular und anpassbar an Projekttyp/-größe. Verpflichtend bei vielen öffentlichen IT-Projekten in Deutschland." },
+      { q: "Welche Vor- und Nachteile hat das V-Modell?", a: "Vorteile: klare Struktur, Verknüpfung von Spezifikation und Test, geeignet für sicherheitskritische Projekte. Nachteile: wenig flexibel bei Änderungen, hoher Dokumentationsaufwand." },
+      { q: "Wo wird das V-Modell eingesetzt?", a: "Öffentliche Verwaltung, Verteidigungsprojekte, kritische Infrastrukturen, Software- und Systementwicklung." }
+    ]},
+    { name: "Kanban / Scaled Agile", prio: "mittel", cards: [
+      { q: "Was ist Kanban und wie funktioniert es?", a: "Methode zur Visualisierung und Steuerung von Arbeitsprozessen. Aufgaben werden auf Boards (To Do, In Progress, Done) dargestellt, kontinuierlicher Fluss statt fester Sprints." },
+      { q: "Wie misst man den Fortschritt in Kanban?", a: "Mit Kennzahlen wie Durchlaufzeit (Cycle Time), Work in Progress (WIP) und Lead Time." },
+      { q: "Wie skaliert man Scrum für große Projekte?", a: "Durch agile Skalierungsframeworks wie SAFe (Scaled Agile Framework), LeSS (Large Scale Scrum) oder Nexus." }
+    ]},
+    { name: "Spiralmodell & Vorgehensmodelle allgemein", prio: "mittel", cards: [
+      { q: "Was ist das Grundprinzip des Spiralmodells?", a: "Iteratives, risikogetriebenes Vorgehensmodell: in wiederholten Zyklen werden Planung, Risikoanalyse, Entwicklung und Bewertung durchlaufen, wobei jede Spirale das System weiter ausbaut." },
+      { q: "Was unterscheidet lineare von agilen Vorgehensmodellen grundsätzlich?", a: "Lineare Modelle (Wasserfall, V-Modell) durchlaufen feste, aufeinanderfolgende Phasen ohne Rücksprünge. Agile Modelle (Scrum, Kanban) arbeiten iterativ-inkrementell mit häufigem Feedback und Anpassung." },
+      { q: "Nenne je einen typischen Einsatzfall für ein schwergewichtiges und ein leichtgewichtiges Vorgehensmodell.", a: "Schwergewichtig (z. B. V-Modell XT): große, sicherheitskritische Verwaltungsprojekte mit hohem Dokumentationsbedarf. Leichtgewichtig (z. B. Scrum/Kanban): kleinere Teams, dynamische Anforderungen, schnelle Iteration." }
+    ]},
+    { name: "OOP-Säulen", prio: "hoch", cards: [
+      { q: "Was ist Kapselung (Encapsulation)?", a: "Bündelung von Daten und Methoden in einer Klasse, Zugriff von außen wird über definierte Schnittstellen (z. B. public/private) kontrolliert." },
+      { q: "Was ist Vererbung (Inheritance)?", a: "Eine Klasse (Subklasse) übernimmt Eigenschaften und Methoden einer anderen Klasse (Superklasse) und kann sie erweitern oder überschreiben." },
+      { q: "Was ist Polymorphie (Polymorphism)?", a: "Objekte unterschiedlicher Klassen können über dieselbe Schnittstelle angesprochen werden, verhalten sich aber je nach tatsächlichem Typ unterschiedlich (z. B. überschriebene Methoden)." },
+      { q: "Was ist Abstraktion?", a: "Reduktion auf die wesentlichen Eigenschaften eines Objekts, Ausblenden von Implementierungsdetails, z. B. über abstrakte Klassen oder Interfaces." },
+      { q: "Wie hängen die vier Säulen zusammen?", a: "Abstraktion definiert das Wesentliche, Kapselung schützt die Umsetzung, Vererbung ermöglicht Wiederverwendung, Polymorphie erlaubt flexible Nutzung verschiedener Implementierungen über eine gemeinsame Schnittstelle." }
+    ]},
+    { name: "UML-Klassendiagramm", prio: "hoch", cards: [
+      { q: "Aus welchen drei Bereichen besteht eine Klasse im UML-Klassendiagramm?", a: "Klassenname (oben), Attribute (Mitte), Methoden/Operationen (unten)." },
+      { q: "Wie werden Sichtbarkeiten im Klassendiagramm notiert?", a: "+ = public, − = private, # = protected, ~ = package/paket-sichtbar." },
+      { q: "Welche Beziehungsarten gibt es im Klassendiagramm und wie sehen sie aus?", a: "Assoziation (einfache Linie), Aggregation (Linie mit leerer Raute, 'hat-ein', lose Beziehung), Komposition (Linie mit gefüllter Raute, starke Abhängigkeit), Vererbung/Generalisierung (Linie mit leerem Dreieck-Pfeil)." },
+      { q: "Wie wird Kardinalität im Klassendiagramm dargestellt?", a: "An den Linienenden werden Zahlen/Bereiche notiert, z. B. 1, 0..1, 1..*, 0..* für die Anzahl möglicher Beziehungen zwischen den Klassen." },
+      { q: "Zeichne skizzenhaft: eine Klasse 'Kunde' die mehrere 'Bestellung'-Objekte hat (1:n).", a: "Zwei Rechtecke (Kunde, Bestellung) verbunden durch eine Linie mit Kardinalität '1' an Kunde und '0..*' an Bestellung, ggf. mit Raute für Aggregation/Komposition je nach Abhängigkeitsstärke." }
+    ]},
+    { name: "Objektdiagramm, Use-Case, Aggregation/Komposition", prio: "mittel", cards: [
+      { q: "Was ist der Unterschied zwischen Klassen- und Objektdiagramm?", a: "Klassendiagramm zeigt die generelle Struktur (Klassen, Beziehungen, Kardinalitäten). Objektdiagramm zeigt eine konkrete Momentaufnahme mit tatsächlichen Objektinstanzen und ihren Werten." },
+      { q: "Was zeigt ein Use-Case-Diagramm?", a: "Die funktionalen Anforderungen eines Systems aus Nutzersicht: Akteure (Personen/Systeme) und die Anwendungsfälle (Use Cases), mit denen sie interagieren." },
+      { q: "Was ist der Unterschied zwischen Aggregation und Komposition?", a: "Aggregation: lose 'hat-ein'-Beziehung, Teile können unabhängig vom Ganzen existieren (leere Raute). Komposition: starke Abhängigkeit, Teile existieren nur mit dem Ganzen und werden mit ihm zerstört (gefüllte Raute)." }
+    ]},
+    { name: "OOP vs. prozedural, Sichtbarkeiten", prio: "hoch", cards: [
+      { q: "Was ist der grundlegende Unterschied zwischen objektorientierter und prozeduraler Programmierung?", a: "Prozedural: Programm als Abfolge von Funktionen/Prozeduren, die auf Daten zugreifen. Objektorientiert: Daten und zugehörige Funktionen werden in Objekten/Klassen gekapselt." },
+      { q: "Erkläre die Sichtbarkeitsmodifikatoren public, private, protected.", a: "public: von überall zugreifbar. private: nur innerhalb der eigenen Klasse zugreifbar. protected: innerhalb der Klasse und ihrer Subklassen zugreifbar." },
+      { q: "Was ist ein praktischer Vorteil der OOP gegenüber prozeduraler Programmierung?", a: "Bessere Wartbarkeit und Wiederverwendbarkeit durch Kapselung und Vererbung, klarere Modellierung realer Sachverhalte als Objekte." }
+    ]},
+    { name: "Programmierparadigmen", prio: "mittel", cards: [
+      { q: "Nenne die wichtigsten Programmierparadigmen im Überblick.", a: "Imperativ/prozedural (Schritt-für-Schritt-Anweisungen), objektorientiert (Objekte/Klassen), funktional (Funktionen ohne Seiteneffekte), deklarativ (Beschreibung des 'Was', nicht des 'Wie', z. B. SQL)." },
+      { q: "Was zeichnet funktionale Programmierung aus?", a: "Funktionen als zentrale Bausteine, Vermeidung von Seiteneffekten und veränderlichem Zustand, Funktionen können als Werte übergeben werden." },
+      { q: "Nenne ein Beispiel für deklarative Programmierung.", a: "SQL: man beschreibt, welche Daten man haben möchte (SELECT ... WHERE ...), nicht wie die Datenbank sie beschafft." }
+    ]},
+    { name: "Bilanz Grundlagen", prio: "hoch", cards: [
+      { q: "Was zeigt eine Bilanz und wie ist sie aufgebaut?", a: "Gegenüberstellung von Aktiva (Vermögen) und Passiva (Kapital) zu einem Stichtag. Aktiva: Anlagevermögen, Umlaufvermögen. Passiva: Eigenkapital, Fremdkapital." },
+      { q: "Nenne je zwei Beispiele für Anlagevermögen, Umlaufvermögen, Eigenkapital und Fremdkapital.", a: "Anlagevermögen: Maschinen, Gebäude. Umlaufvermögen: Kasse, Vorräte. Eigenkapital: Gezeichnetes Kapital, Gewinnrücklagen. Fremdkapital: Bankdarlehen, Verbindlichkeiten aus Lieferungen." },
+      { q: "Wie wird eine Schenkung von 50.000€ per Überweisung in der Bilanz eingeordnet?", a: "Aktivseite: Erhöhung der Kasse/Bank (Umlaufvermögen). Passivseite: Erhöhung des Eigenkapitals (da kein Rückzahlungsanspruch besteht)." },
+      { q: "Was besagt die Bilanzgleichung?", a: "Aktiva = Passiva, also Summe des Vermögens entspricht immer der Summe des Kapitals (Eigen- + Fremdkapital)." },
+      { q: "Was ist der Unterschied zwischen Bilanz und Jahresabrechnung?", a: "Jahresabrechnung = Bilanz + Gewinn- und Verlustrechnung (GuV); gibt zusätzlich Aufschluss über den Geschäftserfolg der Periode, nicht nur den Vermögensstand am Stichtag." }
+    ]},
+    { name: "GuV, Deckungsbeitrag, Break-Even", prio: "mittel", cards: [
+      { q: "Wie wird der Deckungsbeitrag berechnet und wofür wird er genutzt?", a: "Deckungsbeitrag = Erlöse − variable Kosten. Zeigt den Beitrag eines Produkts zur Deckung der fixen Kosten; Grundlage für Preiskalkulation und Produktrentabilität." },
+      { q: "Was unterscheidet DB1, DB2 und DB3?", a: "Stufen der Deckungsbeitragsrechnung mit zunehmender Kostenzurechnung: DB1 (Stückebene), DB2 (Produktgruppenebene), DB3 (Gesamtunternehmensebene)." },
+      { q: "Wie wird der Break-Even-Point berechnet?", a: "Break-Even-Point = Fixkosten / Deckungsbeitrag pro Stück. Punkt, an dem die Erlöse genau die Gesamtkosten decken (Gewinn = 0)." }
+    ]}
+  ]
+},
+week2: {
+  label: "Woche 2", range: "10.–16.8.", color: "purple",
+  topics: [
+    { name: "BCG-Matrix", prio: "hoch", cards: [
+      { q: "Was ist die BCG-Matrix und welche zwei Dimensionen misst sie?", a: "Portfolioanalyse-Instrument der Boston Consulting Group. Dimensionen: Marktwachstum (y-Achse) und relativer Marktanteil (x-Achse)." },
+      { q: "Welche vier Kategorien gibt es in der BCG-Matrix und wie geht man mit ihnen um?", a: "Stars (hoher Marktanteil, hohes Wachstum → investieren), Cash Cows (hoher Marktanteil, niedriges Wachstum → Gewinne abschöpfen), Question Marks (niedriger Marktanteil, hohes Wachstum → prüfen), Poor Dogs (niedriger Marktanteil, niedriges Wachstum → desinvestieren)." },
+      { q: "Wende die BCG-Matrix beispielhaft auf eine Behörde/Verwaltungsleistung an.", a: "Z. B. ein etabliertes, stark genutztes Verwaltungsportal = Cash Cow; ein neues digitales Pilotprojekt mit wachsender Nachfrage = Question Mark oder Star, je nach Marktdurchdringung." },
+      { q: "Was sind die Kritikpunkte an der BCG-Matrix?", a: "Nur zwei Dimensionen betrachtet, andere Einflussfaktoren bleiben unberücksichtigt; Annahme Marktanteil↔Rentabilität nicht immer zutreffend; stark vereinfachte Darstellung." },
+      { q: "Wofür wird die BCG-Matrix in der Verwaltung genutzt?", a: "Analyse von Projekten/Dienstleistungen hinsichtlich strategischer Relevanz, Unterstützung von Budget- und Investitionsentscheidungen, Priorisierung bei begrenztem Budget." }
+    ]},
+    { name: "Unternehmens-/Rechtsformen", prio: "hoch", cards: [
+      { q: "Nenne die Hauptgruppen der Unternehmensformen.", a: "Einzelunternehmen, Personengesellschaften (GbR, OHG, KG), Kapitalgesellschaften (GmbH, UG, AG), Sonderformen (Genossenschaften, Körperschaften des öffentlichen Rechts, Stiftungen)." },
+      { q: "Was unterscheidet Personengesellschaften von Kapitalgesellschaften bei der Haftung?", a: "Personengesellschaften: meist unbeschränkte persönliche Haftung der Gesellschafter. Kapitalgesellschaften: Haftung i. d. R. auf das Gesellschaftsvermögen beschränkt." },
+      { q: "Was sind die Kernmerkmale einer GmbH?", a: "Kapitalgesellschaft, Mindestkapital 25.000€, beschränkte Haftung der Gesellschafter, Organe: Geschäftsführung und Gesellschafterversammlung." },
+      { q: "Zeichne die Unternehmensformen als Baumdiagramm (grobe Struktur).", a: "Unternehmensformen → Einzelunternehmen | Personengesellschaften (GbR, OHG, KG, PartG) | Kapitalgesellschaften (GmbH, UG, AG, SE) | Sonderformen (Genossenschaft, Körperschaft d. ö. Rechts, Stiftung)." },
+      { q: "Nach welchen Kriterien wählt man eine Rechtsform aus?", a: "Haftung (persönlich/beschränkt), Kapitalbedarf, steuerliche Belastung, Mitbestimmung/Entscheidungsfreiheit, Publizitäts- und Berichtspflichten." }
+    ]},
+    { name: "Rechtsformwahl begründen", prio: "hoch", cards: [
+      { q: "Welche Rechtsform würdest du mit 50.000€ Startkapital wählen und warum?", a: "Z. B. GmbH: Mindestkapital (25.000€) ist gedeckt, Haftung ist auf das Gesellschaftsvermögen beschränkt (persönliches Risiko begrenzt), professionelles Auftreten am Markt. Alternative: UG bei geringerem Kapitalbedarf und Wunsch nach schnellerer/günstigerer Gründung." },
+      { q: "Warum keine Personengesellschaft bei höherem Startkapital und Risiko?", a: "Wegen der unbeschränkten persönlichen Haftung mit dem Privatvermögen bei OHG/GbR – bei größerem Kapitaleinsatz steigt das persönliche Risiko unverhältnismäßig." },
+      { q: "Welche Rolle spielt die geplante Unternehmensgröße bei der Rechtsformwahl?", a: "Kleine, einfache Vorhaben eher Einzelunternehmen/GbR (geringer Gründungsaufwand); wachstumsorientierte oder kapitalintensive Vorhaben eher Kapitalgesellschaften wegen Haftungsbeschränkung und besserer Finanzierungsmöglichkeiten." }
+    ]},
+    { name: "Vertragsarten", prio: "hoch", cards: [
+      { q: "Was unterscheidet einen Werkvertrag von einem Dienstvertrag?", a: "Werkvertrag: geschuldet wird ein konkretes Ergebnis/Erfolg (z. B. fertige Software). Dienstvertrag: geschuldet wird die Tätigkeit/das Bemühen selbst, kein Erfolg garantiert (z. B. laufende Beratung, Wartung)." },
+      { q: "Was ist ein Kaufvertrag und wodurch kommt er zustande?", a: "Vertrag über den Erwerb von Eigentum an einer Sache gegen Bezahlung. Zustandekommen durch übereinstimmende Willenserklärungen: Angebot und Annahme." },
+      { q: "Nenne weitere IT-relevante Vertragstypen.", a: "Mietvertrag/Leasing (Nutzung von Hardware/Cloud gegen Entgelt), Lizenzvertrag (Nutzungsrechte an Software), Service Level Agreement/SLA (Qualität, Verfügbarkeit, Reaktionszeiten)." },
+      { q: "Was sind typische Inhalte eines IT-Vertrags?", a: "Leistungsbeschreibung, Gegenleistung/Preis, Laufzeit und Kündigungsmodalitäten, Haftung und Gewährleistung, Datenschutz- und Sicherheitsanforderungen." }
+    ]},
+    { name: "Vertragszustandekommen", prio: "hoch", cards: [
+      { q: "Wie kommt ein Vertrag rechtlich zustande?", a: "Durch zwei übereinstimmende Willenserklärungen: Angebot (Antrag) und Annahme." },
+      { q: "Was bedeutet 'invitatio ad offerendum'?", a: "Aufforderung zur Abgabe eines Angebots (kein bindendes Angebot selbst), z. B. Schaufensterauslage oder Werbeanzeige – der Kunde gibt das eigentliche Angebot ab, der Verkäufer nimmt an oder lehnt ab." },
+      { q: "Was passiert rechtlich bei einem Scherzgeschäft?", a: "Eine Willenserklärung ohne ernsthaften Rechtsbindungswillen, die der Erklärende in der Erwartung abgibt, der Mangel werde erkannt (§ 118 BGB) – die Erklärung ist nichtig, kann aber Schadensersatzpflicht auslösen, wenn der Empfänger auf die Ernsthaftigkeit vertraut hat." }
+    ]},
+    { name: "Ausbildungsvertrag, AGB, SLA", prio: "mittel", cards: [
+      { q: "Was muss ein Ausbildungsvertrag mindestens enthalten?", a: "Art, Ziel und Dauer der Ausbildung, Ausbildungsort, Ausbildungsvergütung, Arbeitszeit, Probezeit, Urlaubsanspruch, Kündigungsvoraussetzungen." },
+      { q: "Was sind AGB und wofür werden sie eingesetzt?", a: "Allgemeine Geschäftsbedingungen: vorformulierte Vertragsbedingungen, die eine Partei der anderen bei Vertragsschluss stellt, um Massengeschäfte einheitlich zu regeln." },
+      { q: "Was regelt ein SLA und was sind typische Inhalte?", a: "Service Level Agreement: Vereinbarung über Qualität, Verfügbarkeit, Reaktionszeiten und Support. Typisch: Uptime-Garantien, Performance-Kriterien, Eskalationsprozesse, Reporting." }
+    ]},
+    { name: "Bestellverfahren", prio: "hoch", cards: [
+      { q: "Wie funktioniert das Bestellpunktverfahren?", a: "Es wird ein fester Meldebestand (Bestellpunkt) definiert; sobald der Lagerbestand diesen erreicht, wird automatisch eine feste Bestellmenge ausgelöst." },
+      { q: "Wie funktioniert das Bestellrhythmusverfahren?", a: "Bestellungen erfolgen in festen Zeitabständen (z. B. wöchentlich), die Bestellmenge wird jeweils an den aktuellen Bedarf angepasst, um einen Zielbestand zu erreichen." },
+      { q: "Was ist der Hauptunterschied zwischen beiden Verfahren?", a: "Bestellpunktverfahren: fester Bestand löst variable Zeitpunkte aus (mengengesteuert). Bestellrhythmusverfahren: feste Zeitpunkte lösen variable Mengen aus (zeitgesteuert)." }
+    ]},
+    { name: "Nutzwertanalyse, ABC-Analyse, Stacey-Matrix", prio: "mittel", cards: [
+      { q: "Wozu dient die Nutzwertanalyse?", a: "Bewertung mehrerer Alternativen anhand gewichteter Kriterien, um eine strukturierte, nachvollziehbare Entscheidung zu treffen (z. B. Softwareauswahl)." },
+      { q: "Was ist das Prinzip der ABC-Analyse?", a: "Klassifizierung von Objekten (z. B. Produkten, Kunden) nach ihrer Bedeutung: A = hoher Wertanteil/wenige Objekte, B = mittlerer Anteil, C = geringer Wertanteil/viele Objekte." },
+      { q: "Wofür wird die Stacey-Matrix genutzt?", a: "Einordnung von Projekten nach Grad der Anforderungsklarheit und technologischer Unsicherheit, um die passende Vorgehensweise (klassisch, agil, chaotisch) abzuleiten." }
+    ]},
+    { name: "PDCA-Zyklus, Kanban wirtschaftlich", prio: "mittel", cards: [
+      { q: "Was bedeuten die vier Phasen des PDCA-Zyklus?", a: "Plan (Planung von Maßnahmen), Do (Umsetzung), Check (Überprüfung der Ergebnisse), Act (Anpassung/kontinuierliche Verbesserung) – iterativer Verbesserungskreislauf." },
+      { q: "Wofür wird PDCA typischerweise eingesetzt?", a: "Für kontinuierliche Prozessverbesserung, z. B. im Qualitätsmanagement oder in einem ISMS (Informationssicherheits-Managementsystem)." },
+      { q: "Wie unterstützt Kanban die kontinuierliche Verbesserung im Sinne von PDCA?", a: "Durch sichtbaren Arbeitsfluss und WIP-Begrenzung werden Engpässe schnell erkannt (Check) und Prozessanpassungen (Act) direkt im laufenden Betrieb vorgenommen." }
+    ]},
+    { name: "Von-Neumann-Architektur", prio: "hoch", cards: [
+      { q: "Aus welchen Hauptkomponenten besteht die Von-Neumann-Architektur?", a: "CPU (mit Rechenwerk/ALU, Steuerwerk, Registern), gemeinsamer Speicher für Daten und Programme, gemeinsamer Systembus für Daten, Adressen und Steuerinformationen." },
+      { q: "Was ist der Von-Neumann-Flaschenhals?", a: "Da nur ein gemeinsamer Bus für Befehle und Daten existiert, entsteht ein Engpass: CPU muss Befehle und Daten nacheinander über denselben Bus holen, was die parallele Verarbeitung begrenzt." },
+      { q: "Nenne Beispiele für Von-Neumann-Systeme.", a: "Klassische PCs, Standard-CPUs (Intel x86, AMD Ryzen), Laptops, Server, historische Rechner wie ENIAC." },
+      { q: "Zeichne/beschreibe den Aufbau: welche Komponenten sind wie verbunden?", a: "CPU (ALU, Steuerwerk, Register) ↔ Systembus ↔ gemeinsamer Speicher (Programme + Daten) ↔ Systembus ↔ Ein-/Ausgabewerk. Alle Komponenten teilen sich denselben Bus." },
+      { q: "Was ist der zentrale Vorteil der Von-Neumann-Architektur trotz des Flaschenhalses?", a: "Hohe Flexibilität, da Speicher dynamisch zwischen Daten und Programmen aufgeteilt werden kann, sowie einfacherer und günstigerer Aufbau." }
+    ]},
+    { name: "Harvard-Architektur & Vergleich", prio: "mittel", cards: [
+      { q: "Was unterscheidet die Harvard- von der Von-Neumann-Architektur?", a: "Harvard nutzt getrennte Speicherbereiche und getrennte Busse für Programme und Daten (paralleler Zugriff möglich), Von-Neumann nutzt einen gemeinsamen Speicher und Bus." },
+      { q: "Welche Vor- und Nachteile hat die Harvard-Architektur?", a: "Vorteile: höhere Geschwindigkeit durch parallelen Zugriff, kein Bus-Engpass, gut für Echtzeitsysteme. Nachteile: komplexere Hardware, weniger flexible Speicheraufteilung." },
+      { q: "Nenne Beispiele für Harvard-Architektur-Systeme.", a: "Mikrocontroller (PIC, Arduino/Atmel AVR), digitale Signalprozessoren (DSPs), ARM Cortex-M (modifizierte Harvard-Architektur), eingebettete Systeme." }
+    ]},
+    { name: "RISC/CISC, Pipelining, Taktfrequenz", prio: "mittel", cards: [
+      { q: "Was unterscheidet RISC von CISC grundsätzlich?", a: "RISC (Reduced Instruction Set Computer): wenige, einfache Befehle, schnelle Ausführung, energieeffizienter. CISC (Complex Instruction Set Computer): viele komplexe Befehle, mehr Funktionalität pro Befehl, aber höherer Energieverbrauch." },
+      { q: "Was ist Pipelining und welchen Vorteil bringt es?", a: "Überlappende Ausführung mehrerer Befehle in aufeinanderfolgenden Verarbeitungsstufen (z. B. Fetch, Decode, Execute), wodurch der Befehlsdurchsatz erhöht wird, ohne die Taktfrequenz zu steigern." },
+      { q: "Wie hoch ist die typische Taktfrequenz eines aktuellen Prozessors?", a: "Meist im Bereich von ca. 2–5 GHz für Consumer-CPUs, teils höher im Turbo-Modus." }
+    ]},
+    { name: "Zahlensysteme umrechnen", prio: "hoch", cards: [
+      { q: "Wie rechnet man eine Dezimalzahl in Binär um?", a: "Fortlaufende Division durch 2, die Reste (von unten nach oben gelesen) ergeben die Binärzahl. Beispiel: 13 → 1101." },
+      { q: "Rechne dein Alter in Binär um (Beispielrechnung 25).", a: "25 = 16+8+1 = 2⁴+2³+2⁰ → Binär: 11001." },
+      { q: "Wie funktioniert die Umrechnung Binär → Hexadezimal?", a: "Binärzahl in 4er-Blöcke von rechts gruppieren, jeden Block einzeln in eine Hex-Ziffer (0–F) umwandeln. Beispiel: 1101 1010 → D A → 0xDA." },
+      { q: "Was ist der Unterschied zwischen Bit und Byte?", a: "1 Bit = kleinste Informationseinheit (0 oder 1). 1 Byte = 8 Bit, kleinste adressierbare Speichereinheit." }
+    ]}
+  ]
+},
+week3: {
+  label: "Woche 3", range: "17.–23.8.", color: "teal",
+  topics: [
+    { name: "Netzwerktopologien", prio: "hoch", cards: [
+      { q: "Nenne die grundlegenden Netzwerktopologien.", a: "Bus, Ring, Stern, Baum, Masche (Mesh), sowie Hybrid-Topologien als Kombination." },
+      { q: "Was ist das Hauptproblem der Stern-Topologie?", a: "Single Point of Failure (SPoF): fällt der zentrale Knoten (Switch/Hub) aus, ist das gesamte Netzwerk betroffen." },
+      { q: "Was ist der Vorteil der Bus-Topologie und was ihr Nachteil?", a: "Vorteil: geringer Verkabelungsaufwand. Nachteil: bei Kabelbruch fällt das gesamte Segment aus, Kollisionsgefahr bei gleichzeitiger Übertragung." },
+      { q: "Was zeichnet die Masch-Topologie aus?", a: "Jeder Knoten ist (teilweise oder vollständig) mit mehreren anderen verbunden → hohe Ausfallsicherheit durch redundante Wege, aber hoher Verkabelungsaufwand." },
+      { q: "Nach welchen Kriterien wählt man eine Netzwerktopologie?", a: "Kosten, Ausfallsicherheit, Skalierbarkeit, Verwaltungsaufwand, benötigte Übertragungsgeschwindigkeit." }
+    ]},
+    { name: "OSI-Schichtenmodell", prio: "hoch", cards: [
+      { q: "Nenne die 7 Schichten des OSI-Modells in der richtigen Reihenfolge.", a: "1. Physikalisch (Bitübertragung), 2. Sicherung (MAC/Ethernet), 3. Netzwerk (Routing, IP), 4. Transport (TCP/UDP), 5. Sitzung, 6. Darstellung (Verschlüsselung, Formate), 7. Anwendung (HTTP, FTP, DNS)." },
+      { q: "Welche Aufgabe hat die Transportschicht (Layer 4)?", a: "Sicherer Datentransport zwischen Endsystemen, Segmentierung großer Datenmengen, Fehlererkennung/-korrektur, Flusskontrolle und Multiplexing (TCP, UDP)." },
+      { q: "Wie unterscheidet sich das TCP/IP-Modell vom OSI-Modell?", a: "TCP/IP hat nur 4 Schichten (Network Interface, Internet, Transport, Application) statt 7. OSI ist ein theoretisches Referenzmodell, TCP/IP wird praktisch genutzt; einige OSI-Schichten werden im TCP/IP-Modell zusammengefasst." },
+      { q: "Nenne je einen typischen Angriff auf der Sicherungs-, Netzwerk- und Anwendungsschicht.", a: "Sicherung: MAC-Spoofing/ARP-Spoofing. Netzwerk: IP-Spoofing, DDoS. Anwendung: SQL-Injection, Cross-Site-Scripting (XSS)." },
+      { q: "Auf welcher Schicht arbeitet ein Router und auf welcher ein Switch?", a: "Router: Netzwerkschicht (Layer 3, Routing anhand IP-Adressen). Switch: Sicherungsschicht (Layer 2, Weiterleitung anhand MAC-Adressen)." }
+    ]},
+    { name: "TCP/IP-Modell, TCP vs. UDP", prio: "hoch", cards: [
+      { q: "Was ist der Hauptunterschied zwischen TCP und UDP?", a: "TCP: verbindungsorientiert, zuverlässig, mit Fehlerkorrektur und Flusskontrolle (z. B. Webseiten, E-Mail). UDP: verbindungslos, schneller, ohne Zustellgarantie (z. B. Streaming, VoIP, Online-Gaming)." },
+      { q: "Nenne je zwei Anwendungsbeispiele für TCP und UDP.", a: "TCP: HTTP/HTTPS, FTP, E-Mail (SMTP). UDP: DNS-Anfragen, Video-Streaming, VoIP." },
+      { q: "Was bedeutet 'verbindungsorientiert' bei TCP konkret?", a: "Vor der Datenübertragung wird über einen Handshake (z. B. Three-Way-Handshake) eine Verbindung aufgebaut, Pakete werden bestätigt und bei Verlust erneut gesendet." }
+    ]},
+    { name: "IPv4/IPv6, Subnetting", prio: "hoch", cards: [
+      { q: "Wie viele Adressen bietet IPv4 und warum reicht das nicht mehr aus?", a: "IPv4 ist 32 Bit lang → ca. 4,3 Milliarden Adressen (2^32). Durch die wachsende Zahl vernetzter Geräte sind die Adressen weitgehend erschöpft." },
+      { q: "Was ist der zentrale Vorteil von IPv6 gegenüber IPv4?", a: "128 Bit Adressraum (statt 32 Bit) → praktisch unbegrenzte Anzahl an Adressen, zudem vereinfachtes Header-Format und integrierte Sicherheitsfunktionen (IPSec)." },
+      { q: "Was bedeutet CIDR-Notation, z. B. /24?", a: "Classless Inter-Domain Routing: die Zahl gibt an, wie viele Bits der Adresse für das Netzwerk reserviert sind. /24 = 24 Bit Netzanteil, 8 Bit für Hosts → 256 Adressen (254 nutzbar)." },
+      { q: "Was ist der Unterschied zwischen öffentlicher und privater IP-Adresse?", a: "Private IP-Adressen (z. B. 192.168.x.x) sind nur innerhalb eines lokalen Netzwerks gültig, öffentliche IP-Adressen sind weltweit eindeutig und im Internet erreichbar." }
+    ]},
+    { name: "Hub, Switch, Router", prio: "hoch", cards: [
+      { q: "Was ist der Unterschied zwischen Hub und Switch?", a: "Hub: leitet Daten ungefiltert an alle angeschlossenen Geräte weiter (Layer 1, keine Adressierung). Switch: leitet Daten gezielt anhand der MAC-Adresse nur an den Zielport weiter (Layer 2)." },
+      { q: "Was macht ein Router im Unterschied zu Switch/Hub?", a: "Router verbindet unterschiedliche Netzwerke miteinander und leitet Datenpakete anhand von IP-Adressen weiter (Layer 3, Routing zwischen Netzen)." },
+      { q: "In welcher OSI-Schicht arbeiten Hub, Switch und Router jeweils?", a: "Hub: Schicht 1 (Physikalisch). Switch: Schicht 2 (Sicherung). Router: Schicht 3 (Netzwerk)." }
+    ]},
+    { name: "Client-Server-Architektur", prio: "mittel", cards: [
+      { q: "Was beschreibt die Client-Server-Architektur?", a: "Aufteilung in Client (fordert Dienste/Ressourcen an) und Server (stellt Dienste/Ressourcen bereit), Kommunikation meist über definierte Protokolle (z. B. HTTP)." },
+      { q: "Nenne Vor- und Nachteile der Client-Server-Architektur.", a: "Vorteile: zentrale Verwaltung, klare Rollenverteilung, gute Skalierbarkeit. Nachteile: Server als Single Point of Failure, hohe Serverlast bei vielen Clients." },
+      { q: "Wie kann Ausfallsicherheit bei Servern erhöht werden?", a: "Durch Redundanz (mehrere Server im Cluster), Load Balancing, Failover-Mechanismen und regelmäßige Backups." }
+    ]},
+    { name: "CIA-Schutzziele", prio: "hoch", cards: [
+      { q: "Was bedeuten die drei CIA-Schutzziele?", a: "Confidentiality (Vertraulichkeit): kein unbefugter Zugriff. Integrity (Integrität): Schutz vor unbefugter Veränderung. Availability (Verfügbarkeit): Systeme/Daten sind bei Bedarf zugänglich." },
+      { q: "Wie setzt man die CIA-Schutzziele am Beispiel eines Webservers konkret um?", a: "Vertraulichkeit: Verschlüsselung (TLS/HTTPS), Zugriffskontrollen. Integrität: Prüfsummen, Signaturen, Schutz vor Manipulation. Verfügbarkeit: Redundanz, Load Balancing, DDoS-Schutz, Backups." },
+      { q: "Welche ergänzenden Schutzziele gibt es neben CIA?", a: "Authentizität (Echtheit des Absenders), Nachweisbarkeit/Verbindlichkeit (Non-Repudiation), teils auch Zurechenbarkeit." },
+      { q: "Was passiert, wenn nur die Verfügbarkeit, aber nicht die Integrität geschützt ist?", a: "Das System bleibt erreichbar, aber Daten könnten unbemerkt manipuliert werden (z. B. durch einen Man-in-the-Middle-Angriff) – der Nutzer erhält falsche, aber verfügbare Informationen." }
+    ]},
+    { name: "DSGVO, Datenschutz vs. Datensicherheit", prio: "hoch", cards: [
+      { q: "Was ist der Unterschied zwischen Datenschutz und Datensicherheit?", a: "Datenschutz: Schutz personenbezogener Daten vor missbräuchlicher Verwendung (rechtlicher Fokus, z. B. DSGVO). Datensicherheit: technischer Schutz aller Daten vor Verlust, Manipulation, unbefugtem Zugriff (unabhängig vom Personenbezug)." },
+      { q: "Was sind zentrale Grundsätze der DSGVO?", a: "Rechtmäßigkeit, Zweckbindung, Datenminimierung, Richtigkeit, Speicherbegrenzung, Integrität/Vertraulichkeit, Rechenschaftspflicht." },
+      { q: "Welche Rechte haben Betroffene nach der DSGVO?", a: "Auskunftsrecht, Recht auf Berichtigung, Recht auf Löschung ('Recht auf Vergessenwerden'), Recht auf Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruchsrecht." },
+      { q: "Was versteht man unter dem Recht auf informationelle Selbstbestimmung?", a: "Grundrecht (aus dem Volkszählungsurteil abgeleitet), wonach jeder selbst über die Preisgabe und Verwendung seiner personenbezogenen Daten bestimmen darf." }
+    ]},
+    { name: "Verschlüsselung, PKI", prio: "hoch", cards: [
+      { q: "Was ist der Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung?", a: "Symmetrisch: ein gemeinsamer Schlüssel für Ver- und Entschlüsselung (z. B. AES) – schnell, aber Schlüsselaustausch ist heikel. Asymmetrisch: Schlüsselpaar aus öffentlichem und privatem Schlüssel (z. B. RSA) – sicherer Austausch, aber langsamer." },
+      { q: "Was ist eine PKI (Public Key Infrastructure)?", a: "System zur Verwaltung digitaler Zertifikate und Schlüssel, stellt sicher, dass ein öffentlicher Schlüssel eindeutig einer Identität zugeordnet werden kann." },
+      { q: "Welche Rollen gibt es innerhalb einer PKI?", a: "Zertifizierungsstelle (CA, stellt Zertifikate aus), Registrierungsstelle (RA, prüft Identitäten), Nutzer/Teilnehmer, Verzeichnisdienste (speichern/veröffentlichen Zertifikate)." },
+      { q: "Wofür wird eine digitale Signatur verwendet?", a: "Zum Nachweis der Authentizität und Integrität eines Dokuments/einer Nachricht – erstellt mit dem privaten Schlüssel des Absenders, prüfbar mit dessen öffentlichem Schlüssel." }
+    ]},
+    { name: "ITIL, ISMS, IT-Grundschutz", prio: "mittel", cards: [
+      { q: "Was ist ITIL und wofür steht es?", a: "Framework für IT-Service-Management (ITSM), Fokus auf effiziente IT-Prozesse entlang des Service Lifecycle (Strategie, Design, Transition, Betrieb, kontinuierliche Verbesserung)." },
+      { q: "Was ist ein ISMS und auf welcher Norm basiert es häufig?", a: "Informationssicherheits-Managementsystem: systematischer Ansatz zur Planung, Umsetzung, Überwachung und Verbesserung der Informationssicherheit, häufig basierend auf ISO/IEC 27001." },
+      { q: "Was ist der IT-Grundschutz des BSI und welches Ziel verfolgt er?", a: "Standard des BSI für strukturierte, risikoorientierte Absicherung von IT-Systemen. Ziel: systematische Erhöhung von Vertraulichkeit, Integrität und Verfügbarkeit als Basis für Audits/Zertifizierungen." }
+    ]},
+    { name: "OZG, EGovG, RegMoG", prio: "hoch", cards: [
+      { q: "Was ist das Ziel des Onlinezugangsgesetzes (OZG) und seit wann gilt es?", a: "Seit 2017: Verpflichtung von Bund, Ländern und Kommunen, Verwaltungsleistungen digital über Verwaltungsportale anzubieten. Umfasst rund 575 Leistungen in 14 Lebens- und 5 Geschäftslagen." },
+      { q: "Was ist der 'Einer-für-alle' (EfA)-Ansatz beim OZG?", a: "Ein Bundesland entwickelt eine digitale Lösung für eine Verwaltungsleistung, andere Länder können diese Lösung nachnutzen, statt jeweils eigene zu bauen." },
+      { q: "Was regelt das E-Government-Gesetz (EGovG) und seit wann?", a: "Seit 2013: fördert elektronische Verwaltung, u. a. elektronische Aktenführung (E-Akte), elektronische Kommunikation (De-Mail), einheitliche Schnittstellen zwischen Behörden." },
+      { q: "Was ist das Ziel des Registermodernisierungsgesetzes (RegMoG) und welches Prinzip steht dahinter?", a: "Seit 2021: Vernetzung/Modernisierung der Register zur effizienteren Datennutzung. Zentrales Prinzip: 'Once-Only' – Bürger geben Daten nur einmal an, Verwaltung nutzt sie mehrfach (über die Steuer-ID als Ordnungsmerkmal)." }
+    ]},
+    { name: "Digitale Souveränität, eIDAS, Once-Only", prio: "mittel", cards: [
+      { q: "Was bedeutet digitale Souveränität für die Verwaltung?", a: "Unabhängigkeit von großen internationalen IT-Anbietern, Förderung europäischer Cloud-Initiativen (z. B. GAIA-X) und Nutzung offener Standards/Open-Source-Software." },
+      { q: "Was regelt eIDAS und was ist neu an eIDAS 2.0?", a: "EU-Verordnung für elektronische Identifizierung und Vertrauensdienste (Signaturen, Siegel, Zeitstempel). eIDAS 2.0 (2023) führt die EU Digital Identity Wallet ein, mit Verpflichtung der Mitgliedstaaten zu einer eID-Lösung." },
+      { q: "Was besagt das Once-Only-Prinzip?", a: "Bürger und Unternehmen müssen Daten gegenüber der Verwaltung nur einmal angeben; die Verwaltung ruft diese bei Bedarf über verknüpfte Register erneut ab, statt sie mehrfach abzufragen." }
+    ]}
+  ]
+},
+week4: {
+  label: "Woche 4", range: "24.–27.8.", color: "coral",
+  topics: [
+    { name: "ER-Modell", prio: "hoch", cards: [
+      { q: "Was beschreibt ein ER-Modell?", a: "Abbildung von Daten und ihren Beziehungen als Entitäten, Attribute und Relationen – Grundlage für die Datenbankmodellierung." },
+      { q: "Welche Kardinalitätsarten gibt es und was bedeuten sie?", a: "1:1 (jede Entität höchstens einer anderen zugeordnet), 1:n (eine Entität kann mit mehreren verbunden sein), n:m (mehrere Entitäten beider Seiten können verknüpft sein, benötigt Zwischentabelle)." },
+      { q: "Wie wird eine n:m-Beziehung in ein relationales Schema umgesetzt?", a: "Über eine Zwischentabelle (Verknüpfungstabelle), die die Primärschlüssel beider beteiligter Tabellen als Fremdschlüssel enthält." },
+      { q: "Wie hängen ER-Modell und Objektorientierung zusammen?", a: "Entitäten entsprechen Klassen, Attribute entsprechen Eigenschaften, Beziehungen entsprechen Assoziationen, Generalisierung/Spezialisierung entspricht Vererbung." }
+    ]},
+    { name: "SQL Grundlagen", prio: "mittel", cards: [
+      { q: "Wie sieht eine einfache SELECT-Abfrage aus, die alle Kunden aus Berlin liefert?", a: "SELECT * FROM Kunden WHERE Stadt = 'Berlin';" },
+      { q: "Wie fügt man mit SQL einen neuen Datensatz ein?", a: "INSERT INTO Tabelle (Spalte1, Spalte2) VALUES (Wert1, Wert2);" },
+      { q: "Was macht ein JOIN und nenne einen Grundtyp.", a: "Verknüpft Zeilen aus zwei oder mehr Tabellen anhand eines gemeinsamen Schlüssels. INNER JOIN liefert nur Zeilen, die in beiden Tabellen übereinstimmende Werte haben." }
+    ]},
+    { name: "Data Warehouse, BI, ETL", prio: "mittel", cards: [
+      { q: "Was ist ein Data Warehouse?", a: "Zentrale, historisierte Datenbank, die Daten aus verschiedenen Quellsystemen konsolidiert für Analyse- und Reportingzwecke (Business Intelligence)." },
+      { q: "Was passiert in den drei Phasen des ETL-Prozesses?", a: "Extract (Daten aus Quellsystemen extrahieren), Transform (Daten bereinigen/vereinheitlichen), Load (Daten ins Data Warehouse laden)." },
+      { q: "Was ist der Unterschied zwischen Star- und Snowflake-Schema?", a: "Star-Schema: zentrale Faktentabelle direkt mit denormalisierten Dimensionstabellen verbunden (einfach, schnell). Snowflake-Schema: Dimensionstabellen sind zusätzlich normalisiert/verzweigt (weniger Redundanz, komplexer)." }
+    ]},
+    { name: "Big Data, OLAP vs. OLTP", prio: "mittel", cards: [
+      { q: "Was sind die 5 V's von Big Data?", a: "Volume (Menge), Variety (Vielfalt), Velocity (Geschwindigkeit), Veracity (Qualität/Verlässlichkeit), Value (Nutzen)." },
+      { q: "Was ist der Unterschied zwischen OLAP und OLTP?", a: "OLTP (Online Transaction Processing): viele kleine, schnelle Transaktionen im operativen Tagesgeschäft (z. B. Bestellungen buchen). OLAP (Online Analytical Processing): komplexe Analysen großer historischer Datenmengen für Reporting/Entscheidungen." },
+      { q: "Nenne zwei typische Techniken des Data Mining.", a: "Klassifikation (Zuordnung zu Kategorien), Clustering (Gruppierung ähnlicher Datenpunkte); auch Assoziationsanalyse und Anomalieerkennung." }
+    ]},
+    { name: "Cloud-Computing", prio: "hoch", cards: [
+      { q: "Erkläre die drei Servicemodelle SaaS, PaaS und IaaS.", a: "IaaS (Infrastructure as a Service): virtuelle Hardware-Ressourcen (Server, Speicher). PaaS (Platform as a Service): Entwicklungsplattform inkl. Betriebssystem/Laufzeitumgebung. SaaS (Software as a Service): fertige Anwendungssoftware über das Internet." },
+      { q: "Was sind Vor- und Nachteile von Cloud-Computing für die Verwaltung?", a: "Vorteile: Skalierbarkeit, Kosteneffizienz, keine eigene Hardware-Wartung. Nachteile: Abhängigkeit vom Anbieter, Datenschutz-/Sicherheitsfragen, ggf. Cloud-Act-Problematik bei US-Anbietern." },
+      { q: "Welche rechtlichen Aspekte sind beim Cloud-Einsatz in der Verwaltung besonders relevant?", a: "DSGVO-Konformität, Datenhoheit/Speicherort der Daten, Auftragsverarbeitungsverträge, Risiken durch extraterritoriale Gesetze wie den US Cloud Act." },
+      { q: "Was ist der Unterschied zwischen Cloud und On-Premises?", a: "On-Premises: eigene Server/Infrastruktur im eigenen Rechenzentrum, volle Kontrolle, hoher eigener Wartungsaufwand. Cloud: Infrastruktur wird von externem Anbieter bereitgestellt und gewartet, flexibel skalierbar." }
+    ]},
+    { name: "Virtualisierung, Container, Cluster", prio: "mittel", cards: [
+      { q: "Was ist Virtualisierung und welchen Vorteil bringt sie?", a: "Abstraktion physischer Hardware, um mehrere virtuelle Maschinen auf einer physischen Maschine zu betreiben. Vorteil: bessere Ressourcenauslastung, Isolation, Flexibilität." },
+      { q: "Was ist der Unterschied zwischen VM und Container?", a: "VM: vollständiges eigenes Betriebssystem pro Instanz (Hypervisor-basiert), ressourcenintensiver. Container: teilen sich den Betriebssystem-Kernel des Hosts, leichtgewichtiger und schneller startbar (z. B. Docker)." },
+      { q: "Was ist ein Cluster und wofür wird es eingesetzt?", a: "Verbund mehrerer Rechner, die zusammenarbeiten, um Leistung und/oder Ausfallsicherheit zu erhöhen (z. B. Load-Balancing-Cluster, High-Availability-Cluster)." }
+    ]},
+    { name: "Beamten-/Tarifrecht", prio: "mittel", cards: [
+      { q: "Was ist der Kernunterschied zwischen Beamten und Angestellten im öffentlichen Dienst?", a: "Beamte: besonderes öffentlich-rechtliches Dienstverhältnis (BeamtStG), kein Streikrecht, Treuepflicht, Versorgung nach Alimentationsprinzip. Angestellte: privatrechtlicher Arbeitsvertrag nach Tarifrecht (TVöD), mit Kündigungsschutz nach KSchG." },
+      { q: "Was bedeutet das Alimentationsprinzip bei Beamten?", a: "Der Dienstherr ist verpflichtet, dem Beamten und seiner Familie eine angemessene Versorgung zu gewähren – auch im Ruhestand (verfassungsrechtlich verankert, Art. 33 GG)." },
+      { q: "Welche gesetzliche Grundlage regelt den Kündigungsschutz für Angestellte im öffentlichen Dienst?", a: "Kündigungsschutzgesetz (KSchG) in Verbindung mit dem Tarifvertrag für den öffentlichen Dienst (TVöD)." }
+    ]},
+    { name: "BPMN", prio: "mittel", cards: [
+      { q: "Was ist BPMN und wozu dient es?", a: "Business Process Model and Notation: Standard zur grafischen, standardisierten Modellierung von Geschäftsprozessen für Fachanwender und IT." },
+      { q: "Nenne die Hauptelemente von BPMN.", a: "Ereignisse (Start, Zwischen-, Endereignis), Aktivitäten (Task, Sub-Prozess), Gateways (exklusiv/inklusiv/parallel zur Ablaufsteuerung), Sequenz- und Nachrichtenflüsse." },
+      { q: "Was unterscheidet Pools von Lanes in BPMN?", a: "Pools stellen ganze Organisationen/Systeme dar, Lanes darin repräsentieren Rollen, Abteilungen oder Funktionseinheiten innerhalb eines Pools." }
+    ]},
+    { name: "RAID, Datenstrukturen", prio: "niedrig", cards: [
+      { q: "Was ist der Zweck von RAID-Systemen?", a: "Zusammenschluss mehrerer Festplatten zur Erhöhung von Datensicherheit (Redundanz) und/oder Geschwindigkeit, z. B. RAID 1 (Spiegelung) oder RAID 5 (Striping mit Parität)." },
+      { q: "Was ist der Unterschied zwischen einer verketteten Liste und einem Binärbaum bezüglich der Suche?", a: "Liste: lineare Suche, im schlechtesten Fall O(n). Binärer Suchbaum: bei ausgeglichenem Baum O(log n), da bei jedem Schritt die Suchmenge halbiert wird." }
+    ]},
+    { name: "Lasten-/Pflichtenheft, Systemanalyse", prio: "niedrig", cards: [
+      { q: "Was unterscheidet Lastenheft und Pflichtenheft?", a: "Lastenheft: vom Auftraggeber formuliert, beschreibt das 'Was' (Anforderungen/Ziele). Pflichtenheft: vom Auftragnehmer erstellt, beschreibt das 'Wie' (konkrete Umsetzung der Anforderungen)." },
+      { q: "Was ist der Zweck einer Systemanalyse zu Projektbeginn?", a: "Erhebung und Analyse der Ist-Situation sowie der Anforderungen, um eine fundierte Grundlage für Planung, Aufwandsschätzung und Systementwurf zu schaffen." }
+    ]}
+  ]
+},
+optional: {
+  label: "Optional", range: "bei Zeit", color: "gray",
+  topics: [
+    { name: "Projektmanagement", prio: "niedrig", cards: [
+      { q: "Was ist der Zweck der Netzplantechnik im Projektmanagement?", a: "Darstellung von Vorgängen, ihren Abhängigkeiten und zeitlichem Ablauf, um den kritischen Pfad (die zeitbestimmende Vorgangskette) zu ermitteln." },
+      { q: "Was umfasst Projektcontrolling?", a: "Laufende Überwachung von Terminen, Kosten und Qualität eines Projekts sowie Steuerung bei Abweichungen vom Plan." }
+    ]},
+    { name: "Systemanalyse/-entwurf", prio: "niedrig", cards: [
+      { q: "Was ist Requirements Engineering?", a: "Systematisches Erheben, Dokumentieren, Prüfen und Verwalten von Anforderungen an ein System während der Analysephase." },
+      { q: "Was ist der Unterschied zwischen Systemanalyse und Systementwurf?", a: "Systemanalyse: Erhebung und Beschreibung der Anforderungen ('Was' soll das System leisten). Systementwurf: konkrete technische Umsetzung/Architektur ('Wie' wird es realisiert)." }
+    ]},
+    { name: "Business Intelligence (Erweiterung)", prio: "niedrig", cards: [
+      { q: "Was ist der AHP (Analytic Hierarchy Process)?", a: "Methode zur strukturierten Entscheidungsunterstützung durch paarweisen Vergleich von Kriterien und Alternativen zur Ableitung von Prioritäten." },
+      { q: "Was ist ein Wissensmanagement-System?", a: "System zur Erfassung, Organisation und Bereitstellung von explizitem und implizitem Wissen innerhalb einer Organisation." }
+    ]},
+    { name: "E-Commerce", prio: "niedrig", cards: [
+      { q: "Was ist der Unterschied zwischen clientbasierter und serverbasierter Interaktivität?", a: "Clientbasiert: Logik läuft im Browser des Nutzers (z. B. JavaScript) – schnelle Reaktion, keine Serverlast. Serverbasiert: Logik läuft auf dem Server, Ergebnis wird an den Client gesendet – zentrale Kontrolle, aber höhere Latenz." },
+      { q: "Was ist ein CMS und wofür wird es genutzt?", a: "Content Management System: Software zur Erstellung, Verwaltung und Veröffentlichung digitaler Inhalte ohne tiefe Programmierkenntnisse (z. B. WordPress)." }
+    ]},
+    { name: "Workflow/DMS", prio: "niedrig", cards: [
+      { q: "Was ist eine E-Akte und welchen Vorteil bringt sie?", a: "Elektronische Akte, die papierbasierte Verwaltungsakten ersetzt. Vorteile: schnellere Zugriffe, bessere Nachvollziehbarkeit, Platz-/Kosteneinsparung, Unterstützung mobiler Arbeit." },
+      { q: "Was ist ein DMS?", a: "Dokumentenmanagementsystem: Verwaltung, Speicherung und Nachverfolgung digitaler Dokumente inkl. Versionierung, Metadaten und Workflow-Unterstützung." }
+    ]},
+    { name: "Volkswirtschaftslehre", prio: "niedrig", cards: [
+      { q: "Was zeigt der einfache Wirtschaftskreislauf?", a: "Den Güter- und Geldfluss zwischen den Wirtschaftssubjekten, z. B. Haushalte liefern Produktionsfaktoren an Unternehmen und erhalten dafür Einkommen, Unternehmen liefern Güter gegen Konsumausgaben." },
+      { q: "Nenne die drei klassischen Marktformen.", a: "Polypol (viele Anbieter, viele Nachfrager), Oligopol (wenige Anbieter), Monopol (ein Anbieter)." }
+    ]},
+    { name: "Corporate Governance / Controlling", prio: "niedrig", cards: [
+      { q: "Was versteht man unter Corporate Governance?", a: "Rahmenwerk aus Regeln und Prozessen zur verantwortungsvollen Leitung und Kontrolle eines Unternehmens, mit Fokus auf Transparenz und Interessenausgleich der Stakeholder." },
+      { q: "Was ist die Aufgabe des Controllings?", a: "Planung, Steuerung und Kontrolle von Unternehmensprozessen anhand von Kennzahlen, um wirtschaftliche Ziele zu erreichen." }
+    ]},
+    { name: "IT-Grundschutz vertieft, ITSM", prio: "niedrig", cards: [
+      { q: "Was regelt BSI-200-2 (Standard-Absicherung)?", a: "Vorgehensweise zur Umsetzung des IT-Grundschutzes mit standardisierten Sicherheitsmaßnahmen für normalen Schutzbedarf, als praktikabler Einstieg in die Informationssicherheit." },
+      { q: "Was ist ITSM (IT-Servicemanagement)?", a: "Gesamtheit der Aktivitäten zur Planung, Bereitstellung und Steuerung von IT-Dienstleistungen, häufig nach dem ITIL-Framework organisiert." }
+    ]},
+    { name: "IT-Infrastruktur praktisch", prio: "niedrig", cards: [
+      { q: "Was umfasst Nutzerrechteverwaltung?", a: "Zuweisung und Verwaltung von Zugriffsrechten für Nutzer auf Systeme/Ressourcen, meist rollenbasiert, um das Prinzip der minimalen Rechtevergabe umzusetzen." },
+      { q: "Wie berechnet man aus einer CIDR-Angabe wie /26 die Anzahl nutzbarer Hosts?", a: "/26 bedeutet 6 Bit für Hosts (32-26=6) → 2^6 = 64 Adressen, davon 62 nutzbar (Netzwerk- und Broadcast-Adresse abgezogen)." }
+    ]},
+    { name: "Cloud praktisch", prio: "niedrig", cards: [
+      { q: "Was ist eine 'Instanz' im Cloud-Kontext?", a: "Eine virtuelle Maschine, die bei einem Cloud-Anbieter gestartet wird, mit konfigurierbaren Ressourcen (CPU, RAM, Speicher, Betriebssystem)." },
+      { q: "Was ist der Unterschied zwischen AWS Lambda und einer klassischen virtuellen Instanz?", a: "Lambda ist eine serverlose Funktion, die nur bei Bedarf ausgeführt wird und nach Ausführungszeit abgerechnet wird. Eine Instanz läuft dauerhaft und wird nach Laufzeit/Ressourcen abgerechnet, unabhängig von tatsächlicher Auslastung." }
+    ]},
+    { name: "Sonstige Einzelthemen", prio: "niedrig", cards: [
+      { q: "Was bedeutet Normalisierung in Datenbanken?", a: "Strukturierung von Tabellen zur Vermeidung von Redundanzen und Anomalien, in aufeinander aufbauenden Normalformen (1NF, 2NF, 3NF)." },
+      { q: "Was besagt das Liskov Substitution Principle (LSP)?", a: "Objekte einer Subklasse müssen sich anstelle von Objekten der Superklasse einsetzen lassen, ohne die Korrektheit des Programms zu beeinträchtigen." }
+    ]}
+  ]
+}
+};
+
+const rampMap = { blue: 'c-blue', purple: 'c-purple', teal: 'c-teal', coral: 'c-coral', gray: 'c-gray' };
+const REINSERT_GAP = 6;
+
+const root = document.getElementById('app');
+let view = { screen: 'home' };
+let seenCards = new Set();
+let session = null;
+
+function buildSessionCards(weekKey, topicIdx){
+  const cards = [];
+  if(weekKey === 'mix'){
+    ['week1','week2','week3','week4','optional'].forEach(wk=>{
+      DATA[wk].topics.forEach((t,ti)=>t.cards.forEach((c,ci)=>{
+        cards.push({ wk, ti, ci, topicName: t.name, card: c, status: 'open' });
+      }));
+    });
+    for(let i=cards.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [cards[i],cards[j]]=[cards[j],cards[i]]; }
+  } else {
+    const w = DATA[weekKey];
+    const topicIndices = topicIdx===null ? w.topics.map((_,i)=>i) : [topicIdx];
+    topicIndices.forEach(ti=>{
+      w.topics[ti].cards.forEach((c,ci)=>{
+        cards.push({ wk: weekKey, ti, ci, topicName: w.topics[ti].name, card: c, status: 'open' });
+      });
+    });
+  }
+  return cards;
+}
+
+function startSession(weekKey, topicIdx){
+  session = { cards: buildSessionCards(weekKey, topicIdx), queue: [], pos: 0, flipped: false };
+  session.queue = session.cards.map((_,i)=>i);
+  view = { screen: 'cards' };
+  render();
+}
+
+function currentSessionCard(){
+  const idx = session.queue[session.pos];
+  return session.cards[idx];
+}
+
+function countCards(topics){ return topics.reduce((s,t)=>s+t.cards.length,0); }
+function countSeen(topics, weekKey){
+  let n=0;
+  topics.forEach((t,ti)=>t.cards.forEach((c,ci)=>{ if(seenCards.has(weekKey+'-'+ti+'-'+ci)) n++; }));
+  return n;
+}
+
+function render(){
+  if(view.screen==='home') renderHome();
+  else if(view.screen==='topics') renderTopics();
+  else if(view.screen==='cards') renderCards();
+}
+
+function renderHome(){
+  const keys = ['week1','week2','week3','week4','optional'];
+  let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
+  keys.forEach(k=>{
+    const w = DATA[k];
+    const total = countCards(w.topics);
+    const seen = countSeen(w.topics, k);
+    const ramp = rampMap[w.color];
+    html += `<div class="wk-card ${ramp}" data-key="${k}">
+      <div>
+        <div class="wk-title">${w.label}<span class="wk-range">${w.range}</span></div>
+        <div class="wk-sub">${w.topics.length} Themen &middot; ${total} Karten</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="wk-sub">${seen}/${total} gesehen</div>
+        <span class="icon">&#8250;</span>
+      </div>
+    </div>`;
+  });
+  html += `<button id="mix-btn" style="margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;">&#8646; Zufällige Wiederholung (alle Wochen)</button>`;
+  html += '</div>';
+  root.innerHTML = html;
+  document.querySelectorAll('.wk-card').forEach(el=>{
+    el.addEventListener('click', ()=>{ view = { screen:'topics', weekKey: el.dataset.key }; render(); });
+  });
+  document.getElementById('mix-btn').addEventListener('click', ()=>{ startSession('mix', null); });
+}
+
+function renderTopics(){
+  const w = DATA[view.weekKey];
+  const prioClass = { hoch:'badge-hoch', mittel:'badge-mittel', niedrig:'badge-niedrig' };
+  let html = `<button id="back-home" class="back-btn">&larr; Übersicht</button>`;
+  html += `<div style="font-size:18px;font-weight:600;margin-bottom:4px;">${w.label} <span style="font-size:13px;font-weight:400;color:var(--text-secondary);">${w.range}</span></div>`;
+  html += `<button id="start-week" style="margin:8px 0 16px;width:100%;">&#9654; Alle Karten dieser Woche starten</button>`;
+  html += '<div>';
+  w.topics.forEach((t,ti)=>{
+    const seen = t.cards.filter((c,ci)=>seenCards.has(view.weekKey+'-'+ti+'-'+ci)).length;
+    html += `<div class="topic-row" data-ti="${ti}">
+      <div>
+        <div style="font-size:14px;font-weight:500;">${t.name}</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${t.cards.length} Karten &middot; ${seen} gesehen</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="badge ${prioClass[t.prio]}">${t.prio}</span>
+        <span class="icon">&#8250;</span>
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  root.innerHTML = html;
+  document.getElementById('back-home').addEventListener('click', ()=>{ view={screen:'home'}; render(); });
+  document.getElementById('start-week').addEventListener('click', ()=>{ startSession(view.weekKey, null); });
+  document.querySelectorAll('.topic-row').forEach(el=>{
+    el.addEventListener('click', ()=>{ startSession(view.weekKey, parseInt(el.dataset.ti)); });
+  });
+}
+
+function renderCards(){
+  if(session.pos >= session.queue.length){
+    renderSessionDone();
+    return;
+  }
+  const item = currentSessionCard();
+  seenCards.add(item.wk+'-'+item.ti+'-'+item.ci);
+  const openCount = session.queue.length - session.pos;
+  const doneCount = session.cards.filter(c=>c.status==='done').length;
+  const retryCount = session.cards.filter(c=>c.status==='retry').length;
+
+  let html = `<button id="back-btn" class="back-btn">&larr; Übersicht</button>`;
+  html += `<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">${item.topicName}</div>`;
+  html += `<div class="stat-row"><span>${openCount} offen</span><span>${retryCount} in Wiederholung</span><span>${doneCount} geschafft</span></div>`;
+  html += `<div id="flip-card" class="flip-card">
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">${session.flipped ? 'MUSTERLÖSUNG' : 'FRAGE'}</div>
+    <div style="font-size:16px;line-height:1.6;">${session.flipped ? item.card.a : item.card.q}</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:16px;text-align:center;">${session.flipped ? '' : 'Antippen für Musterlösung'}</div>
+  </div>`;
+  if(session.flipped){
+    html += `<div class="btn-row">
+      <button id="no-btn" class="btn-no">&#10005; Nicht gewusst</button>
+      <button id="yes-btn" class="btn-yes">&#10003; Gewusst</button>
+    </div>`;
+  } else {
+    html += `<div style="margin-top:14px;"><button id="flip-hint-btn" style="width:100%;">Karte umdrehen</button></div>`;
+  }
+  root.innerHTML = html;
+  document.getElementById('back-btn').addEventListener('click', ()=>{ view={screen:'home'}; render(); });
+  document.getElementById('flip-card').addEventListener('click', flipCard);
+  const flipHintBtn = document.getElementById('flip-hint-btn');
+  if(flipHintBtn) flipHintBtn.addEventListener('click', flipCard);
+  const yesBtn = document.getElementById('yes-btn');
+  const noBtn = document.getElementById('no-btn');
+  if(yesBtn) yesBtn.addEventListener('click', ()=>answer(true));
+  if(noBtn) noBtn.addEventListener('click', ()=>answer(false));
+}
+
+function flipCard(){ session.flipped = !session.flipped; render(); }
+
+function answer(knew){
+  const idx = session.queue[session.pos];
+  if(knew){
+    session.cards[idx].status = 'done';
+    session.pos++;
+  } else {
+    session.cards[idx].status = 'retry';
+    const reinsertAt = Math.min(session.pos + 1 + REINSERT_GAP, session.queue.length);
+    session.queue.splice(reinsertAt, 0, idx);
+    session.pos++;
+  }
+  session.flipped = false;
+  render();
+}
+
+function renderSessionDone(){
+  const total = session.cards.length;
+  let html = `<button id="back-btn" class="back-btn">&larr; Übersicht</button>`;
+  html += `<div class="done-box">
+    <div style="font-size:28px;">&#10003;</div>
+    <div style="font-size:16px;font-weight:600;margin-top:10px;">Durchgang abgeschlossen</div>
+    <div style="font-size:13px;margin-top:4px;">${total} Karten gewusst</div>
+  </div>`;
+  html += `<button id="restart-btn" style="margin-top:16px;width:100%;">Nochmal von vorn</button>`;
+  root.innerHTML = html;
+  document.getElementById('back-btn').addEventListener('click', ()=>{ view={screen:'home'}; render(); });
+  document.getElementById('restart-btn').addEventListener('click', ()=>{
+    session.queue = session.cards.map((_,i)=>i);
+    session.cards.forEach(c=>c.status='open');
+    session.pos = 0;
+    session.flipped = false;
+    render();
+  });
+}
+
+render();
+</script>
+</body>
+</html>
