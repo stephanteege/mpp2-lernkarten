@@ -50,6 +50,7 @@
   .flip-card{ cursor:pointer; border:1px solid var(--border); border-radius:12px;
     background:var(--surface); min-height:220px; padding:1.5rem; display:flex;
     flex-direction:column; justify-content:center; }
+  .flip-card svg{ max-width:100%; height:auto; display:block; margin:0 auto; }
   .stat-row{ display:flex; gap:14px; font-size:12px; color:var(--text-muted); margin-bottom:10px; }
   .btn-row{ display:flex; gap:10px; margin-top:14px; }
   .btn-row button{ flex:1; display:flex; align-items:center; justify-content:center; gap:6px; }
@@ -63,6 +64,328 @@
 <h1>MPP2 Lernkarten</h1>
 <div id="app"></div>
 <script>
+const DIAGRAMS = {
+
+vmodell: `<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="30" x2="240" y2="230" stroke="#185FA5" stroke-width="3"/>
+<line x1="240" y1="230" x2="440" y2="30" stroke="#993C1D" stroke-width="3"/>
+<g font-size="11" fill="#0C447C">
+<rect x="10" y="14" width="130" height="30" rx="6" fill="#E6F1FB"/><text x="75" y="33" text-anchor="middle">Anforderungsanalyse</text>
+<rect x="35" y="64" width="130" height="30" rx="6" fill="#E6F1FB"/><text x="100" y="83" text-anchor="middle">Systemdesign</text>
+<rect x="60" y="114" width="130" height="30" rx="6" fill="#E6F1FB"/><text x="125" y="133" text-anchor="middle">Softwaredesign</text>
+<rect x="175" y="200" width="130" height="30" rx="6" fill="#F1EFE8" stroke="#5F5E5A"/><text x="240" y="219" text-anchor="middle" fill="#444441">Implementierung</text>
+</g>
+<g font-size="11" fill="#712B13">
+<rect x="340" y="14" width="130" height="30" rx="6" fill="#FAECE7"/><text x="405" y="33" text-anchor="middle">Abnahmetest</text>
+<rect x="315" y="64" width="130" height="30" rx="6" fill="#FAECE7"/><text x="380" y="83" text-anchor="middle">Systemtest</text>
+<rect x="290" y="114" width="130" height="30" rx="6" fill="#FAECE7"/><text x="355" y="133" text-anchor="middle">Integrationstest</text>
+</g>
+<text x="60" y="250" font-size="10" fill="#6b6a63">Spezifikation</text>
+<text x="360" y="250" font-size="10" fill="#6b6a63">Verifikation / Test</text>
+</svg>`,
+
+wasserfall: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg">
+<g font-size="11" fill="#0C447C">
+<rect x="10" y="10" width="80" height="34" rx="6" fill="#E6F1FB"/><text x="50" y="31" text-anchor="middle">Analyse</text>
+<rect x="100" y="44" width="80" height="34" rx="6" fill="#E6F1FB"/><text x="140" y="65" text-anchor="middle">Design</text>
+<rect x="190" y="78" width="90" height="34" rx="6" fill="#E6F1FB"/><text x="235" y="99" text-anchor="middle">Implementierung</text>
+<rect x="290" y="112" width="70" height="34" rx="6" fill="#E6F1FB"/><text x="325" y="133" text-anchor="middle">Test</text>
+<rect x="370" y="146" width="80" height="34" rx="6" fill="#E6F1FB"/><text x="410" y="167" text-anchor="middle">Betrieb</text>
+</g>
+<path d="M90 27 L100 27 L100 44" stroke="#185FA5" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M180 61 L190 61 L190 78" stroke="#185FA5" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M280 95 L290 95 L290 112" stroke="#185FA5" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M360 129 L370 129 L370 146" stroke="#185FA5" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#185FA5"/></marker></defs>
+</svg>`,
+
+scrum: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+<circle cx="150" cy="150" r="100" fill="none" stroke="#dedcd4" stroke-width="2"/>
+<g font-size="11" fill="#0C447C">
+<rect x="120" y="10" width="120" height="30" rx="6" fill="#E6F1FB"/><text x="180" y="29" text-anchor="middle">Sprint Planning</text>
+<rect x="220" y="135" width="70" height="30" rx="6" fill="#E6F1FB"/><text x="255" y="154" text-anchor="middle">Daily Scrum</text>
+<rect x="120" y="260" width="120" height="30" rx="6" fill="#E6F1FB"/><text x="180" y="279" text-anchor="middle">Sprint Review</text>
+<rect x="10" y="135" width="90" height="30" rx="6" fill="#E6F1FB"/><text x="55" y="154" text-anchor="middle">Retrospective</text>
+</g>
+<circle cx="150" cy="150" r="30" fill="#E1F5EE"/>
+<text x="150" y="147" font-size="10" text-anchor="middle" fill="#085041">Sprint</text>
+<text x="150" y="159" font-size="10" text-anchor="middle" fill="#085041">2-4 Wochen</text>
+<path d="M150,150 m-100,0 a100,100 0 1,1 200,0" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow2)"/>
+<defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#185FA5"/></marker></defs>
+</svg>`,
+
+spiralmodell: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+<path d="M150,150 m0,-10 a10,10 0 1,1 -0.1,0 M150,150 m0,-30 a30,30 0 1,1 -0.1,0 M150,150 m0,-60 a60,60 0 1,1 -0.1,0 M150,150 m0,-100 a100,100 0 1,1 -0.1,0" fill="none" stroke="#534AB7" stroke-width="2"/>
+<g font-size="10" fill="#3C3489">
+<text x="150" y="45" text-anchor="middle">Zyklus 4</text>
+<text x="150" y="85" text-anchor="middle">Zyklus 3</text>
+<text x="150" y="115" text-anchor="middle">Zyklus 2</text>
+<text x="150" y="135" text-anchor="middle">Zyklus 1</text>
+</g>
+<g font-size="9" fill="#6b6a63">
+<text x="230" y="150">Planung</text>
+<text x="150" y="270">Risikoanalyse</text>
+<text x="30" y="150" text-anchor="end">Entwicklung</text>
+<text x="150" y="35" text-anchor="middle">Bewertung</text>
+</g>
+</svg>`,
+
+klassendiagramm: `<svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+<g>
+<rect x="20" y="20" width="150" height="110" fill="#ffffff" stroke="#c7c4b8" stroke-width="1.5"/>
+<line x1="20" y1="50" x2="170" y2="50" stroke="#c7c4b8"/>
+<line x1="20" y1="90" x2="170" y2="90" stroke="#c7c4b8"/>
+<text x="95" y="38" font-size="12" text-anchor="middle" font-weight="600" fill="#1f1e1c">Kunde</text>
+<text x="28" y="66" font-size="10" fill="#444441">- name: String</text>
+<text x="28" y="80" font-size="10" fill="#444441">- kdNr: int</text>
+<text x="28" y="106" font-size="10" fill="#444441">+ bestellen()</text>
+</g>
+<g>
+<rect x="250" y="20" width="150" height="110" fill="#ffffff" stroke="#c7c4b8" stroke-width="1.5"/>
+<line x1="250" y1="50" x2="400" y2="50" stroke="#c7c4b8"/>
+<line x1="250" y1="90" x2="400" y2="90" stroke="#c7c4b8"/>
+<text x="325" y="38" font-size="12" text-anchor="middle" font-weight="600" fill="#1f1e1c">Bestellung</text>
+<text x="258" y="66" font-size="10" fill="#444441">- datum: Date</text>
+<text x="258" y="80" font-size="10" fill="#444441">- betrag: float</text>
+<text x="258" y="106" font-size="10" fill="#444441">+ stornieren()</text>
+</g>
+<line x1="170" y1="75" x2="250" y2="75" stroke="#1f1e1c" stroke-width="1.5"/>
+<text x="185" y="70" font-size="11" fill="#1f1e1c">1</text>
+<text x="230" y="70" font-size="11" fill="#1f1e1c">0..*</text>
+</svg>`,
+
+beziehungsarten: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
+<g font-size="11" fill="#444441">
+<line x1="20" y1="30" x2="120" y2="30" stroke="#1f1e1c" stroke-width="1.5"/>
+<text x="130" y="34">Assoziation</text>
+<line x1="20" y1="70" x2="105" y2="70" stroke="#1f1e1c" stroke-width="1.5"/>
+<polygon points="105,70 120,64 135,70 120,76" fill="#ffffff" stroke="#1f1e1c" stroke-width="1.5"/>
+<text x="145" y="74">Aggregation (hat-ein, lose)</text>
+<line x1="20" y1="110" x2="105" y2="110" stroke="#1f1e1c" stroke-width="1.5"/>
+<polygon points="105,110 120,104 135,110 120,116" fill="#1f1e1c"/>
+<text x="145" y="114">Komposition (starke Bindung)</text>
+<line x1="20" y1="150" x2="110" y2="150" stroke="#1f1e1c" stroke-width="1.5"/>
+<polygon points="110,150 130,144 130,156" fill="#ffffff" stroke="#1f1e1c" stroke-width="1.5"/>
+<text x="145" y="154">Vererbung (Generalisierung)</text>
+<line x1="20" y1="190" x2="120" y2="190" stroke="#1f1e1c" stroke-width="1.5" stroke-dasharray="4,3"/>
+<polygon points="120,190 132,186 132,194" fill="none" stroke="#1f1e1c"/>
+<text x="145" y="194">Realisierung (Interface)</text>
+</g>
+</svg>`,
+
+objektdiagramm: `<svg viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg">
+<g>
+<rect x="20" y="15" width="170" height="90" fill="#ffffff" stroke="#c7c4b8" stroke-width="1.5"/>
+<line x1="20" y1="45" x2="190" y2="45" stroke="#c7c4b8"/>
+<text x="105" y="33" font-size="12" text-anchor="middle" font-weight="600" text-decoration="underline" fill="#1f1e1c">kunde1 : Kunde</text>
+<text x="28" y="62" font-size="10" fill="#444441">name = "Meier"</text>
+<text x="28" y="78" font-size="10" fill="#444441">kdNr = 1042</text>
+</g>
+<g>
+<rect x="230" y="15" width="170" height="90" fill="#ffffff" stroke="#c7c4b8" stroke-width="1.5"/>
+<line x1="230" y1="45" x2="400" y2="45" stroke="#c7c4b8"/>
+<text x="315" y="33" font-size="12" text-anchor="middle" font-weight="600" text-decoration="underline" fill="#1f1e1c">b1 : Bestellung</text>
+<text x="238" y="62" font-size="10" fill="#444441">datum = 12.08.2026</text>
+<text x="238" y="78" font-size="10" fill="#444441">betrag = 49.90</text>
+</g>
+<line x1="190" y1="60" x2="230" y2="60" stroke="#1f1e1c" stroke-width="1.5"/>
+</svg>`,
+
+bilanz: `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+<text x="100" y="20" font-size="13" font-weight="600" text-anchor="middle" fill="#1f1e1c">Aktiva</text>
+<text x="300" y="20" font-size="13" font-weight="600" text-anchor="middle" fill="#1f1e1c">Passiva</text>
+<line x1="200" y1="10" x2="200" y2="200" stroke="#1f1e1c" stroke-width="1.5"/>
+<line x1="10" y1="30" x2="390" y2="30" stroke="#1f1e1c" stroke-width="1.5"/>
+<rect x="10" y="35" width="180" height="70" fill="#E6F1FB"/>
+<text x="100" y="75" font-size="11" text-anchor="middle" fill="#0C447C">Anlagevermögen</text>
+<rect x="10" y="110" width="180" height="80" fill="#E1F5EE"/>
+<text x="100" y="154" font-size="11" text-anchor="middle" fill="#085041">Umlaufvermögen</text>
+<rect x="210" y="35" width="180" height="90" fill="#FAEEDA"/>
+<text x="300" y="84" font-size="11" text-anchor="middle" fill="#633806">Eigenkapital</text>
+<rect x="210" y="130" width="180" height="60" fill="#FAECE7"/>
+<text x="300" y="164" font-size="11" text-anchor="middle" fill="#712B13">Fremdkapital</text>
+<text x="200" y="212" font-size="10" text-anchor="middle" fill="#6b6a63">Summe Aktiva = Summe Passiva</text>
+</svg>`,
+
+unternehmensformen: `<svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg">
+<rect x="180" y="10" width="100" height="28" rx="6" fill="#F1EFE8" stroke="#5F5E5A"/>
+<text x="230" y="28" font-size="10" text-anchor="middle" fill="#2C2C2A">Unternehmensformen</text>
+<g font-size="9" fill="#0C447C">
+<rect x="10" y="80" width="90" height="26" rx="5" fill="#E6F1FB"/><text x="55" y="97" text-anchor="middle">Einzelunternehmen</text>
+<rect x="120" y="80" width="90" height="26" rx="5" fill="#E6F1FB"/><text x="165" y="97" text-anchor="middle">Personenges.</text>
+<rect x="230" y="80" width="90" height="26" rx="5" fill="#E6F1FB"/><text x="275" y="97" text-anchor="middle">Kapitalges.</text>
+<rect x="340" y="80" width="110" height="26" rx="5" fill="#E6F1FB"/><text x="395" y="97" text-anchor="middle">Sonderformen</text>
+</g>
+<g font-size="8" fill="#444441">
+<text x="165" y="130" text-anchor="middle">GbR · OHG · KG</text>
+<text x="275" y="130" text-anchor="middle">GmbH · UG · AG</text>
+<text x="395" y="130" text-anchor="middle">Genossenschaft · Stiftung</text>
+</g>
+<line x1="230" y1="38" x2="55" y2="80" stroke="#c7c4b8"/>
+<line x1="230" y1="38" x2="165" y2="80" stroke="#c7c4b8"/>
+<line x1="230" y1="38" x2="275" y2="80" stroke="#c7c4b8"/>
+<line x1="230" y1="38" x2="395" y2="80" stroke="#c7c4b8"/>
+<line x1="165" y1="106" x2="165" y2="118" stroke="#c7c4b8"/>
+<line x1="275" y1="106" x2="275" y2="118" stroke="#c7c4b8"/>
+<line x1="395" y1="106" x2="395" y2="118" stroke="#c7c4b8"/>
+</svg>`,
+
+bcgmatrix: `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="30" x2="40" y2="280" stroke="#1f1e1c" stroke-width="1.5"/>
+<line x1="40" y1="280" x2="300" y2="280" stroke="#1f1e1c" stroke-width="1.5"/>
+<line x1="170" y1="30" x2="170" y2="280" stroke="#dedcd4" stroke-dasharray="3,3"/>
+<line x1="40" y1="155" x2="300" y2="155" stroke="#dedcd4" stroke-dasharray="3,3"/>
+<rect x="40" y="30" width="130" height="125" fill="#E1F5EE"/>
+<text x="105" y="90" font-size="13" text-anchor="middle" fill="#085041" font-weight="600">Star</text>
+<rect x="170" y="30" width="130" height="125" fill="#FAEEDA"/>
+<text x="235" y="90" font-size="12" text-anchor="middle" fill="#633806" font-weight="600">Question Mark</text>
+<rect x="40" y="155" width="130" height="125" fill="#E6F1FB"/>
+<text x="105" y="217" font-size="12" text-anchor="middle" fill="#0C447C" font-weight="600">Cash Cow</text>
+<rect x="170" y="155" width="130" height="125" fill="#FAECE7"/>
+<text x="235" y="217" font-size="13" text-anchor="middle" fill="#712B13" font-weight="600">Poor Dog</text>
+<text x="20" y="160" font-size="10" fill="#6b6a63" transform="rotate(-90 20 160)">Marktwachstum &#8594;</text>
+<text x="170" y="300" font-size="10" fill="#6b6a63" text-anchor="middle">Relativer Marktanteil &#8594;</text>
+</svg>`,
+
+vonneumann: `<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+<rect x="140" y="20" width="100" height="60" rx="6" fill="#E6F1FB" stroke="#185FA5"/>
+<text x="190" y="45" font-size="11" text-anchor="middle" fill="#0C447C">CPU</text>
+<text x="190" y="60" font-size="9" text-anchor="middle" fill="#0C447C">ALU · Steuerwerk · Register</text>
+<rect x="140" y="150" width="100" height="50" rx="6" fill="#E1F5EE" stroke="#0F6E56"/>
+<text x="190" y="180" font-size="11" text-anchor="middle" fill="#085041">Speicher</text>
+<text x="190" y="192" font-size="8" text-anchor="middle" fill="#085041">Daten + Programme</text>
+<rect x="10" y="90" width="90" height="40" rx="6" fill="#F1EFE8" stroke="#5F5E5A"/>
+<text x="55" y="114" font-size="10" text-anchor="middle" fill="#2C2C2A">Eingabe</text>
+<rect x="280" y="90" width="90" height="40" rx="6" fill="#F1EFE8" stroke="#5F5E5A"/>
+<text x="325" y="114" font-size="10" text-anchor="middle" fill="#2C2C2A">Ausgabe</text>
+<line x1="190" y1="80" x2="190" y2="150" stroke="#993C1D" stroke-width="4"/>
+<text x="245" y="118" font-size="9" fill="#993C1D">Ein Bus (Flaschenhals)</text>
+<line x1="100" y1="110" x2="140" y2="60" stroke="#5F5E5A" stroke-width="1.5"/>
+<line x1="280" y1="110" x2="240" y2="60" stroke="#5F5E5A" stroke-width="1.5"/>
+</svg>`,
+
+harvard: `<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+<rect x="140" y="90" width="100" height="50" rx="6" fill="#E6F1FB" stroke="#185FA5"/>
+<text x="190" y="112" font-size="11" text-anchor="middle" fill="#0C447C">CPU</text>
+<text x="190" y="126" font-size="8" text-anchor="middle" fill="#0C447C">ALU · Steuerwerk</text>
+<rect x="140" y="10" width="100" height="45" rx="6" fill="#E1F5EE" stroke="#0F6E56"/>
+<text x="190" y="30" font-size="10" text-anchor="middle" fill="#085041">Programmspeicher</text>
+<text x="190" y="43" font-size="8" text-anchor="middle" fill="#085041">Instruktionen</text>
+<rect x="140" y="165" width="100" height="45" rx="6" fill="#FAEEDA" stroke="#854F0B"/>
+<text x="190" y="185" font-size="10" text-anchor="middle" fill="#633806">Datenspeicher</text>
+<text x="190" y="198" font-size="8" text-anchor="middle" fill="#633806">Daten</text>
+<line x1="190" y1="55" x2="190" y2="90" stroke="#0F6E56" stroke-width="3"/>
+<line x1="190" y1="140" x2="190" y2="165" stroke="#854F0B" stroke-width="3"/>
+<text x="255" y="45" font-size="9" fill="#6b6a63">Instruktionsbus</text>
+<text x="255" y="185" font-size="9" fill="#6b6a63">Datenbus</text>
+<text x="10" y="115" font-size="9" fill="#6b6a63">Getrennte Busse →</text>
+<text x="10" y="128" font-size="9" fill="#6b6a63">paralleler Zugriff</text>
+</svg>`,
+
+topologien: `<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
+<g font-size="9" fill="#444441" text-anchor="middle">
+<line x1="20" y1="40" x2="140" y2="40" stroke="#5F5E5A" stroke-width="2"/>
+<circle cx="35" cy="40" r="5" fill="#185FA5"/><circle cx="65" cy="40" r="5" fill="#185FA5"/><circle cx="95" cy="40" r="5" fill="#185FA5"/><circle cx="125" cy="40" r="5" fill="#185FA5"/>
+<text x="80" y="62">Bus</text>
+
+<circle cx="260" cy="42" r="30" fill="none" stroke="#5F5E5A" stroke-width="2"/>
+<circle cx="260" cy="12" r="5" fill="#0F6E56"/><circle cx="290" cy="42" r="5" fill="#0F6E56"/><circle cx="260" cy="72" r="5" fill="#0F6E56"/><circle cx="230" cy="42" r="5" fill="#0F6E56"/>
+<text x="260" y="90">Ring</text>
+
+<circle cx="390" cy="40" r="6" fill="#993C1D"/>
+<circle cx="350" cy="15" r="5" fill="#854F0B"/><circle cx="430" cy="15" r="5" fill="#854F0B"/><circle cx="350" cy="65" r="5" fill="#854F0B"/><circle cx="430" cy="65" r="5" fill="#854F0B"/>
+<line x1="390" y1="40" x2="350" y2="15" stroke="#5F5E5A"/><line x1="390" y1="40" x2="430" y2="15" stroke="#5F5E5A"/>
+<line x1="390" y1="40" x2="350" y2="65" stroke="#5F5E5A"/><line x1="390" y1="40" x2="430" y2="65" stroke="#5F5E5A"/>
+<text x="390" y="90">Stern</text>
+
+<circle cx="80" cy="150" r="6" fill="#534AB7"/>
+<circle cx="40" cy="180" r="5" fill="#534AB7"/><circle cx="120" cy="180" r="5" fill="#534AB7"/>
+<circle cx="20" cy="215" r="4" fill="#534AB7"/><circle cx="60" cy="215" r="4" fill="#534AB7"/><circle cx="100" cy="215" r="4" fill="#534AB7"/><circle cx="140" cy="215" r="4" fill="#534AB7"/>
+<line x1="80" y1="150" x2="40" y2="180" stroke="#5F5E5A"/><line x1="80" y1="150" x2="120" y2="180" stroke="#5F5E5A"/>
+<line x1="40" y1="180" x2="20" y2="215" stroke="#5F5E5A"/><line x1="40" y1="180" x2="60" y2="215" stroke="#5F5E5A"/>
+<line x1="120" y1="180" x2="100" y2="215" stroke="#5F5E5A"/><line x1="120" y1="180" x2="140" y2="215" stroke="#5F5E5A"/>
+<text x="80" y="240">Baum</text>
+
+<circle cx="300" cy="160" r="5" fill="#993C1D"/><circle cx="360" cy="150" r="5" fill="#993C1D"/><circle cx="330" cy="200" r="5" fill="#993C1D"/><circle cx="390" cy="200" r="5" fill="#993C1D"/>
+<line x1="300" y1="160" x2="360" y2="150" stroke="#5F5E5A"/><line x1="300" y1="160" x2="330" y2="200" stroke="#5F5E5A"/>
+<line x1="360" y1="150" x2="390" y2="200" stroke="#5F5E5A"/><line x1="330" y1="200" x2="390" y2="200" stroke="#5F5E5A"/>
+<line x1="300" y1="160" x2="390" y2="200" stroke="#5F5E5A"/><line x1="360" y1="150" x2="330" y2="200" stroke="#5F5E5A"/>
+<text x="345" y="230">Masche</text>
+</g>
+</svg>`,
+
+osi: `<svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+<g font-size="10" fill="#0C447C">
+<rect x="20" y="10" width="260" height="28" fill="#E6F1FB" stroke="#c7c4b8"/><text x="150" y="28" text-anchor="middle">7 · Anwendung (HTTP, FTP, DNS)</text>
+<rect x="20" y="38" width="260" height="28" fill="#EEEDFE" stroke="#c7c4b8"/><text x="150" y="56" text-anchor="middle" fill="#3C3489">6 · Darstellung</text>
+<rect x="20" y="66" width="260" height="28" fill="#E6F1FB" stroke="#c7c4b8"/><text x="150" y="84" text-anchor="middle">5 · Sitzung</text>
+<rect x="20" y="94" width="260" height="28" fill="#E1F5EE" stroke="#c7c4b8"/><text x="150" y="112" text-anchor="middle" fill="#085041">4 · Transport (TCP, UDP)</text>
+<rect x="20" y="122" width="260" height="28" fill="#FAEEDA" stroke="#c7c4b8"/><text x="150" y="140" text-anchor="middle" fill="#633806">3 · Netzwerk (IP, Routing)</text>
+<rect x="20" y="150" width="260" height="28" fill="#FAECE7" stroke="#c7c4b8"/><text x="150" y="168" text-anchor="middle" fill="#712B13">2 · Sicherung (MAC)</text>
+<rect x="20" y="178" width="260" height="28" fill="#F1EFE8" stroke="#c7c4b8"/><text x="150" y="196" text-anchor="middle" fill="#2C2C2A">1 · Physikalisch</text>
+</g>
+<text x="150" y="222" font-size="9" fill="#6b6a63" text-anchor="middle">TCP/IP fasst 5-7 zu "Anwendung" zusammen</text>
+</svg>`,
+
+clientserver: `<svg viewBox="0 0 340 140" xmlns="http://www.w3.org/2000/svg">
+<rect x="20" y="20" width="80" height="50" rx="6" fill="#E6F1FB" stroke="#185FA5"/>
+<text x="60" y="49" font-size="11" text-anchor="middle" fill="#0C447C">Client</text>
+<rect x="20" y="80" width="80" height="50" rx="6" fill="#E6F1FB" stroke="#185FA5"/>
+<text x="60" y="109" font-size="11" text-anchor="middle" fill="#0C447C">Client</text>
+<rect x="240" y="50" width="90" height="50" rx="6" fill="#E1F5EE" stroke="#0F6E56"/>
+<text x="285" y="79" font-size="11" text-anchor="middle" fill="#085041">Server</text>
+<line x1="100" y1="45" x2="240" y2="65" stroke="#5F5E5A" marker-end="url(#a3)"/>
+<line x1="100" y1="105" x2="240" y2="85" stroke="#5F5E5A" marker-end="url(#a3)"/>
+<text x="160" y="60" font-size="8" fill="#6b6a63">Anfrage</text>
+<defs><marker id="a3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#5F5E5A"/></marker></defs>
+</svg>`,
+
+ermodell: `<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg">
+<rect x="15" y="45" width="110" height="45" rx="6" fill="#E6F1FB" stroke="#185FA5"/>
+<text x="70" y="72" font-size="11" text-anchor="middle" fill="#0C447C">Kunde</text>
+<polygon points="185,67 220,50 255,67 220,84" fill="#F1EFE8" stroke="#5F5E5A"/>
+<text x="220" y="71" font-size="9" text-anchor="middle" fill="#2C2C2A">bestellt</text>
+<rect x="295" y="45" width="110" height="45" rx="6" fill="#E1F5EE" stroke="#0F6E56"/>
+<text x="350" y="72" font-size="11" text-anchor="middle" fill="#085041">Produkt</text>
+<line x1="125" y1="67" x2="185" y2="67" stroke="#1f1e1c"/>
+<line x1="255" y1="67" x2="295" y2="67" stroke="#1f1e1c"/>
+<text x="140" y="60" font-size="10" fill="#1f1e1c">1</text>
+<text x="265" y="60" font-size="10" fill="#1f1e1c">n</text>
+<text x="220" y="115" font-size="9" fill="#6b6a63" text-anchor="middle">n:m wird über Zwischentabelle "Bestellposition" aufgelöst</text>
+</svg>`,
+
+bpmn: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+<circle cx="30" cy="60" r="16" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<rect x="80" y="40" width="100" height="40" rx="8" fill="#E6F1FB" stroke="#185FA5"/>
+<text x="130" y="64" font-size="10" text-anchor="middle" fill="#0C447C">Aktivität</text>
+<polygon points="215,60 235,42 255,60 235,78" fill="#FAEEDA" stroke="#854F0B"/>
+<text x="235" y="64" font-size="14" text-anchor="middle" fill="#633806">?</text>
+<circle cx="330" cy="60" r="16" fill="#FAECE7" stroke="#993C1D" stroke-width="2.5"/>
+<line x1="46" y1="60" x2="80" y2="60" stroke="#5F5E5A" marker-end="url(#a4)"/>
+<line x1="180" y1="60" x2="215" y2="60" stroke="#5F5E5A" marker-end="url(#a4)"/>
+<line x1="255" y1="60" x2="314" y2="60" stroke="#5F5E5A" marker-end="url(#a4)"/>
+<defs><marker id="a4" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#5F5E5A"/></marker></defs>
+<text x="30" y="95" font-size="8" fill="#6b6a63" text-anchor="middle">Start</text>
+<text x="235" y="98" font-size="8" fill="#6b6a63" text-anchor="middle">Gateway</text>
+<text x="330" y="95" font-size="8" fill="#6b6a63" text-anchor="middle">Ende</text>
+</svg>`,
+
+hubswitchrouter: `<svg viewBox="0 0 400 130" xmlns="http://www.w3.org/2000/svg">
+<g font-size="9" text-anchor="middle">
+<rect x="20" y="30" width="80" height="40" rx="6" fill="#F1EFE8" stroke="#5F5E5A"/><text x="60" y="53" fill="#2C2C2A">Hub</text>
+<text x="60" y="90" fill="#6b6a63">Layer 1</text>
+<text x="60" y="102" fill="#6b6a63">sendet an alle</text>
+<rect x="160" y="30" width="80" height="40" rx="6" fill="#E1F5EE" stroke="#0F6E56"/><text x="200" y="53" fill="#085041">Switch</text>
+<text x="200" y="90" fill="#6b6a63">Layer 2</text>
+<text x="200" y="102" fill="#6b6a63">MAC-Adresse</text>
+<rect x="300" y="30" width="80" height="40" rx="6" fill="#E6F1FB" stroke="#185FA5"/><text x="340" y="53" fill="#0C447C">Router</text>
+<text x="340" y="90" fill="#6b6a63">Layer 3</text>
+<text x="340" y="102" fill="#6b6a63">IP-Adresse</text>
+</g>
+</svg>`
+
+};
+
 const DATA = {
 week1: {
   label: "Woche 1", range: "1.–9.8.", color: "blue",
@@ -70,17 +393,17 @@ week1: {
     { name: "Scrum", prio: "hoch", cards: [
       { q: "Welche Rollen gibt es in Scrum und was ist ihre Aufgabe?", a: "Product Owner: verantwortet das Product Backlog und Priorisierung. Scrum Master: sorgt für Einhaltung des Scrum-Prozesses, beseitigt Hindernisse. Entwicklungsteam: setzt die Arbeit im Sprint um." },
       { q: "Was sind die Artefakte in Scrum?", a: "Product Backlog (priorisierte Gesamtliste der Anforderungen), Sprint Backlog (Aufgaben für den aktuellen Sprint), Increment (fertiges Produktinkrement am Sprintende)." },
-      { q: "Welche Events (Meetings) gibt es in Scrum?", a: "Sprint Planning (Sprintstart, Ziel & Aufgaben festlegen), Daily Scrum (tägliches 15-Min-Stand-up), Sprint Review (Ergebnispräsentation), Sprint Retrospective (Prozessreflexion im Team)." },
+      { q: "Welche Events (Meetings) gibt es in Scrum?", a: "Sprint Planning (Sprintstart, Ziel & Aufgaben festlegen), Daily Scrum (tägliches 15-Min-Stand-up), Sprint Review (Ergebnispräsentation), Sprint Retrospective (Prozessreflexion im Team).", svg: DIAGRAMS.scrum },
       { q: "Wie lange dauert typischerweise ein Sprint?", a: "Meist 2–4 Wochen, fest getaktet und über das gesamte Projekt konstant." },
       { q: "Wann sollte man Scrum statt Wasserfall wählen?", a: "Scrum bei dynamischen Projekten mit unsicheren/sich ändernden Anforderungen und frühem Feedback-Bedarf; Wasserfall bei stabilen, klar definierten Anforderungen." }
     ]},
     { name: "Wasserfallmodell", prio: "hoch", cards: [
-      { q: "Wie ist das Wasserfallmodell aufgebaut?", a: "Lineares, sequenzielles Vorgehen in Phasen: Analyse, Design, Implementierung, Test, Betrieb. Jede Phase muss abgeschlossen sein, bevor die nächste beginnt." },
+      { q: "Wie ist das Wasserfallmodell aufgebaut?", a: "Lineares, sequenzielles Vorgehen in Phasen: Analyse, Design, Implementierung, Test, Betrieb. Jede Phase muss abgeschlossen sein, bevor die nächste beginnt.", svg: DIAGRAMS.wasserfall },
       { q: "Was sind Vor- und Nachteile des Wasserfallmodells?", a: "Vorteile: klare Struktur, einfache Planung, gute Dokumentation. Nachteile: geringe Flexibilität, spätes Erkennen von Fehlern, schwierig bei sich ändernden Anforderungen." },
       { q: "Wo wird das Wasserfallmodell typischerweise eingesetzt?", a: "Bei Projekten mit stabilen Anforderungen, z. B. standardisierte Verwaltungssoftware." }
     ]},
     { name: "V-Modell / V-Modell XT", prio: "hoch", cards: [
-      { q: "Wie ist das V-Modell aufgebaut?", a: "Darstellung in V-Form: linke Seite = Spezifikation (Anforderungen, Architektur, Design), rechte Seite = Testen/Validieren auf jeder Spezifikationsebene." },
+      { q: "Wie ist das V-Modell aufgebaut?", a: "Darstellung in V-Form: linke Seite = Spezifikation (Anforderungen, Architektur, Design), rechte Seite = Testen/Validieren auf jeder Spezifikationsebene.", svg: DIAGRAMS.vmodell },
       { q: "Welche Phasen umfasst das V-Modell?", a: "Anforderungsanalyse, System- und Softwaredesign, Implementierung, Modultests, Integrationstests, Systemtests, Abnahmetests." },
       { q: "Was ist das V-Modell XT und wo wird es verpflichtend eingesetzt?", a: "Weiterentwicklung/Standardisierung des klassischen V-Modells, modular und anpassbar an Projekttyp/-größe. Verpflichtend bei vielen öffentlichen IT-Projekten in Deutschland." },
       { q: "Welche Vor- und Nachteile hat das V-Modell?", a: "Vorteile: klare Struktur, Verknüpfung von Spezifikation und Test, geeignet für sicherheitskritische Projekte. Nachteile: wenig flexibel bei Änderungen, hoher Dokumentationsaufwand." },
@@ -92,7 +415,7 @@ week1: {
       { q: "Wie skaliert man Scrum für große Projekte?", a: "Durch agile Skalierungsframeworks wie SAFe (Scaled Agile Framework), LeSS (Large Scale Scrum) oder Nexus." }
     ]},
     { name: "Spiralmodell & Vorgehensmodelle allgemein", prio: "mittel", cards: [
-      { q: "Was ist das Grundprinzip des Spiralmodells?", a: "Iteratives, risikogetriebenes Vorgehensmodell: in wiederholten Zyklen werden Planung, Risikoanalyse, Entwicklung und Bewertung durchlaufen, wobei jede Spirale das System weiter ausbaut." },
+      { q: "Was ist das Grundprinzip des Spiralmodells?", a: "Iteratives, risikogetriebenes Vorgehensmodell: in wiederholten Zyklen werden Planung, Risikoanalyse, Entwicklung und Bewertung durchlaufen, wobei jede Spirale das System weiter ausbaut.", svg: DIAGRAMS.spiralmodell },
       { q: "Was unterscheidet lineare von agilen Vorgehensmodellen grundsätzlich?", a: "Lineare Modelle (Wasserfall, V-Modell) durchlaufen feste, aufeinanderfolgende Phasen ohne Rücksprünge. Agile Modelle (Scrum, Kanban) arbeiten iterativ-inkrementell mit häufigem Feedback und Anpassung." },
       { q: "Nenne je einen typischen Einsatzfall für ein schwergewichtiges und ein leichtgewichtiges Vorgehensmodell.", a: "Schwergewichtig (z. B. V-Modell XT): große, sicherheitskritische Verwaltungsprojekte mit hohem Dokumentationsbedarf. Leichtgewichtig (z. B. Scrum/Kanban): kleinere Teams, dynamische Anforderungen, schnelle Iteration." }
     ]},
@@ -104,14 +427,14 @@ week1: {
       { q: "Wie hängen die vier Säulen zusammen?", a: "Abstraktion definiert das Wesentliche, Kapselung schützt die Umsetzung, Vererbung ermöglicht Wiederverwendung, Polymorphie erlaubt flexible Nutzung verschiedener Implementierungen über eine gemeinsame Schnittstelle." }
     ]},
     { name: "UML-Klassendiagramm", prio: "hoch", cards: [
-      { q: "Aus welchen drei Bereichen besteht eine Klasse im UML-Klassendiagramm?", a: "Klassenname (oben), Attribute (Mitte), Methoden/Operationen (unten)." },
+      { q: "Aus welchen drei Bereichen besteht eine Klasse im UML-Klassendiagramm?", a: "Klassenname (oben), Attribute (Mitte), Methoden/Operationen (unten).", svg: DIAGRAMS.klassendiagramm },
       { q: "Wie werden Sichtbarkeiten im Klassendiagramm notiert?", a: "+ = public, − = private, # = protected, ~ = package/paket-sichtbar." },
-      { q: "Welche Beziehungsarten gibt es im Klassendiagramm und wie sehen sie aus?", a: "Assoziation (einfache Linie), Aggregation (Linie mit leerer Raute, 'hat-ein', lose Beziehung), Komposition (Linie mit gefüllter Raute, starke Abhängigkeit), Vererbung/Generalisierung (Linie mit leerem Dreieck-Pfeil)." },
+      { q: "Welche Beziehungsarten gibt es im Klassendiagramm und wie sehen sie aus?", a: "Assoziation (einfache Linie), Aggregation (Linie mit leerer Raute, 'hat-ein', lose Beziehung), Komposition (Linie mit gefüllter Raute, starke Abhängigkeit), Vererbung/Generalisierung (Linie mit leerem Dreieck-Pfeil).", svg: DIAGRAMS.beziehungsarten },
       { q: "Wie wird Kardinalität im Klassendiagramm dargestellt?", a: "An den Linienenden werden Zahlen/Bereiche notiert, z. B. 1, 0..1, 1..*, 0..* für die Anzahl möglicher Beziehungen zwischen den Klassen." },
       { q: "Zeichne skizzenhaft: eine Klasse 'Kunde' die mehrere 'Bestellung'-Objekte hat (1:n).", a: "Zwei Rechtecke (Kunde, Bestellung) verbunden durch eine Linie mit Kardinalität '1' an Kunde und '0..*' an Bestellung, ggf. mit Raute für Aggregation/Komposition je nach Abhängigkeitsstärke." }
     ]},
     { name: "Objektdiagramm, Use-Case, Aggregation/Komposition", prio: "mittel", cards: [
-      { q: "Was ist der Unterschied zwischen Klassen- und Objektdiagramm?", a: "Klassendiagramm zeigt die generelle Struktur (Klassen, Beziehungen, Kardinalitäten). Objektdiagramm zeigt eine konkrete Momentaufnahme mit tatsächlichen Objektinstanzen und ihren Werten." },
+      { q: "Was ist der Unterschied zwischen Klassen- und Objektdiagramm?", a: "Klassendiagramm zeigt die generelle Struktur (Klassen, Beziehungen, Kardinalitäten). Objektdiagramm zeigt eine konkrete Momentaufnahme mit tatsächlichen Objektinstanzen und ihren Werten.", svg: DIAGRAMS.objektdiagramm },
       { q: "Was zeigt ein Use-Case-Diagramm?", a: "Die funktionalen Anforderungen eines Systems aus Nutzersicht: Akteure (Personen/Systeme) und die Anwendungsfälle (Use Cases), mit denen sie interagieren." },
       { q: "Was ist der Unterschied zwischen Aggregation und Komposition?", a: "Aggregation: lose 'hat-ein'-Beziehung, Teile können unabhängig vom Ganzen existieren (leere Raute). Komposition: starke Abhängigkeit, Teile existieren nur mit dem Ganzen und werden mit ihm zerstört (gefüllte Raute)." }
     ]},
@@ -126,7 +449,7 @@ week1: {
       { q: "Nenne ein Beispiel für deklarative Programmierung.", a: "SQL: man beschreibt, welche Daten man haben möchte (SELECT ... WHERE ...), nicht wie die Datenbank sie beschafft." }
     ]},
     { name: "Bilanz Grundlagen", prio: "hoch", cards: [
-      { q: "Was zeigt eine Bilanz und wie ist sie aufgebaut?", a: "Gegenüberstellung von Aktiva (Vermögen) und Passiva (Kapital) zu einem Stichtag. Aktiva: Anlagevermögen, Umlaufvermögen. Passiva: Eigenkapital, Fremdkapital." },
+      { q: "Was zeigt eine Bilanz und wie ist sie aufgebaut?", a: "Gegenüberstellung von Aktiva (Vermögen) und Passiva (Kapital) zu einem Stichtag. Aktiva: Anlagevermögen, Umlaufvermögen. Passiva: Eigenkapital, Fremdkapital.", svg: DIAGRAMS.bilanz },
       { q: "Nenne je zwei Beispiele für Anlagevermögen, Umlaufvermögen, Eigenkapital und Fremdkapital.", a: "Anlagevermögen: Maschinen, Gebäude. Umlaufvermögen: Kasse, Vorräte. Eigenkapital: Gezeichnetes Kapital, Gewinnrücklagen. Fremdkapital: Bankdarlehen, Verbindlichkeiten aus Lieferungen." },
       { q: "Wie wird eine Schenkung von 50.000€ per Überweisung in der Bilanz eingeordnet?", a: "Aktivseite: Erhöhung der Kasse/Bank (Umlaufvermögen). Passivseite: Erhöhung des Eigenkapitals (da kein Rückzahlungsanspruch besteht)." },
       { q: "Was besagt die Bilanzgleichung?", a: "Aktiva = Passiva, also Summe des Vermögens entspricht immer der Summe des Kapitals (Eigen- + Fremdkapital)." },
@@ -143,7 +466,7 @@ week2: {
   label: "Woche 2", range: "10.–16.8.", color: "purple",
   topics: [
     { name: "BCG-Matrix", prio: "hoch", cards: [
-      { q: "Was ist die BCG-Matrix und welche zwei Dimensionen misst sie?", a: "Portfolioanalyse-Instrument der Boston Consulting Group. Dimensionen: Marktwachstum (y-Achse) und relativer Marktanteil (x-Achse)." },
+      { q: "Was ist die BCG-Matrix und welche zwei Dimensionen misst sie?", a: "Portfolioanalyse-Instrument der Boston Consulting Group. Dimensionen: Marktwachstum (y-Achse) und relativer Marktanteil (x-Achse).", svg: DIAGRAMS.bcgmatrix },
       { q: "Welche vier Kategorien gibt es in der BCG-Matrix und wie geht man mit ihnen um?", a: "Stars (hoher Marktanteil, hohes Wachstum → investieren), Cash Cows (hoher Marktanteil, niedriges Wachstum → Gewinne abschöpfen), Question Marks (niedriger Marktanteil, hohes Wachstum → prüfen), Poor Dogs (niedriger Marktanteil, niedriges Wachstum → desinvestieren)." },
       { q: "Wende die BCG-Matrix beispielhaft auf eine Behörde/Verwaltungsleistung an.", a: "Z. B. ein etabliertes, stark genutztes Verwaltungsportal = Cash Cow; ein neues digitales Pilotprojekt mit wachsender Nachfrage = Question Mark oder Star, je nach Marktdurchdringung." },
       { q: "Was sind die Kritikpunkte an der BCG-Matrix?", a: "Nur zwei Dimensionen betrachtet, andere Einflussfaktoren bleiben unberücksichtigt; Annahme Marktanteil↔Rentabilität nicht immer zutreffend; stark vereinfachte Darstellung." },
@@ -153,7 +476,7 @@ week2: {
       { q: "Nenne die Hauptgruppen der Unternehmensformen.", a: "Einzelunternehmen, Personengesellschaften (GbR, OHG, KG), Kapitalgesellschaften (GmbH, UG, AG), Sonderformen (Genossenschaften, Körperschaften des öffentlichen Rechts, Stiftungen)." },
       { q: "Was unterscheidet Personengesellschaften von Kapitalgesellschaften bei der Haftung?", a: "Personengesellschaften: meist unbeschränkte persönliche Haftung der Gesellschafter. Kapitalgesellschaften: Haftung i. d. R. auf das Gesellschaftsvermögen beschränkt." },
       { q: "Was sind die Kernmerkmale einer GmbH?", a: "Kapitalgesellschaft, Mindestkapital 25.000€, beschränkte Haftung der Gesellschafter, Organe: Geschäftsführung und Gesellschafterversammlung." },
-      { q: "Zeichne die Unternehmensformen als Baumdiagramm (grobe Struktur).", a: "Unternehmensformen → Einzelunternehmen | Personengesellschaften (GbR, OHG, KG, PartG) | Kapitalgesellschaften (GmbH, UG, AG, SE) | Sonderformen (Genossenschaft, Körperschaft d. ö. Rechts, Stiftung)." },
+      { q: "Zeichne die Unternehmensformen als Baumdiagramm (grobe Struktur).", a: "Unternehmensformen → Einzelunternehmen | Personengesellschaften (GbR, OHG, KG, PartG) | Kapitalgesellschaften (GmbH, UG, AG, SE) | Sonderformen (Genossenschaft, Körperschaft d. ö. Rechts, Stiftung).", svg: DIAGRAMS.unternehmensformen },
       { q: "Nach welchen Kriterien wählt man eine Rechtsform aus?", a: "Haftung (persönlich/beschränkt), Kapitalbedarf, steuerliche Belastung, Mitbestimmung/Entscheidungsfreiheit, Publizitäts- und Berichtspflichten." }
     ]},
     { name: "Rechtsformwahl begründen", prio: "hoch", cards: [
@@ -193,14 +516,14 @@ week2: {
       { q: "Wie unterstützt Kanban die kontinuierliche Verbesserung im Sinne von PDCA?", a: "Durch sichtbaren Arbeitsfluss und WIP-Begrenzung werden Engpässe schnell erkannt (Check) und Prozessanpassungen (Act) direkt im laufenden Betrieb vorgenommen." }
     ]},
     { name: "Von-Neumann-Architektur", prio: "hoch", cards: [
-      { q: "Aus welchen Hauptkomponenten besteht die Von-Neumann-Architektur?", a: "CPU (mit Rechenwerk/ALU, Steuerwerk, Registern), gemeinsamer Speicher für Daten und Programme, gemeinsamer Systembus für Daten, Adressen und Steuerinformationen." },
+      { q: "Aus welchen Hauptkomponenten besteht die Von-Neumann-Architektur?", a: "CPU (mit Rechenwerk/ALU, Steuerwerk, Registern), gemeinsamer Speicher für Daten und Programme, gemeinsamer Systembus für Daten, Adressen und Steuerinformationen.", svg: DIAGRAMS.vonneumann },
       { q: "Was ist der Von-Neumann-Flaschenhals?", a: "Da nur ein gemeinsamer Bus für Befehle und Daten existiert, entsteht ein Engpass: CPU muss Befehle und Daten nacheinander über denselben Bus holen, was die parallele Verarbeitung begrenzt." },
       { q: "Nenne Beispiele für Von-Neumann-Systeme.", a: "Klassische PCs, Standard-CPUs (Intel x86, AMD Ryzen), Laptops, Server, historische Rechner wie ENIAC." },
       { q: "Zeichne/beschreibe den Aufbau: welche Komponenten sind wie verbunden?", a: "CPU (ALU, Steuerwerk, Register) ↔ Systembus ↔ gemeinsamer Speicher (Programme + Daten) ↔ Systembus ↔ Ein-/Ausgabewerk. Alle Komponenten teilen sich denselben Bus." },
       { q: "Was ist der zentrale Vorteil der Von-Neumann-Architektur trotz des Flaschenhalses?", a: "Hohe Flexibilität, da Speicher dynamisch zwischen Daten und Programmen aufgeteilt werden kann, sowie einfacherer und günstigerer Aufbau." }
     ]},
     { name: "Harvard-Architektur & Vergleich", prio: "mittel", cards: [
-      { q: "Was unterscheidet die Harvard- von der Von-Neumann-Architektur?", a: "Harvard nutzt getrennte Speicherbereiche und getrennte Busse für Programme und Daten (paralleler Zugriff möglich), Von-Neumann nutzt einen gemeinsamen Speicher und Bus." },
+      { q: "Was unterscheidet die Harvard- von der Von-Neumann-Architektur?", a: "Harvard nutzt getrennte Speicherbereiche und getrennte Busse für Programme und Daten (paralleler Zugriff möglich), Von-Neumann nutzt einen gemeinsamen Speicher und Bus.", svg: DIAGRAMS.harvard },
       { q: "Welche Vor- und Nachteile hat die Harvard-Architektur?", a: "Vorteile: höhere Geschwindigkeit durch parallelen Zugriff, kein Bus-Engpass, gut für Echtzeitsysteme. Nachteile: komplexere Hardware, weniger flexible Speicheraufteilung." },
       { q: "Nenne Beispiele für Harvard-Architektur-Systeme.", a: "Mikrocontroller (PIC, Arduino/Atmel AVR), digitale Signalprozessoren (DSPs), ARM Cortex-M (modifizierte Harvard-Architektur), eingebettete Systeme." }
     ]},
@@ -221,14 +544,14 @@ week3: {
   label: "Woche 3", range: "17.–23.8.", color: "teal",
   topics: [
     { name: "Netzwerktopologien", prio: "hoch", cards: [
-      { q: "Nenne die grundlegenden Netzwerktopologien.", a: "Bus, Ring, Stern, Baum, Masche (Mesh), sowie Hybrid-Topologien als Kombination." },
+      { q: "Nenne die grundlegenden Netzwerktopologien.", a: "Bus, Ring, Stern, Baum, Masche (Mesh), sowie Hybrid-Topologien als Kombination.", svg: DIAGRAMS.topologien },
       { q: "Was ist das Hauptproblem der Stern-Topologie?", a: "Single Point of Failure (SPoF): fällt der zentrale Knoten (Switch/Hub) aus, ist das gesamte Netzwerk betroffen." },
       { q: "Was ist der Vorteil der Bus-Topologie und was ihr Nachteil?", a: "Vorteil: geringer Verkabelungsaufwand. Nachteil: bei Kabelbruch fällt das gesamte Segment aus, Kollisionsgefahr bei gleichzeitiger Übertragung." },
       { q: "Was zeichnet die Masch-Topologie aus?", a: "Jeder Knoten ist (teilweise oder vollständig) mit mehreren anderen verbunden → hohe Ausfallsicherheit durch redundante Wege, aber hoher Verkabelungsaufwand." },
       { q: "Nach welchen Kriterien wählt man eine Netzwerktopologie?", a: "Kosten, Ausfallsicherheit, Skalierbarkeit, Verwaltungsaufwand, benötigte Übertragungsgeschwindigkeit." }
     ]},
     { name: "OSI-Schichtenmodell", prio: "hoch", cards: [
-      { q: "Nenne die 7 Schichten des OSI-Modells in der richtigen Reihenfolge.", a: "1. Physikalisch (Bitübertragung), 2. Sicherung (MAC/Ethernet), 3. Netzwerk (Routing, IP), 4. Transport (TCP/UDP), 5. Sitzung, 6. Darstellung (Verschlüsselung, Formate), 7. Anwendung (HTTP, FTP, DNS)." },
+      { q: "Nenne die 7 Schichten des OSI-Modells in der richtigen Reihenfolge.", a: "1. Physikalisch (Bitübertragung), 2. Sicherung (MAC/Ethernet), 3. Netzwerk (Routing, IP), 4. Transport (TCP/UDP), 5. Sitzung, 6. Darstellung (Verschlüsselung, Formate), 7. Anwendung (HTTP, FTP, DNS).", svg: DIAGRAMS.osi },
       { q: "Welche Aufgabe hat die Transportschicht (Layer 4)?", a: "Sicherer Datentransport zwischen Endsystemen, Segmentierung großer Datenmengen, Fehlererkennung/-korrektur, Flusskontrolle und Multiplexing (TCP, UDP)." },
       { q: "Wie unterscheidet sich das TCP/IP-Modell vom OSI-Modell?", a: "TCP/IP hat nur 4 Schichten (Network Interface, Internet, Transport, Application) statt 7. OSI ist ein theoretisches Referenzmodell, TCP/IP wird praktisch genutzt; einige OSI-Schichten werden im TCP/IP-Modell zusammengefasst." },
       { q: "Nenne je einen typischen Angriff auf der Sicherungs-, Netzwerk- und Anwendungsschicht.", a: "Sicherung: MAC-Spoofing/ARP-Spoofing. Netzwerk: IP-Spoofing, DDoS. Anwendung: SQL-Injection, Cross-Site-Scripting (XSS)." },
@@ -246,12 +569,12 @@ week3: {
       { q: "Was ist der Unterschied zwischen öffentlicher und privater IP-Adresse?", a: "Private IP-Adressen (z. B. 192.168.x.x) sind nur innerhalb eines lokalen Netzwerks gültig, öffentliche IP-Adressen sind weltweit eindeutig und im Internet erreichbar." }
     ]},
     { name: "Hub, Switch, Router", prio: "hoch", cards: [
-      { q: "Was ist der Unterschied zwischen Hub und Switch?", a: "Hub: leitet Daten ungefiltert an alle angeschlossenen Geräte weiter (Layer 1, keine Adressierung). Switch: leitet Daten gezielt anhand der MAC-Adresse nur an den Zielport weiter (Layer 2)." },
+      { q: "Was ist der Unterschied zwischen Hub und Switch?", a: "Hub: leitet Daten ungefiltert an alle angeschlossenen Geräte weiter (Layer 1, keine Adressierung). Switch: leitet Daten gezielt anhand der MAC-Adresse nur an den Zielport weiter (Layer 2).", svg: DIAGRAMS.hubswitchrouter },
       { q: "Was macht ein Router im Unterschied zu Switch/Hub?", a: "Router verbindet unterschiedliche Netzwerke miteinander und leitet Datenpakete anhand von IP-Adressen weiter (Layer 3, Routing zwischen Netzen)." },
       { q: "In welcher OSI-Schicht arbeiten Hub, Switch und Router jeweils?", a: "Hub: Schicht 1 (Physikalisch). Switch: Schicht 2 (Sicherung). Router: Schicht 3 (Netzwerk)." }
     ]},
     { name: "Client-Server-Architektur", prio: "mittel", cards: [
-      { q: "Was beschreibt die Client-Server-Architektur?", a: "Aufteilung in Client (fordert Dienste/Ressourcen an) und Server (stellt Dienste/Ressourcen bereit), Kommunikation meist über definierte Protokolle (z. B. HTTP)." },
+      { q: "Was beschreibt die Client-Server-Architektur?", a: "Aufteilung in Client (fordert Dienste/Ressourcen an) und Server (stellt Dienste/Ressourcen bereit), Kommunikation meist über definierte Protokolle (z. B. HTTP).", svg: DIAGRAMS.clientserver },
       { q: "Nenne Vor- und Nachteile der Client-Server-Architektur.", a: "Vorteile: zentrale Verwaltung, klare Rollenverteilung, gute Skalierbarkeit. Nachteile: Server als Single Point of Failure, hohe Serverlast bei vielen Clients." },
       { q: "Wie kann Ausfallsicherheit bei Servern erhöht werden?", a: "Durch Redundanz (mehrere Server im Cluster), Load Balancing, Failover-Mechanismen und regelmäßige Backups." }
     ]},
@@ -295,7 +618,7 @@ week4: {
   label: "Woche 4", range: "24.–27.8.", color: "coral",
   topics: [
     { name: "ER-Modell", prio: "hoch", cards: [
-      { q: "Was beschreibt ein ER-Modell?", a: "Abbildung von Daten und ihren Beziehungen als Entitäten, Attribute und Relationen – Grundlage für die Datenbankmodellierung." },
+      { q: "Was beschreibt ein ER-Modell?", a: "Abbildung von Daten und ihren Beziehungen als Entitäten, Attribute und Relationen – Grundlage für die Datenbankmodellierung.", svg: DIAGRAMS.ermodell },
       { q: "Welche Kardinalitätsarten gibt es und was bedeuten sie?", a: "1:1 (jede Entität höchstens einer anderen zugeordnet), 1:n (eine Entität kann mit mehreren verbunden sein), n:m (mehrere Entitäten beider Seiten können verknüpft sein, benötigt Zwischentabelle)." },
       { q: "Wie wird eine n:m-Beziehung in ein relationales Schema umgesetzt?", a: "Über eine Zwischentabelle (Verknüpfungstabelle), die die Primärschlüssel beider beteiligter Tabellen als Fremdschlüssel enthält." },
       { q: "Wie hängen ER-Modell und Objektorientierung zusammen?", a: "Entitäten entsprechen Klassen, Attribute entsprechen Eigenschaften, Beziehungen entsprechen Assoziationen, Generalisierung/Spezialisierung entspricht Vererbung." }
@@ -332,7 +655,7 @@ week4: {
       { q: "Welche gesetzliche Grundlage regelt den Kündigungsschutz für Angestellte im öffentlichen Dienst?", a: "Kündigungsschutzgesetz (KSchG) in Verbindung mit dem Tarifvertrag für den öffentlichen Dienst (TVöD)." }
     ]},
     { name: "BPMN", prio: "mittel", cards: [
-      { q: "Was ist BPMN und wozu dient es?", a: "Business Process Model and Notation: Standard zur grafischen, standardisierten Modellierung von Geschäftsprozessen für Fachanwender und IT." },
+      { q: "Was ist BPMN und wozu dient es?", a: "Business Process Model and Notation: Standard zur grafischen, standardisierten Modellierung von Geschäftsprozessen für Fachanwender und IT.", svg: DIAGRAMS.bpmn },
       { q: "Nenne die Hauptelemente von BPMN.", a: "Ereignisse (Start, Zwischen-, Endereignis), Aktivitäten (Task, Sub-Prozess), Gateways (exklusiv/inklusiv/parallel zur Ablaufsteuerung), Sequenz- und Nachrichtenflüsse." },
       { q: "Was unterscheidet Pools von Lanes in BPMN?", a: "Pools stellen ganze Organisationen/Systeme dar, Lanes darin repräsentieren Rollen, Abteilungen oder Funktionseinheiten innerhalb eines Pools." }
     ]},
@@ -522,9 +845,11 @@ function renderCards(){
   let html = `<button id="back-btn" class="back-btn">&larr; Übersicht</button>`;
   html += `<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">${item.topicName}</div>`;
   html += `<div class="stat-row"><span>${openCount} offen</span><span>${retryCount} in Wiederholung</span><span>${doneCount} geschafft</span></div>`;
+  const showSvg = session.flipped && item.card.svg;
   html += `<div id="flip-card" class="flip-card">
     <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">${session.flipped ? 'MUSTERLÖSUNG' : 'FRAGE'}</div>
     <div style="font-size:16px;line-height:1.6;">${session.flipped ? item.card.a : item.card.q}</div>
+    ${showSvg ? `<div style="margin-top:14px;background:var(--bg);border-radius:8px;padding:10px;">${item.card.svg}</div>` : ''}
     <div style="font-size:12px;color:var(--text-muted);margin-top:16px;text-align:center;">${session.flipped ? '' : 'Antippen für Musterlösung'}</div>
   </div>`;
   if(session.flipped){
