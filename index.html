@@ -39,6 +39,7 @@
   .c-teal{ background:var(--teal-50); color:var(--teal-800); }
   .c-coral{ background:var(--coral-50); color:var(--coral-800); }
   .c-gray{ background:var(--gray-50); color:var(--gray-800); }
+  .c-amber{ background:var(--amber-50); color:var(--amber-800); }
   .badge{ font-size:11px; padding:3px 9px; border-radius:var(--radius); font-weight:500; }
   .badge-hoch{ background:var(--coral-50); color:var(--coral-800); }
   .badge-mittel{ background:var(--amber-50); color:var(--amber-800); }
@@ -1293,13 +1294,40 @@ optional: {
 
 const rampMap = { blue: 'c-blue', purple: 'c-purple', teal: 'c-teal', coral: 'c-coral', gray: 'c-gray' };
 const REINSERT_GAP = 6;
+const STORAGE_KEY = 'mpp2_lernkarten_status_v1';
 
 const root = document.getElementById('app');
 let view = { screen: 'home' };
-let seenCards = new Set();
 let session = null;
+let pendingStart = null; // { weekKey, topicIdx } while filter picker is shown
 
-function buildSessionCards(weekKey, topicIdx){
+// --- Persistent card status: 'neu' | 'lernen' | 'bekannt' ---
+let cardStatus = {};
+try {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(raw) cardStatus = JSON.parse(raw);
+} catch(e) { cardStatus = {}; }
+
+function saveStatus(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cardStatus)); } catch(e) {}
+}
+
+function cardId(wk, ti, ci){ return wk+'-'+ti+'-'+ci; }
+function getStatus(wk, ti, ci){ return cardStatus[cardId(wk,ti,ci)] || 'neu'; }
+function setStatus(wk, ti, ci, status){
+  cardStatus[cardId(wk,ti,ci)] = status;
+  saveStatus();
+}
+
+function statusCounts(topics, weekKey){
+  const counts = { neu: 0, lernen: 0, bekannt: 0 };
+  topics.forEach((t,ti)=>t.cards.forEach((c,ci)=>{
+    counts[getStatus(weekKey,ti,ci)]++;
+  }));
+  return counts;
+}
+
+function buildSessionCards(weekKey, topicIdx, filter){
   const cards = [];
   if(weekKey === 'mix'){
     ['week1','week2','week3','optional'].forEach(wk=>{
@@ -1317,11 +1345,23 @@ function buildSessionCards(weekKey, topicIdx){
       });
     });
   }
+  if(filter === 'unbekannt'){
+    return cards.filter(c => getStatus(c.wk,c.ti,c.ci) !== 'bekannt');
+  } else if(filter === 'bekannt'){
+    return cards.filter(c => getStatus(c.wk,c.ti,c.ci) === 'bekannt');
+  }
   return cards;
 }
 
-function startSession(weekKey, topicIdx){
-  session = { cards: buildSessionCards(weekKey, topicIdx), queue: [], pos: 0, flipped: false, weekKey: weekKey };
+function startSession(weekKey, topicIdx, filter){
+  const cards = buildSessionCards(weekKey, topicIdx, filter);
+  if(cards.length === 0){
+    session = { cards: [], queue: [], pos: 0, flipped: false, weekKey: weekKey, empty: true };
+    view = { screen: 'cards' };
+    render();
+    return;
+  }
+  session = { cards, queue: [], pos: 0, flipped: false, weekKey: weekKey };
   session.queue = session.cards.map((_,i)=>i);
   view = { screen: 'cards' };
   render();
@@ -1333,16 +1373,22 @@ function currentSessionCard(){
 }
 
 function countCards(topics){ return topics.reduce((s,t)=>s+t.cards.length,0); }
-function countSeen(topics, weekKey){
-  let n=0;
-  topics.forEach((t,ti)=>t.cards.forEach((c,ci)=>{ if(seenCards.has(weekKey+'-'+ti+'-'+ci)) n++; }));
-  return n;
-}
 
 function render(){
   if(view.screen==='home') renderHome();
   else if(view.screen==='topics') renderTopics();
+  else if(view.screen==='filter') renderFilterPicker();
   else if(view.screen==='cards') renderCards();
+}
+
+function statusBar(counts, total){
+  if(total === 0) return '';
+  const pctBekannt = Math.round(counts.bekannt/total*100);
+  const pctLernen = Math.round(counts.lernen/total*100);
+  return `<div style="display:flex;height:6px;border-radius:3px;overflow:hidden;margin-top:6px;background:var(--gray-50);">
+    <div style="width:${pctBekannt}%;background:var(--teal-600);"></div>
+    <div style="width:${pctLernen}%;background:var(--amber-600);"></div>
+  </div>`;
 }
 
 function renderHome(){
@@ -1351,16 +1397,17 @@ function renderHome(){
   keys.forEach(k=>{
     const w = DATA[k];
     const total = countCards(w.topics);
-    const seen = countSeen(w.topics, k);
+    const counts = statusCounts(w.topics, k);
     const ramp = rampMap[w.color];
     html += `<div class="wk-card ${ramp}" data-key="${k}">
-      <div>
-        <div class="wk-title">${w.label}<span class="wk-range">${w.range}</span></div>
+      <div style="width:100%;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="wk-title">${w.label}<span class="wk-range">${w.range}</span></div>
+          <span class="icon">&#8250;</span>
+        </div>
         <div class="wk-sub">${w.topics.length} Themen &middot; ${total} Karten</div>
-      </div>
-      <div style="text-align:right;">
-        <div class="wk-sub">${seen}/${total} gesehen</div>
-        <span class="icon">&#8250;</span>
+        <div class="wk-sub" style="margin-top:4px;">${counts.bekannt} bekannt &middot; ${counts.lernen} in Arbeit &middot; ${counts.neu} neu</div>
+        ${statusBar(counts, total)}
       </div>
     </div>`;
   });
@@ -1370,7 +1417,7 @@ function renderHome(){
   document.querySelectorAll('.wk-card').forEach(el=>{
     el.addEventListener('click', ()=>{ view = { screen:'topics', weekKey: el.dataset.key }; render(); });
   });
-  document.getElementById('mix-btn').addEventListener('click', ()=>{ startSession('mix', null); });
+  document.getElementById('mix-btn').addEventListener('click', ()=>{ view = { screen:'filter', weekKey:'mix', topicIdx:null }; render(); });
 }
 
 function renderTopics(){
@@ -1381,41 +1428,102 @@ function renderTopics(){
   html += `<button id="start-week" style="margin:8px 0 16px;width:100%;">&#9654; Alle Karten dieser Woche starten</button>`;
   html += '<div>';
   w.topics.forEach((t,ti)=>{
-    const seen = t.cards.filter((c,ci)=>seenCards.has(view.weekKey+'-'+ti+'-'+ci)).length;
+    const counts = statusCounts([t], view.weekKey);
     html += `<div class="topic-row" data-ti="${ti}">
-      <div>
-        <div style="font-size:14px;font-weight:500;">${t.name}</div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${t.cards.length} Karten &middot; ${seen} gesehen</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span class="badge ${prioClass[t.prio]}">${t.prio}</span>
-        <span class="icon">&#8250;</span>
+      <div style="width:100%;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:14px;font-weight:500;">${t.name}</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="badge ${prioClass[t.prio]}">${t.prio}</span>
+            <span class="icon">&#8250;</span>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${t.cards.length} Karten &middot; ${counts.bekannt} bekannt &middot; ${counts.lernen} in Arbeit &middot; ${counts.neu} neu</div>
+        ${statusBar(counts, t.cards.length)}
       </div>
     </div>`;
   });
   html += '</div>';
   root.innerHTML = html;
   document.getElementById('back-home').addEventListener('click', ()=>{ view={screen:'home'}; render(); });
-  document.getElementById('start-week').addEventListener('click', ()=>{ startSession(view.weekKey, null); });
+  document.getElementById('start-week').addEventListener('click', ()=>{ view = { screen:'filter', weekKey: view.weekKey, topicIdx: null }; render(); });
   document.querySelectorAll('.topic-row').forEach(el=>{
-    el.addEventListener('click', ()=>{ startSession(view.weekKey, parseInt(el.dataset.ti)); });
+    el.addEventListener('click', ()=>{
+      const ti = parseInt(el.dataset.ti);
+      view = { screen:'filter', weekKey: view.weekKey, topicIdx: ti };
+      render();
+    });
   });
 }
 
+function renderFilterPicker(){
+  const weekKey = view.weekKey;
+  const topicIdx = view.topicIdx;
+  const allCards = buildSessionCards(weekKey, topicIdx, 'alle');
+  const unbekanntCards = buildSessionCards(weekKey, topicIdx, 'unbekannt');
+  const bekanntCards = buildSessionCards(weekKey, topicIdx, 'bekannt');
+
+  let contextLabel = 'Zufällige Wiederholung';
+  if(weekKey !== 'mix'){
+    contextLabel = topicIdx===null ? DATA[weekKey].label : DATA[weekKey].topics[topicIdx].name;
+  }
+
+  const backTarget = weekKey === 'mix' ? 'home' : 'topics';
+  let html = `<button id="back-btn" class="back-btn">&larr; ${weekKey==='mix' ? 'Übersicht' : 'Themen'}</button>`;
+  html += `<div style="font-size:16px;font-weight:600;margin-bottom:14px;">${contextLabel}</div>`;
+  html += `<div style="display:flex;flex-direction:column;gap:10px;">
+    <button id="f-alle" style="text-align:left;padding:14px;">
+      <div style="font-weight:500;font-size:14px;">Alle Karten</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${allCards.length} Karten</div>
+    </button>
+    <button id="f-unbekannt" style="text-align:left;padding:14px;" ${unbekanntCards.length===0?'disabled':''}>
+      <div style="font-weight:500;font-size:14px;">Nur was ich noch nicht kann</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${unbekanntCards.length} Karten (neu + in Arbeit)</div>
+    </button>
+    <button id="f-bekannt" style="text-align:left;padding:14px;" ${bekanntCards.length===0?'disabled':''}>
+      <div style="font-weight:500;font-size:14px;">Bekanntes wiederholen</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${bekanntCards.length} Karten</div>
+    </button>
+  </div>`;
+  root.innerHTML = html;
+  document.getElementById('back-btn').addEventListener('click', ()=>{
+    view = weekKey === 'mix' ? {screen:'home'} : {screen:'topics', weekKey: weekKey};
+    render();
+  });
+  document.getElementById('f-alle').addEventListener('click', ()=>startSession(weekKey, topicIdx, 'alle'));
+  document.getElementById('f-unbekannt').addEventListener('click', ()=>startSession(weekKey, topicIdx, 'unbekannt'));
+  document.getElementById('f-bekannt').addEventListener('click', ()=>startSession(weekKey, topicIdx, 'bekannt'));
+}
+
 function renderCards(){
+  if(session.empty){
+    let html = `<button id="back-btn" class="back-btn">&larr; Zurück</button>`;
+    html += `<div class="done-box" style="background:var(--gray-50);color:var(--gray-800);">
+      <div style="font-size:16px;font-weight:600;">Keine Karten in dieser Auswahl</div>
+      <div style="font-size:13px;margin-top:6px;">Wähle einen anderen Filter.</div>
+    </div>`;
+    root.innerHTML = html;
+    document.getElementById('back-btn').addEventListener('click', goBackFromSession);
+    return;
+  }
   if(session.pos >= session.queue.length){
     renderSessionDone();
     return;
   }
   const item = currentSessionCard();
-  seenCards.add(item.wk+'-'+item.ti+'-'+item.ci);
   const openCount = session.queue.length - session.pos;
   const doneCount = session.cards.filter(c=>c.status==='done').length;
   const retryCount = session.cards.filter(c=>c.status==='retry').length;
   const backLabel = (session.weekKey && session.weekKey !== 'mix') ? 'Themen' : 'Übersicht';
+  const priorStatus = getStatus(item.wk, item.ti, item.ci);
+  const priorLabel = { neu: 'Neu', lernen: 'Zuletzt: nicht gewusst', bekannt: 'Zuletzt: gewusst' }[priorStatus];
+  const priorClass = { neu: 'c-gray', lernen: 'c-amber', bekannt: 'c-teal' }[priorStatus];
 
   let html = `<button id="back-btn" class="back-btn">&larr; ${backLabel}</button>`;
-  html += `<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">${item.topicName}</div>`;
+  html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <div style="font-size:13px;color:var(--text-secondary);">${item.topicName}</div>
+    <span class="badge ${priorClass}" style="font-size:10px;">${priorLabel}</span>
+  </div>`;
   html += `<div class="stat-row"><span>${openCount} offen</span><span>${retryCount} in Wiederholung</span><span>${doneCount} geschafft</span></div>`;
   const showSvg = session.flipped && item.card.svg;
   html += `<div id="flip-card" class="flip-card">
@@ -1456,11 +1564,14 @@ function goBackFromSession(){
 
 function answer(knew){
   const idx = session.queue[session.pos];
+  const item = session.cards[idx];
   if(knew){
     session.cards[idx].status = 'done';
+    setStatus(item.wk, item.ti, item.ci, 'bekannt');
     session.pos++;
   } else {
     session.cards[idx].status = 'retry';
+    setStatus(item.wk, item.ti, item.ci, 'lernen');
     const reinsertAt = Math.min(session.pos + 1 + REINSERT_GAP, session.queue.length);
     session.queue.splice(reinsertAt, 0, idx);
     session.pos++;
