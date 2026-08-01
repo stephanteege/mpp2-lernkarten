@@ -966,159 +966,6 @@ const DATA = {
 week1: {
   label: "Woche 1", range: "3.–7.8. (Mo–Fr)", color: "blue",
   topics: [
-    { name: "Scrum", prio: "hoch", cards: [
-      { q: "Welche Rollen gibt es in Scrum und was ist ihre Aufgabe?", a: "Product Owner: verantwortet das Product Backlog und Priorisierung. Scrum Master: sorgt für Einhaltung des Scrum-Prozesses, beseitigt Hindernisse. Entwicklungsteam: setzt die Arbeit im Sprint um.", svg: DIAGRAMS.scrumrollen },
-      { q: "Was sind die Artefakte in Scrum?", a: "Product Backlog (priorisierte Gesamtliste der Anforderungen), Sprint Backlog (Aufgaben für den aktuellen Sprint), Increment (fertiges Produktinkrement am Sprintende).", svg: DIAGRAMS.scrumartefakte },
-      { q: "Welche Events (Meetings) gibt es in Scrum?", a: "Sprint Planning (Sprintstart, Ziel & Aufgaben festlegen), Daily Scrum (tägliches 15-Min-Stand-up), Sprint Review (Ergebnispräsentation), Sprint Retrospective (Prozessreflexion im Team).", svg: DIAGRAMS.scrum },
-      { q: "Wie lange dauert typischerweise ein Sprint?", a: "Meist 2–4 Wochen, fest getaktet und über das gesamte Projekt konstant." },
-      { q: "Wann sollte man Scrum statt Wasserfall wählen?", a: "Scrum bei dynamischen Projekten mit unsicheren/sich ändernden Anforderungen und frühem Feedback-Bedarf; Wasserfall bei stabilen, klar definierten Anforderungen." }
-    ]},
-    { name: "Wasserfallmodell", prio: "hoch", cards: [
-      { q: "Wie ist das Wasserfallmodell aufgebaut?", a: "Lineares, sequenzielles Vorgehen in Phasen: Analyse, Design, Implementierung, Test, Betrieb. Jede Phase muss abgeschlossen sein, bevor die nächste beginnt.", svg: DIAGRAMS.wasserfall },
-      { q: "Was sind Vor- und Nachteile des Wasserfallmodells?", a: "Vorteile: klare Struktur, einfache Planung, gute Dokumentation. Nachteile: geringe Flexibilität, spätes Erkennen von Fehlern, schwierig bei sich ändernden Anforderungen.", svg: DIAGRAMS.wasserfallvornachteil },
-      { q: "Wo wird das Wasserfallmodell typischerweise eingesetzt?", a: "Bei Projekten mit stabilen Anforderungen, z. B. standardisierte Verwaltungssoftware." }
-    ]},
-    { name: "V-Modell / V-Modell XT", prio: "hoch", cards: [
-      { q: "Wie ist das V-Modell aufgebaut?", a: "Darstellung in V-Form: linke Seite = Spezifikation (Anforderungen, Architektur, Design), rechte Seite = Testen/Validieren auf jeder Spezifikationsebene.", svg: DIAGRAMS.vmodell },
-      { q: "Welche Phasen umfasst das V-Modell?", a: "Anforderungsanalyse, System- und Softwaredesign, Implementierung, Modultests, Integrationstests, Systemtests, Abnahmetests.", svg: DIAGRAMS.vmodellphasen },
-      { q: "Was ist das V-Modell XT und wo wird es verpflichtend eingesetzt?", a: "Weiterentwicklung/Standardisierung des klassischen V-Modells, modular und anpassbar an Projekttyp/-größe. Verpflichtend bei vielen öffentlichen IT-Projekten in Deutschland." },
-      { q: "Welche Vor- und Nachteile hat das V-Modell?", a: "Vorteile: klare Struktur, Verknüpfung von Spezifikation und Test, geeignet für sicherheitskritische Projekte. Nachteile: wenig flexibel bei Änderungen, hoher Dokumentationsaufwand.", svg: DIAGRAMS.vmodellvornachteil },
-      { q: "Wo wird das V-Modell eingesetzt?", a: "Öffentliche Verwaltung, Verteidigungsprojekte, kritische Infrastrukturen, Software- und Systementwicklung." }
-    ]},
-    { name: "Kanban / Scaled Agile", prio: "mittel", cards: [
-      { q: "Was ist Kanban und wie funktioniert es?", a: "Methode zur Visualisierung und Steuerung von Arbeitsprozessen. Aufgaben werden auf Boards (To Do, In Progress, Done) dargestellt, kontinuierlicher Fluss statt fester Sprints.", svg: DIAGRAMS.kanban },
-      { q: "Wie misst man den Fortschritt in Kanban?", a: "Mit Kennzahlen wie Durchlaufzeit (Cycle Time), Work in Progress (WIP) und Lead Time." },
-      { q: "Wie skaliert man Scrum für große Projekte?", a: "Durch agile Skalierungsframeworks wie SAFe (Scaled Agile Framework), LeSS (Large Scale Scrum) oder Nexus." }
-    ]},
-    { name: "Spiralmodell & Vorgehensmodelle allgemein", prio: "mittel", cards: [
-      { q: "Was ist das Grundprinzip des Spiralmodells?", a: "Iteratives, risikogetriebenes Vorgehensmodell: in wiederholten Zyklen werden Planung, Risikoanalyse, Entwicklung und Bewertung durchlaufen, wobei jede Spirale das System weiter ausbaut.", svg: DIAGRAMS.spiralmodell },
-      { q: "Was unterscheidet lineare von agilen Vorgehensmodellen grundsätzlich?", a: "Lineare Modelle (Wasserfall, V-Modell) durchlaufen feste, aufeinanderfolgende Phasen ohne Rücksprünge. Agile Modelle (Scrum, Kanban) arbeiten iterativ-inkrementell mit häufigem Feedback und Anpassung." },
-      { q: "Nenne je einen typischen Einsatzfall für ein schwergewichtiges und ein leichtgewichtiges Vorgehensmodell.", a: "Schwergewichtig (z. B. V-Modell XT): große, sicherheitskritische Verwaltungsprojekte mit hohem Dokumentationsbedarf. Leichtgewichtig (z. B. Scrum/Kanban): kleinere Teams, dynamische Anforderungen, schnelle Iteration." }
-    ]},
-    { name: "OOP-Säulen", prio: "hoch", cards: [
-      { q: "Was ist Kapselung (Encapsulation)?", a: "Bündelung von Daten und Methoden in einer Klasse, Zugriff von außen wird über definierte Schnittstellen (z. B. public/private) kontrolliert." },
-      { q: "Was ist Vererbung (Inheritance)?", a: "Eine Klasse (Subklasse) übernimmt Eigenschaften und Methoden einer anderen Klasse (Superklasse) und kann sie erweitern oder überschreiben." },
-      { q: "Was ist Polymorphie (Polymorphism)?", a: "Objekte unterschiedlicher Klassen können über dieselbe Schnittstelle angesprochen werden, verhalten sich aber je nach tatsächlichem Typ unterschiedlich (z. B. überschriebene Methoden)." },
-      { q: "Was ist Abstraktion?", a: "Reduktion auf die wesentlichen Eigenschaften eines Objekts, Ausblenden von Implementierungsdetails, z. B. über abstrakte Klassen oder Interfaces." },
-      { q: "Wie hängen die vier Säulen zusammen?", a: "Abstraktion definiert das Wesentliche, Kapselung schützt die Umsetzung, Vererbung ermöglicht Wiederverwendung, Polymorphie erlaubt flexible Nutzung verschiedener Implementierungen über eine gemeinsame Schnittstelle." }
-    ]},
-    { name: "UML-Klassendiagramm", prio: "hoch", cards: [
-      { q: "Aus welchen drei Bereichen besteht eine Klasse im UML-Klassendiagramm?", a: "Klassenname (oben), Attribute (Mitte), Methoden/Operationen (unten).", svg: DIAGRAMS.klassendiagramm },
-      { q: "Wie werden Sichtbarkeiten im Klassendiagramm notiert?", a: "+ = public, − = private, # = protected, ~ = package/paket-sichtbar.", svg: DIAGRAMS.sichtbarkeiten },
-      { q: "Welche Beziehungsarten gibt es im Klassendiagramm und wie sehen sie aus?", a: "Assoziation (einfache Linie), Aggregation (Linie mit leerer Raute, 'hat-ein', lose Beziehung), Komposition (Linie mit gefüllter Raute, starke Abhängigkeit), Vererbung/Generalisierung (Linie mit leerem Dreieck-Pfeil).", svg: DIAGRAMS.beziehungsarten },
-      { q: "Wie wird Kardinalität im Klassendiagramm dargestellt?", a: "An den Linienenden werden Zahlen/Bereiche notiert, z. B. 1, 0..1, 1..*, 0..* für die Anzahl möglicher Beziehungen zwischen den Klassen.", svg: DIAGRAMS.klassenkardinalitaet },
-      { q: "Zeichne skizzenhaft: eine Klasse 'Kunde' die mehrere 'Bestellung'-Objekte hat (1:n).", a: "Zwei Rechtecke (Kunde, Bestellung) verbunden durch eine Linie mit Kardinalität '1' an Kunde und '0..*' an Bestellung, ggf. mit Raute für Aggregation/Komposition je nach Abhängigkeitsstärke.", svg: DIAGRAMS.kundebestellung }
-    ]},
-    { name: "Objektdiagramm, Use-Case, Aggregation/Komposition", prio: "mittel", cards: [
-      { q: "Was ist der Unterschied zwischen Klassen- und Objektdiagramm?", a: "Klassendiagramm zeigt die generelle Struktur (Klassen, Beziehungen, Kardinalitäten). Objektdiagramm zeigt eine konkrete Momentaufnahme mit tatsächlichen Objektinstanzen und ihren Werten.", svg: DIAGRAMS.objektdiagramm },
-      { q: "Was zeigt ein Use-Case-Diagramm?", a: "Die funktionalen Anforderungen eines Systems aus Nutzersicht: Akteure (Personen/Systeme) und die Anwendungsfälle (Use Cases), mit denen sie interagieren.", svg: DIAGRAMS.usecase },
-      { q: "Was ist der Unterschied zwischen Aggregation und Komposition?", a: "Aggregation: lose 'hat-ein'-Beziehung, Teile können unabhängig vom Ganzen existieren (leere Raute). Komposition: starke Abhängigkeit, Teile existieren nur mit dem Ganzen und werden mit ihm zerstört (gefüllte Raute).", svg: DIAGRAMS.aggkomp }
-    ]},
-    { name: "OOP vs. prozedural, Sichtbarkeiten", prio: "hoch", cards: [
-      { q: "Was ist der grundlegende Unterschied zwischen objektorientierter und prozeduraler Programmierung?", a: "Prozedural: Programm als Abfolge von Funktionen/Prozeduren, die auf Daten zugreifen. Objektorientiert: Daten und zugehörige Funktionen werden in Objekten/Klassen gekapselt." },
-      { q: "Erkläre die Sichtbarkeitsmodifikatoren public, private, protected.", a: "public: von überall zugreifbar. private: nur innerhalb der eigenen Klasse zugreifbar. protected: innerhalb der Klasse und ihrer Subklassen zugreifbar." },
-      { q: "Was ist ein praktischer Vorteil der OOP gegenüber prozeduraler Programmierung?", a: "Bessere Wartbarkeit und Wiederverwendbarkeit durch Kapselung und Vererbung, klarere Modellierung realer Sachverhalte als Objekte." }
-    ]},
-    { name: "Programmierparadigmen", prio: "mittel", cards: [
-      { q: "Nenne die wichtigsten Programmierparadigmen im Überblick.", a: "Imperativ/prozedural (Schritt-für-Schritt-Anweisungen), objektorientiert (Objekte/Klassen), funktional (Funktionen ohne Seiteneffekte), deklarativ (Beschreibung des 'Was', nicht des 'Wie', z. B. SQL)." },
-      { q: "Was zeichnet funktionale Programmierung aus?", a: "Funktionen als zentrale Bausteine, Vermeidung von Seiteneffekten und veränderlichem Zustand, Funktionen können als Werte übergeben werden." },
-      { q: "Nenne ein Beispiel für deklarative Programmierung.", a: "SQL: man beschreibt, welche Daten man haben möchte (SELECT ... WHERE ...), nicht wie die Datenbank sie beschafft." }
-    ]},
-    { name: "Bilanz Grundlagen", prio: "hoch", cards: [
-      { q: "Was zeigt eine Bilanz und wie ist sie aufgebaut?", a: "Gegenüberstellung von Aktiva (Vermögen) und Passiva (Kapital) zu einem Stichtag. Aktiva: Anlagevermögen, Umlaufvermögen. Passiva: Eigenkapital, Fremdkapital.", svg: DIAGRAMS.bilanz },
-      { q: "Nenne je zwei Beispiele für Anlagevermögen, Umlaufvermögen, Eigenkapital und Fremdkapital.", a: "Anlagevermögen: Maschinen, Gebäude. Umlaufvermögen: Kasse, Vorräte. Eigenkapital: Gezeichnetes Kapital, Gewinnrücklagen. Fremdkapital: Bankdarlehen, Verbindlichkeiten aus Lieferungen.", svg: DIAGRAMS.bilanzbeispiele },
-      { q: "Wie wird eine Schenkung von 50.000€ per Überweisung in der Bilanz eingeordnet?", a: "Aktivseite: Erhöhung der Kasse/Bank (Umlaufvermögen). Passivseite: Erhöhung des Eigenkapitals (da kein Rückzahlungsanspruch besteht).", svg: DIAGRAMS.bilanzschenkung },
-      { q: "Was besagt die Bilanzgleichung?", a: "Aktiva = Passiva, also Summe des Vermögens entspricht immer der Summe des Kapitals (Eigen- + Fremdkapital).", svg: DIAGRAMS.bilanzgleichung },
-      { q: "Was ist der Unterschied zwischen Bilanz und Jahresabrechnung?", a: "Jahresabrechnung = Bilanz + Gewinn- und Verlustrechnung (GuV); gibt zusätzlich Aufschluss über den Geschäftserfolg der Periode, nicht nur den Vermögensstand am Stichtag." }
-    ]},
-    { name: "GuV, Deckungsbeitrag, Break-Even", prio: "mittel", cards: [
-      { q: "Wie wird der Deckungsbeitrag berechnet und wofür wird er genutzt?", a: "Deckungsbeitrag = Erlöse − variable Kosten. Zeigt den Beitrag eines Produkts zur Deckung der fixen Kosten; Grundlage für Preiskalkulation und Produktrentabilität." },
-      { q: "Was unterscheidet DB1, DB2 und DB3?", a: "Stufen der Deckungsbeitragsrechnung mit zunehmender Kostenzurechnung: DB1 (Stückebene), DB2 (Produktgruppenebene), DB3 (Gesamtunternehmensebene)." },
-      { q: "Wie wird der Break-Even-Point berechnet?", a: "Break-Even-Point = Fixkosten / Deckungsbeitrag pro Stück. Punkt, an dem die Erlöse genau die Gesamtkosten decken (Gewinn = 0)." }
-    ]}
-  ]
-},
-week2: {
-  label: "Woche 2", range: "10.–14.8. (Mo–Fr)", color: "purple",
-  topics: [
-    { name: "BCG-Matrix", prio: "hoch", cards: [
-      { q: "Was ist die BCG-Matrix und welche zwei Dimensionen misst sie?", a: "Portfolioanalyse-Instrument der Boston Consulting Group. Dimensionen: Marktwachstum (y-Achse) und relativer Marktanteil (x-Achse).", svg: DIAGRAMS.bcgmatrix },
-      { q: "Welche vier Kategorien gibt es in der BCG-Matrix und wie geht man mit ihnen um?", a: "Stars (hoher Marktanteil, hohes Wachstum → investieren), Cash Cows (hoher Marktanteil, niedriges Wachstum → Gewinne abschöpfen), Question Marks (niedriger Marktanteil, hohes Wachstum → prüfen), Poor Dogs (niedriger Marktanteil, niedriges Wachstum → desinvestieren).", svg: DIAGRAMS.bcgkategorien },
-      { q: "Wende die BCG-Matrix beispielhaft auf eine Behörde/Verwaltungsleistung an.", a: "Z. B. ein etabliertes, stark genutztes Verwaltungsportal = Cash Cow; ein neues digitales Pilotprojekt mit wachsender Nachfrage = Question Mark oder Star, je nach Marktdurchdringung.", svg: DIAGRAMS.bcgbehoerde },
-      { q: "Was sind die Kritikpunkte an der BCG-Matrix?", a: "Nur zwei Dimensionen betrachtet, andere Einflussfaktoren bleiben unberücksichtigt; Annahme Marktanteil↔Rentabilität nicht immer zutreffend; stark vereinfachte Darstellung." },
-      { q: "Wofür wird die BCG-Matrix in der Verwaltung genutzt?", a: "Analyse von Projekten/Dienstleistungen hinsichtlich strategischer Relevanz, Unterstützung von Budget- und Investitionsentscheidungen, Priorisierung bei begrenztem Budget." }
-    ]},
-    { name: "Unternehmens-/Rechtsformen", prio: "hoch", cards: [
-      { q: "Nenne die Hauptgruppen der Unternehmensformen.", a: "Einzelunternehmen, Personengesellschaften (GbR, OHG, KG), Kapitalgesellschaften (GmbH, UG, AG), Sonderformen (Genossenschaften, Körperschaften des öffentlichen Rechts, Stiftungen).", svg: DIAGRAMS.unternehmensformenliste },
-      { q: "Was unterscheidet Personengesellschaften von Kapitalgesellschaften bei der Haftung?", a: "Personengesellschaften: meist unbeschränkte persönliche Haftung der Gesellschafter. Kapitalgesellschaften: Haftung i. d. R. auf das Gesellschaftsvermögen beschränkt." },
-      { q: "Was sind die Kernmerkmale einer GmbH?", a: "Kapitalgesellschaft, Mindestkapital 25.000€, beschränkte Haftung der Gesellschafter, Organe: Geschäftsführung und Gesellschafterversammlung." },
-      { q: "Zeichne die Unternehmensformen als Baumdiagramm (grobe Struktur).", a: "Unternehmensformen → Einzelunternehmen | Personengesellschaften (GbR, OHG, KG, PartG) | Kapitalgesellschaften (GmbH, UG, AG, SE) | Sonderformen (Genossenschaft, Körperschaft d. ö. Rechts, Stiftung).", svg: DIAGRAMS.unternehmensformen },
-      { q: "Nach welchen Kriterien wählt man eine Rechtsform aus?", a: "Haftung (persönlich/beschränkt), Kapitalbedarf, steuerliche Belastung, Mitbestimmung/Entscheidungsfreiheit, Publizitäts- und Berichtspflichten." }
-    ]},
-    { name: "Rechtsformwahl begründen", prio: "hoch", cards: [
-      { q: "Welche Rechtsform würdest du mit 50.000€ Startkapital wählen und warum?", a: "Z. B. GmbH: Mindestkapital (25.000€) ist gedeckt, Haftung ist auf das Gesellschaftsvermögen beschränkt (persönliches Risiko begrenzt), professionelles Auftreten am Markt. Alternative: UG bei geringerem Kapitalbedarf und Wunsch nach schnellerer/günstigerer Gründung." },
-      { q: "Warum keine Personengesellschaft bei höherem Startkapital und Risiko?", a: "Wegen der unbeschränkten persönlichen Haftung mit dem Privatvermögen bei OHG/GbR – bei größerem Kapitaleinsatz steigt das persönliche Risiko unverhältnismäßig." },
-      { q: "Welche Rolle spielt die geplante Unternehmensgröße bei der Rechtsformwahl?", a: "Kleine, einfache Vorhaben eher Einzelunternehmen/GbR (geringer Gründungsaufwand); wachstumsorientierte oder kapitalintensive Vorhaben eher Kapitalgesellschaften wegen Haftungsbeschränkung und besserer Finanzierungsmöglichkeiten." }
-    ]},
-    { name: "Vertragsarten", prio: "hoch", cards: [
-      { q: "Was unterscheidet einen Werkvertrag von einem Dienstvertrag?", a: "Werkvertrag: geschuldet wird ein konkretes Ergebnis/Erfolg (z. B. fertige Software). Dienstvertrag: geschuldet wird die Tätigkeit/das Bemühen selbst, kein Erfolg garantiert (z. B. laufende Beratung, Wartung)." },
-      { q: "Was ist ein Kaufvertrag und wodurch kommt er zustande?", a: "Vertrag über den Erwerb von Eigentum an einer Sache gegen Bezahlung. Zustandekommen durch übereinstimmende Willenserklärungen: Angebot und Annahme." },
-      { q: "Nenne weitere IT-relevante Vertragstypen.", a: "Mietvertrag/Leasing (Nutzung von Hardware/Cloud gegen Entgelt), Lizenzvertrag (Nutzungsrechte an Software), Service Level Agreement/SLA (Qualität, Verfügbarkeit, Reaktionszeiten)." },
-      { q: "Was sind typische Inhalte eines IT-Vertrags?", a: "Leistungsbeschreibung, Gegenleistung/Preis, Laufzeit und Kündigungsmodalitäten, Haftung und Gewährleistung, Datenschutz- und Sicherheitsanforderungen." }
-    ]},
-    { name: "Vertragszustandekommen", prio: "hoch", cards: [
-      { q: "Wie kommt ein Vertrag rechtlich zustande?", a: "Durch zwei übereinstimmende Willenserklärungen: Angebot (Antrag) und Annahme." },
-      { q: "Was bedeutet 'invitatio ad offerendum'?", a: "Aufforderung zur Abgabe eines Angebots (kein bindendes Angebot selbst), z. B. Schaufensterauslage oder Werbeanzeige – der Kunde gibt das eigentliche Angebot ab, der Verkäufer nimmt an oder lehnt ab." },
-      { q: "Was passiert rechtlich bei einem Scherzgeschäft?", a: "Eine Willenserklärung ohne ernsthaften Rechtsbindungswillen, die der Erklärende in der Erwartung abgibt, der Mangel werde erkannt (§ 118 BGB) – die Erklärung ist nichtig, kann aber Schadensersatzpflicht auslösen, wenn der Empfänger auf die Ernsthaftigkeit vertraut hat." }
-    ]},
-    { name: "Ausbildungsvertrag, AGB, SLA", prio: "mittel", cards: [
-      { q: "Was muss ein Ausbildungsvertrag mindestens enthalten?", a: "Art, Ziel und Dauer der Ausbildung, Ausbildungsort, Ausbildungsvergütung, Arbeitszeit, Probezeit, Urlaubsanspruch, Kündigungsvoraussetzungen." },
-      { q: "Was sind AGB und wofür werden sie eingesetzt?", a: "Allgemeine Geschäftsbedingungen: vorformulierte Vertragsbedingungen, die eine Partei der anderen bei Vertragsschluss stellt, um Massengeschäfte einheitlich zu regeln." },
-      { q: "Was regelt ein SLA und was sind typische Inhalte?", a: "Service Level Agreement: Vereinbarung über Qualität, Verfügbarkeit, Reaktionszeiten und Support. Typisch: Uptime-Garantien, Performance-Kriterien, Eskalationsprozesse, Reporting." }
-    ]},
-    { name: "Bestellverfahren", prio: "hoch", cards: [
-      { q: "Wie funktioniert das Bestellpunktverfahren?", a: "Es wird ein fester Meldebestand (Bestellpunkt) definiert; sobald der Lagerbestand diesen erreicht, wird automatisch eine feste Bestellmenge ausgelöst." },
-      { q: "Wie funktioniert das Bestellrhythmusverfahren?", a: "Bestellungen erfolgen in festen Zeitabständen (z. B. wöchentlich), die Bestellmenge wird jeweils an den aktuellen Bedarf angepasst, um einen Zielbestand zu erreichen." },
-      { q: "Was ist der Hauptunterschied zwischen beiden Verfahren?", a: "Bestellpunktverfahren: fester Bestand löst variable Zeitpunkte aus (mengengesteuert). Bestellrhythmusverfahren: feste Zeitpunkte lösen variable Mengen aus (zeitgesteuert)." }
-    ]},
-    { name: "Nutzwertanalyse, ABC-Analyse, Stacey-Matrix", prio: "mittel", cards: [
-      { q: "Wozu dient die Nutzwertanalyse?", a: "Bewertung mehrerer Alternativen anhand gewichteter Kriterien, um eine strukturierte, nachvollziehbare Entscheidung zu treffen (z. B. Softwareauswahl)." },
-      { q: "Was ist das Prinzip der ABC-Analyse?", a: "Klassifizierung von Objekten (z. B. Produkten, Kunden) nach ihrer Bedeutung: A = hoher Wertanteil/wenige Objekte, B = mittlerer Anteil, C = geringer Wertanteil/viele Objekte." },
-      { q: "Wofür wird die Stacey-Matrix genutzt?", a: "Einordnung von Projekten nach Grad der Anforderungsklarheit und technologischer Unsicherheit, um die passende Vorgehensweise (klassisch, agil, chaotisch) abzuleiten." }
-    ]},
-    { name: "PDCA-Zyklus, Kanban wirtschaftlich", prio: "mittel", cards: [
-      { q: "Was bedeuten die vier Phasen des PDCA-Zyklus?", a: "Plan (Planung von Maßnahmen), Do (Umsetzung), Check (Überprüfung der Ergebnisse), Act (Anpassung/kontinuierliche Verbesserung) – iterativer Verbesserungskreislauf." },
-      { q: "Wofür wird PDCA typischerweise eingesetzt?", a: "Für kontinuierliche Prozessverbesserung, z. B. im Qualitätsmanagement oder in einem ISMS (Informationssicherheits-Managementsystem)." },
-      { q: "Wie unterstützt Kanban die kontinuierliche Verbesserung im Sinne von PDCA?", a: "Durch sichtbaren Arbeitsfluss und WIP-Begrenzung werden Engpässe schnell erkannt (Check) und Prozessanpassungen (Act) direkt im laufenden Betrieb vorgenommen." }
-    ]},
-    { name: "Von-Neumann-Architektur", prio: "hoch", cards: [
-      { q: "Aus welchen Hauptkomponenten besteht die Von-Neumann-Architektur?", a: "CPU (mit Rechenwerk/ALU, Steuerwerk, Registern), gemeinsamer Speicher für Daten und Programme, gemeinsamer Systembus für Daten, Adressen und Steuerinformationen.", svg: DIAGRAMS.vonneumann },
-      { q: "Was ist der Von-Neumann-Flaschenhals?", a: "Da nur ein gemeinsamer Bus für Befehle und Daten existiert, entsteht ein Engpass: CPU muss Befehle und Daten nacheinander über denselben Bus holen, was die parallele Verarbeitung begrenzt.", svg: DIAGRAMS.vonneumannflaschenhals },
-      { q: "Nenne Beispiele für Von-Neumann-Systeme.", a: "Klassische PCs, Standard-CPUs (Intel x86, AMD Ryzen), Laptops, Server, historische Rechner wie ENIAC." },
-      { q: "Zeichne/beschreibe den Aufbau: welche Komponenten sind wie verbunden?", a: "CPU (ALU, Steuerwerk, Register) ↔ Systembus ↔ gemeinsamer Speicher (Programme + Daten) ↔ Systembus ↔ Ein-/Ausgabewerk. Alle Komponenten teilen sich denselben Bus.", svg: DIAGRAMS.vonneumannverbindung },
-      { q: "Was ist der zentrale Vorteil der Von-Neumann-Architektur trotz des Flaschenhalses?", a: "Hohe Flexibilität, da Speicher dynamisch zwischen Daten und Programmen aufgeteilt werden kann, sowie einfacherer und günstigerer Aufbau." }
-    ]},
-    { name: "Harvard-Architektur & Vergleich", prio: "mittel", cards: [
-      { q: "Was unterscheidet die Harvard- von der Von-Neumann-Architektur?", a: "Harvard nutzt getrennte Speicherbereiche und getrennte Busse für Programme und Daten (paralleler Zugriff möglich), Von-Neumann nutzt einen gemeinsamen Speicher und Bus.", svg: DIAGRAMS.harvard },
-      { q: "Welche Vor- und Nachteile hat die Harvard-Architektur?", a: "Vorteile: höhere Geschwindigkeit durch parallelen Zugriff, kein Bus-Engpass, gut für Echtzeitsysteme. Nachteile: komplexere Hardware, weniger flexible Speicheraufteilung." },
-      { q: "Nenne Beispiele für Harvard-Architektur-Systeme.", a: "Mikrocontroller (PIC, Arduino/Atmel AVR), digitale Signalprozessoren (DSPs), ARM Cortex-M (modifizierte Harvard-Architektur), eingebettete Systeme." }
-    ]},
-    { name: "RISC/CISC, Pipelining, Taktfrequenz", prio: "mittel", cards: [
-      { q: "Was unterscheidet RISC von CISC grundsätzlich?", a: "RISC (Reduced Instruction Set Computer): wenige, einfache Befehle, schnelle Ausführung, energieeffizienter. CISC (Complex Instruction Set Computer): viele komplexe Befehle, mehr Funktionalität pro Befehl, aber höherer Energieverbrauch.", svg: DIAGRAMS.riscvscisc },
-      { q: "Was ist Pipelining und welchen Vorteil bringt es?", a: "Überlappende Ausführung mehrerer Befehle in aufeinanderfolgenden Verarbeitungsstufen (z. B. Fetch, Decode, Execute), wodurch der Befehlsdurchsatz erhöht wird, ohne die Taktfrequenz zu steigern.", svg: DIAGRAMS.pipelining },
-      { q: "Wie hoch ist die typische Taktfrequenz eines aktuellen Prozessors?", a: "Meist im Bereich von ca. 2–5 GHz für Consumer-CPUs, teils höher im Turbo-Modus." }
-    ]},
-    { name: "Zahlensysteme umrechnen", prio: "hoch", cards: [
-      { q: "Wie rechnet man eine Dezimalzahl in Binär um?", a: "Fortlaufende Division durch 2, die Reste (von unten nach oben gelesen) ergeben die Binärzahl. Beispiel: 13 → 1101." },
-      { q: "Rechne dein Alter in Binär um (Beispielrechnung 25).", a: "25 = 16+8+1 = 2⁴+2³+2⁰ → Binär: 11001." },
-      { q: "Wie funktioniert die Umrechnung Binär → Hexadezimal?", a: "Binärzahl in 4er-Blöcke von rechts gruppieren, jeden Block einzeln in eine Hex-Ziffer (0–F) umwandeln. Beispiel: 1101 1010 → D A → 0xDA." },
-      { q: "Was ist der Unterschied zwischen Bit und Byte?", a: "1 Bit = kleinste Informationseinheit (0 oder 1). 1 Byte = 8 Bit, kleinste adressierbare Speichereinheit." }
-    ]}
-  ]
-},
-week3: {
-  label: "Woche 3", range: "17.–21.8. (Mo–Fr)", color: "teal",
-  topics: [
     { name: "Netzwerktopologien", prio: "hoch", cards: [
       { q: "Nenne die grundlegenden Netzwerktopologien.", a: "Bus, Ring, Stern, Baum, Masche (Mesh), sowie Hybrid-Topologien als Kombination.", svg: DIAGRAMS.topologien },
       { q: "Was ist das Hauptproblem der Stern-Topologie?", a: "Single Point of Failure (SPoF): fällt der zentrale Knoten (Switch/Hub) aus, ist das gesamte Netzwerk betroffen.", svg: DIAGRAMS.sterntopologie },
@@ -1154,28 +1001,39 @@ week3: {
       { q: "Nenne Vor- und Nachteile der Client-Server-Architektur.", a: "Vorteile: zentrale Verwaltung, klare Rollenverteilung, gute Skalierbarkeit. Nachteile: Server als Single Point of Failure, hohe Serverlast bei vielen Clients." },
       { q: "Wie kann Ausfallsicherheit bei Servern erhöht werden?", a: "Durch Redundanz (mehrere Server im Cluster), Load Balancing, Failover-Mechanismen und regelmäßige Backups." }
     ]},
-    { name: "CIA-Schutzziele", prio: "hoch", cards: [
-      { q: "Was bedeuten die drei CIA-Schutzziele?", a: "Confidentiality (Vertraulichkeit): kein unbefugter Zugriff. Integrity (Integrität): Schutz vor unbefugter Veränderung. Availability (Verfügbarkeit): Systeme/Daten sind bei Bedarf zugänglich.", svg: DIAGRAMS.ciatriade },
-      { q: "Wie setzt man die CIA-Schutzziele am Beispiel eines Webservers konkret um?", a: "Vertraulichkeit: Verschlüsselung (TLS/HTTPS), Zugriffskontrollen. Integrität: Prüfsummen, Signaturen, Schutz vor Manipulation. Verfügbarkeit: Redundanz, Load Balancing, DDoS-Schutz, Backups." },
-      { q: "Welche ergänzenden Schutzziele gibt es neben CIA?", a: "Authentizität (Echtheit des Absenders), Nachweisbarkeit/Verbindlichkeit (Non-Repudiation), teils auch Zurechenbarkeit." },
-      { q: "Was passiert, wenn nur die Verfügbarkeit, aber nicht die Integrität geschützt ist?", a: "Das System bleibt erreichbar, aber Daten könnten unbemerkt manipuliert werden (z. B. durch einen Man-in-the-Middle-Angriff) – der Nutzer erhält falsche, aber verfügbare Informationen." }
+    { name: "BCG-Matrix", prio: "hoch", cards: [
+      { q: "Was ist die BCG-Matrix und welche zwei Dimensionen misst sie?", a: "Portfolioanalyse-Instrument der Boston Consulting Group. Dimensionen: Marktwachstum (y-Achse) und relativer Marktanteil (x-Achse).", svg: DIAGRAMS.bcgmatrix },
+      { q: "Welche vier Kategorien gibt es in der BCG-Matrix und wie geht man mit ihnen um?", a: "Stars (hoher Marktanteil, hohes Wachstum → investieren), Cash Cows (hoher Marktanteil, niedriges Wachstum → Gewinne abschöpfen), Question Marks (niedriger Marktanteil, hohes Wachstum → prüfen), Poor Dogs (niedriger Marktanteil, niedriges Wachstum → desinvestieren).", svg: DIAGRAMS.bcgkategorien },
+      { q: "Wende die BCG-Matrix beispielhaft auf eine Behörde/Verwaltungsleistung an.", a: "Z. B. ein etabliertes, stark genutztes Verwaltungsportal = Cash Cow; ein neues digitales Pilotprojekt mit wachsender Nachfrage = Question Mark oder Star, je nach Marktdurchdringung.", svg: DIAGRAMS.bcgbehoerde },
+      { q: "Was sind die Kritikpunkte an der BCG-Matrix?", a: "Nur zwei Dimensionen betrachtet, andere Einflussfaktoren bleiben unberücksichtigt; Annahme Marktanteil↔Rentabilität nicht immer zutreffend; stark vereinfachte Darstellung." },
+      { q: "Wofür wird die BCG-Matrix in der Verwaltung genutzt?", a: "Analyse von Projekten/Dienstleistungen hinsichtlich strategischer Relevanz, Unterstützung von Budget- und Investitionsentscheidungen, Priorisierung bei begrenztem Budget." }
     ]},
-    { name: "DSGVO, Datenschutz vs. Datensicherheit", prio: "hoch", cards: [
-      { q: "Was ist der Unterschied zwischen Datenschutz und Datensicherheit?", a: "Datenschutz: Schutz personenbezogener Daten vor missbräuchlicher Verwendung (rechtlicher Fokus, z. B. DSGVO). Datensicherheit: technischer Schutz aller Daten vor Verlust, Manipulation, unbefugtem Zugriff (unabhängig vom Personenbezug)." },
-      { q: "Was sind zentrale Grundsätze der DSGVO?", a: "Rechtmäßigkeit, Zweckbindung, Datenminimierung, Richtigkeit, Speicherbegrenzung, Integrität/Vertraulichkeit, Rechenschaftspflicht.", svg: DIAGRAMS.dsgvo },
-      { q: "Welche Rechte haben Betroffene nach der DSGVO?", a: "Auskunftsrecht, Recht auf Berichtigung, Recht auf Löschung ('Recht auf Vergessenwerden'), Recht auf Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruchsrecht." },
-      { q: "Was versteht man unter dem Recht auf informationelle Selbstbestimmung?", a: "Grundrecht (aus dem Volkszählungsurteil abgeleitet), wonach jeder selbst über die Preisgabe und Verwendung seiner personenbezogenen Daten bestimmen darf." }
+    { name: "Unternehmens-/Rechtsformen", prio: "hoch", cards: [
+      { q: "Nenne die Hauptgruppen der Unternehmensformen.", a: "Einzelunternehmen, Personengesellschaften (GbR, OHG, KG), Kapitalgesellschaften (GmbH, UG, AG), Sonderformen (Genossenschaften, Körperschaften des öffentlichen Rechts, Stiftungen).", svg: DIAGRAMS.unternehmensformenliste },
+      { q: "Was unterscheidet Personengesellschaften von Kapitalgesellschaften bei der Haftung?", a: "Personengesellschaften: meist unbeschränkte persönliche Haftung der Gesellschafter. Kapitalgesellschaften: Haftung i. d. R. auf das Gesellschaftsvermögen beschränkt." },
+      { q: "Was sind die Kernmerkmale einer GmbH?", a: "Kapitalgesellschaft, Mindestkapital 25.000€, beschränkte Haftung der Gesellschafter, Organe: Geschäftsführung und Gesellschafterversammlung." },
+      { q: "Zeichne die Unternehmensformen als Baumdiagramm (grobe Struktur).", a: "Unternehmensformen → Einzelunternehmen | Personengesellschaften (GbR, OHG, KG, PartG) | Kapitalgesellschaften (GmbH, UG, AG, SE) | Sonderformen (Genossenschaft, Körperschaft d. ö. Rechts, Stiftung).", svg: DIAGRAMS.unternehmensformen },
+      { q: "Nach welchen Kriterien wählt man eine Rechtsform aus?", a: "Haftung (persönlich/beschränkt), Kapitalbedarf, steuerliche Belastung, Mitbestimmung/Entscheidungsfreiheit, Publizitäts- und Berichtspflichten." }
     ]},
-    { name: "Verschlüsselung, PKI", prio: "hoch", cards: [
-      { q: "Was ist der Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung?", a: "Symmetrisch: ein gemeinsamer Schlüssel für Ver- und Entschlüsselung (z. B. AES) – schnell, aber Schlüsselaustausch ist heikel. Asymmetrisch: Schlüsselpaar aus öffentlichem und privatem Schlüssel (z. B. RSA) – sicherer Austausch, aber langsamer.", svg: DIAGRAMS.verschluesselung },
-      { q: "Was ist eine PKI (Public Key Infrastructure)?", a: "System zur Verwaltung digitaler Zertifikate und Schlüssel, stellt sicher, dass ein öffentlicher Schlüssel eindeutig einer Identität zugeordnet werden kann.", svg: DIAGRAMS.pki },
-      { q: "Welche Rollen gibt es innerhalb einer PKI?", a: "Zertifizierungsstelle (CA, stellt Zertifikate aus), Registrierungsstelle (RA, prüft Identitäten), Nutzer/Teilnehmer, Verzeichnisdienste (speichern/veröffentlichen Zertifikate)." },
-      { q: "Wofür wird eine digitale Signatur verwendet?", a: "Zum Nachweis der Authentizität und Integrität eines Dokuments/einer Nachricht – erstellt mit dem privaten Schlüssel des Absenders, prüfbar mit dessen öffentlichem Schlüssel." }
+    { name: "Rechtsformwahl begründen", prio: "hoch", cards: [
+      { q: "Welche Rechtsform würdest du mit 50.000€ Startkapital wählen und warum?", a: "Z. B. GmbH: Mindestkapital (25.000€) ist gedeckt, Haftung ist auf das Gesellschaftsvermögen beschränkt (persönliches Risiko begrenzt), professionelles Auftreten am Markt. Alternative: UG bei geringerem Kapitalbedarf und Wunsch nach schnellerer/günstigerer Gründung." },
+      { q: "Warum keine Personengesellschaft bei höherem Startkapital und Risiko?", a: "Wegen der unbeschränkten persönlichen Haftung mit dem Privatvermögen bei OHG/GbR – bei größerem Kapitaleinsatz steigt das persönliche Risiko unverhältnismäßig." },
+      { q: "Welche Rolle spielt die geplante Unternehmensgröße bei der Rechtsformwahl?", a: "Kleine, einfache Vorhaben eher Einzelunternehmen/GbR (geringer Gründungsaufwand); wachstumsorientierte oder kapitalintensive Vorhaben eher Kapitalgesellschaften wegen Haftungsbeschränkung und besserer Finanzierungsmöglichkeiten." }
     ]},
-    { name: "ITIL, ISMS, IT-Grundschutz", prio: "mittel", cards: [
-      { q: "Was ist ITIL und wofür steht es?", a: "Framework für IT-Service-Management (ITSM), Fokus auf effiziente IT-Prozesse entlang des Service Lifecycle (Strategie, Design, Transition, Betrieb, kontinuierliche Verbesserung)." },
-      { q: "Was ist ein ISMS und auf welcher Norm basiert es häufig?", a: "Informationssicherheits-Managementsystem: systematischer Ansatz zur Planung, Umsetzung, Überwachung und Verbesserung der Informationssicherheit, häufig basierend auf ISO/IEC 27001." },
-      { q: "Was ist der IT-Grundschutz des BSI und welches Ziel verfolgt er?", a: "Standard des BSI für strukturierte, risikoorientierte Absicherung von IT-Systemen. Ziel: systematische Erhöhung von Vertraulichkeit, Integrität und Verfügbarkeit als Basis für Audits/Zertifizierungen." }
+    { name: "Bestellverfahren", prio: "hoch", cards: [
+      { q: "Wie funktioniert das Bestellpunktverfahren?", a: "Es wird ein fester Meldebestand (Bestellpunkt) definiert; sobald der Lagerbestand diesen erreicht, wird automatisch eine feste Bestellmenge ausgelöst." },
+      { q: "Wie funktioniert das Bestellrhythmusverfahren?", a: "Bestellungen erfolgen in festen Zeitabständen (z. B. wöchentlich), die Bestellmenge wird jeweils an den aktuellen Bedarf angepasst, um einen Zielbestand zu erreichen." },
+      { q: "Was ist der Hauptunterschied zwischen beiden Verfahren?", a: "Bestellpunktverfahren: fester Bestand löst variable Zeitpunkte aus (mengengesteuert). Bestellrhythmusverfahren: feste Zeitpunkte lösen variable Mengen aus (zeitgesteuert)." }
+    ]},
+    { name: "Nutzwertanalyse, ABC-Analyse, Stacey-Matrix", prio: "mittel", cards: [
+      { q: "Wozu dient die Nutzwertanalyse?", a: "Bewertung mehrerer Alternativen anhand gewichteter Kriterien, um eine strukturierte, nachvollziehbare Entscheidung zu treffen (z. B. Softwareauswahl)." },
+      { q: "Was ist das Prinzip der ABC-Analyse?", a: "Klassifizierung von Objekten (z. B. Produkten, Kunden) nach ihrer Bedeutung: A = hoher Wertanteil/wenige Objekte, B = mittlerer Anteil, C = geringer Wertanteil/viele Objekte." },
+      { q: "Wofür wird die Stacey-Matrix genutzt?", a: "Einordnung von Projekten nach Grad der Anforderungsklarheit und technologischer Unsicherheit, um die passende Vorgehensweise (klassisch, agil, chaotisch) abzuleiten." }
+    ]},
+    { name: "PDCA-Zyklus, Kanban wirtschaftlich", prio: "mittel", cards: [
+      { q: "Was bedeuten die vier Phasen des PDCA-Zyklus?", a: "Plan (Planung von Maßnahmen), Do (Umsetzung), Check (Überprüfung der Ergebnisse), Act (Anpassung/kontinuierliche Verbesserung) – iterativer Verbesserungskreislauf." },
+      { q: "Wofür wird PDCA typischerweise eingesetzt?", a: "Für kontinuierliche Prozessverbesserung, z. B. im Qualitätsmanagement oder in einem ISMS (Informationssicherheits-Managementsystem)." },
+      { q: "Wie unterstützt Kanban die kontinuierliche Verbesserung im Sinne von PDCA?", a: "Durch sichtbaren Arbeitsfluss und WIP-Begrenzung werden Engpässe schnell erkannt (Check) und Prozessanpassungen (Act) direkt im laufenden Betrieb vorgenommen." }
     ]},
     { name: "OZG, EGovG, RegMoG", prio: "hoch", cards: [
       { q: "Was ist das Ziel des Onlinezugangsgesetzes (OZG) und seit wann gilt es?", a: "Seit 2017: Verpflichtung von Bund, Ländern und Kommunen, Verwaltungsleistungen digital über Verwaltungsportale anzubieten. Umfasst rund 575 Leistungen in 14 Lebens- und 5 Geschäftslagen." },
@@ -1187,6 +1045,81 @@ week3: {
       { q: "Was bedeutet digitale Souveränität für die Verwaltung?", a: "Unabhängigkeit von großen internationalen IT-Anbietern, Förderung europäischer Cloud-Initiativen (z. B. GAIA-X) und Nutzung offener Standards/Open-Source-Software." },
       { q: "Was regelt eIDAS und was ist neu an eIDAS 2.0?", a: "EU-Verordnung für elektronische Identifizierung und Vertrauensdienste (Signaturen, Siegel, Zeitstempel). eIDAS 2.0 (2023) führt die EU Digital Identity Wallet ein, mit Verpflichtung der Mitgliedstaaten zu einer eID-Lösung." },
       { q: "Was besagt das Once-Only-Prinzip?", a: "Bürger und Unternehmen müssen Daten gegenüber der Verwaltung nur einmal angeben; die Verwaltung ruft diese bei Bedarf über verknüpfte Register erneut ab, statt sie mehrfach abzufragen." }
+    ]},
+    { name: "Beamten-/Tarifrecht", prio: "mittel", cards: [
+      { q: "Was ist der Kernunterschied zwischen Beamten und Angestellten im öffentlichen Dienst?", a: "Beamte: besonderes öffentlich-rechtliches Dienstverhältnis (BeamtStG), kein Streikrecht, Treuepflicht, Versorgung nach Alimentationsprinzip. Angestellte: privatrechtlicher Arbeitsvertrag nach Tarifrecht (TVöD), mit Kündigungsschutz nach KSchG." },
+      { q: "Was bedeutet das Alimentationsprinzip bei Beamten?", a: "Der Dienstherr ist verpflichtet, dem Beamten und seiner Familie eine angemessene Versorgung zu gewähren – auch im Ruhestand (verfassungsrechtlich verankert, Art. 33 GG).", svg: DIAGRAMS.alimentation },
+      { q: "Welche gesetzliche Grundlage regelt den Kündigungsschutz für Angestellte im öffentlichen Dienst?", a: "Kündigungsschutzgesetz (KSchG) in Verbindung mit dem Tarifvertrag für den öffentlichen Dienst (TVöD)." }
+    ]},
+    { name: "BPMN", prio: "mittel", cards: [
+      { q: "Was ist BPMN und wozu dient es?", a: "Business Process Model and Notation: Standard zur grafischen, standardisierten Modellierung von Geschäftsprozessen für Fachanwender und IT.", svg: DIAGRAMS.bpmn },
+      { q: "Nenne die Hauptelemente von BPMN.", a: "Ereignisse (Start, Zwischen-, Endereignis), Aktivitäten (Task, Sub-Prozess), Gateways (exklusiv/inklusiv/parallel zur Ablaufsteuerung), Sequenz- und Nachrichtenflüsse.", svg: DIAGRAMS.bpmnelemente },
+      { q: "Was unterscheidet Pools von Lanes in BPMN?", a: "Pools stellen ganze Organisationen/Systeme dar, Lanes darin repräsentieren Rollen, Abteilungen oder Funktionseinheiten innerhalb eines Pools.", svg: DIAGRAMS.bpmnpoolslanes }
+    ]},
+    { name: "RAID, Datenstrukturen", prio: "niedrig", cards: [
+      { q: "Was ist der Zweck von RAID-Systemen?", a: "Zusammenschluss mehrerer Festplatten zur Erhöhung von Datensicherheit (Redundanz) und/oder Geschwindigkeit, z. B. RAID 1 (Spiegelung) oder RAID 5 (Striping mit Parität).", svg: DIAGRAMS.raid },
+      { q: "Was ist der Unterschied zwischen einer verketteten Liste und einem Binärbaum bezüglich der Suche?", a: "Liste: lineare Suche, im schlechtesten Fall O(n). Binärer Suchbaum: bei ausgeglichenem Baum O(log n), da bei jedem Schritt die Suchmenge halbiert wird.", svg: DIAGRAMS.listevsbaum }
+    ]},
+    { name: "Lasten-/Pflichtenheft, Systemanalyse", prio: "niedrig", cards: [
+      { q: "Was unterscheidet Lastenheft und Pflichtenheft?", a: "Lastenheft: vom Auftraggeber formuliert, beschreibt das 'Was' (Anforderungen/Ziele). Pflichtenheft: vom Auftragnehmer erstellt, beschreibt das 'Wie' (konkrete Umsetzung der Anforderungen)." },
+      { q: "Was ist der Zweck einer Systemanalyse zu Projektbeginn?", a: "Erhebung und Analyse der Ist-Situation sowie der Anforderungen, um eine fundierte Grundlage für Planung, Aufwandsschätzung und Systementwurf zu schaffen." }
+    ]}
+  ]
+},
+week2: {
+  label: "Woche 2", range: "10.–14.8. (Mo–Fr)", color: "purple",
+  topics: [
+    { name: "Scrum", prio: "hoch", cards: [
+      { q: "Welche Rollen gibt es in Scrum und was ist ihre Aufgabe?", a: "Product Owner: verantwortet das Product Backlog und Priorisierung. Scrum Master: sorgt für Einhaltung des Scrum-Prozesses, beseitigt Hindernisse. Entwicklungsteam: setzt die Arbeit im Sprint um.", svg: DIAGRAMS.scrumrollen },
+      { q: "Was sind die Artefakte in Scrum?", a: "Product Backlog (priorisierte Gesamtliste der Anforderungen), Sprint Backlog (Aufgaben für den aktuellen Sprint), Increment (fertiges Produktinkrement am Sprintende).", svg: DIAGRAMS.scrumartefakte },
+      { q: "Welche Events (Meetings) gibt es in Scrum?", a: "Sprint Planning (Sprintstart, Ziel & Aufgaben festlegen), Daily Scrum (tägliches 15-Min-Stand-up), Sprint Review (Ergebnispräsentation), Sprint Retrospective (Prozessreflexion im Team).", svg: DIAGRAMS.scrum },
+      { q: "Wie lange dauert typischerweise ein Sprint?", a: "Meist 2–4 Wochen, fest getaktet und über das gesamte Projekt konstant." },
+      { q: "Wann sollte man Scrum statt Wasserfall wählen?", a: "Scrum bei dynamischen Projekten mit unsicheren/sich ändernden Anforderungen und frühem Feedback-Bedarf; Wasserfall bei stabilen, klar definierten Anforderungen." }
+    ]},
+    { name: "Wasserfallmodell", prio: "hoch", cards: [
+      { q: "Wie ist das Wasserfallmodell aufgebaut?", a: "Lineares, sequenzielles Vorgehen in Phasen: Analyse, Design, Implementierung, Test, Betrieb. Jede Phase muss abgeschlossen sein, bevor die nächste beginnt.", svg: DIAGRAMS.wasserfall },
+      { q: "Was sind Vor- und Nachteile des Wasserfallmodells?", a: "Vorteile: klare Struktur, einfache Planung, gute Dokumentation. Nachteile: geringe Flexibilität, spätes Erkennen von Fehlern, schwierig bei sich ändernden Anforderungen.", svg: DIAGRAMS.wasserfallvornachteil },
+      { q: "Wo wird das Wasserfallmodell typischerweise eingesetzt?", a: "Bei Projekten mit stabilen Anforderungen, z. B. standardisierte Verwaltungssoftware." }
+    ]},
+    { name: "V-Modell / V-Modell XT", prio: "hoch", cards: [
+      { q: "Wie ist das V-Modell aufgebaut?", a: "Darstellung in V-Form: linke Seite = Spezifikation (Anforderungen, Architektur, Design), rechte Seite = Testen/Validieren auf jeder Spezifikationsebene.", svg: DIAGRAMS.vmodell },
+      { q: "Welche Phasen umfasst das V-Modell?", a: "Anforderungsanalyse, System- und Softwaredesign, Implementierung, Modultests, Integrationstests, Systemtests, Abnahmetests.", svg: DIAGRAMS.vmodellphasen },
+      { q: "Was ist das V-Modell XT und wo wird es verpflichtend eingesetzt?", a: "Weiterentwicklung/Standardisierung des klassischen V-Modells, modular und anpassbar an Projekttyp/-größe. Verpflichtend bei vielen öffentlichen IT-Projekten in Deutschland." },
+      { q: "Welche Vor- und Nachteile hat das V-Modell?", a: "Vorteile: klare Struktur, Verknüpfung von Spezifikation und Test, geeignet für sicherheitskritische Projekte. Nachteile: wenig flexibel bei Änderungen, hoher Dokumentationsaufwand.", svg: DIAGRAMS.vmodellvornachteil },
+      { q: "Wo wird das V-Modell eingesetzt?", a: "Öffentliche Verwaltung, Verteidigungsprojekte, kritische Infrastrukturen, Software- und Systementwicklung." }
+    ]},
+    { name: "Kanban / Scaled Agile", prio: "mittel", cards: [
+      { q: "Was ist Kanban und wie funktioniert es?", a: "Methode zur Visualisierung und Steuerung von Arbeitsprozessen. Aufgaben werden auf Boards (To Do, In Progress, Done) dargestellt, kontinuierlicher Fluss statt fester Sprints.", svg: DIAGRAMS.kanban },
+      { q: "Wie misst man den Fortschritt in Kanban?", a: "Mit Kennzahlen wie Durchlaufzeit (Cycle Time), Work in Progress (WIP) und Lead Time." },
+      { q: "Wie skaliert man Scrum für große Projekte?", a: "Durch agile Skalierungsframeworks wie SAFe (Scaled Agile Framework), LeSS (Large Scale Scrum) oder Nexus." }
+    ]},
+    { name: "Spiralmodell & Vorgehensmodelle allgemein", prio: "mittel", cards: [
+      { q: "Was ist das Grundprinzip des Spiralmodells?", a: "Iteratives, risikogetriebenes Vorgehensmodell: in wiederholten Zyklen werden Planung, Risikoanalyse, Entwicklung und Bewertung durchlaufen, wobei jede Spirale das System weiter ausbaut.", svg: DIAGRAMS.spiralmodell },
+      { q: "Was unterscheidet lineare von agilen Vorgehensmodellen grundsätzlich?", a: "Lineare Modelle (Wasserfall, V-Modell) durchlaufen feste, aufeinanderfolgende Phasen ohne Rücksprünge. Agile Modelle (Scrum, Kanban) arbeiten iterativ-inkrementell mit häufigem Feedback und Anpassung." },
+      { q: "Nenne je einen typischen Einsatzfall für ein schwergewichtiges und ein leichtgewichtiges Vorgehensmodell.", a: "Schwergewichtig (z. B. V-Modell XT): große, sicherheitskritische Verwaltungsprojekte mit hohem Dokumentationsbedarf. Leichtgewichtig (z. B. Scrum/Kanban): kleinere Teams, dynamische Anforderungen, schnelle Iteration." }
+    ]},
+    { name: "Von-Neumann-Architektur", prio: "hoch", cards: [
+      { q: "Aus welchen Hauptkomponenten besteht die Von-Neumann-Architektur?", a: "CPU (mit Rechenwerk/ALU, Steuerwerk, Registern), gemeinsamer Speicher für Daten und Programme, gemeinsamer Systembus für Daten, Adressen und Steuerinformationen.", svg: DIAGRAMS.vonneumann },
+      { q: "Was ist der Von-Neumann-Flaschenhals?", a: "Da nur ein gemeinsamer Bus für Befehle und Daten existiert, entsteht ein Engpass: CPU muss Befehle und Daten nacheinander über denselben Bus holen, was die parallele Verarbeitung begrenzt.", svg: DIAGRAMS.vonneumannflaschenhals },
+      { q: "Nenne Beispiele für Von-Neumann-Systeme.", a: "Klassische PCs, Standard-CPUs (Intel x86, AMD Ryzen), Laptops, Server, historische Rechner wie ENIAC." },
+      { q: "Zeichne/beschreibe den Aufbau: welche Komponenten sind wie verbunden?", a: "CPU (ALU, Steuerwerk, Register) ↔ Systembus ↔ gemeinsamer Speicher (Programme + Daten) ↔ Systembus ↔ Ein-/Ausgabewerk. Alle Komponenten teilen sich denselben Bus.", svg: DIAGRAMS.vonneumannverbindung },
+      { q: "Was ist der zentrale Vorteil der Von-Neumann-Architektur trotz des Flaschenhalses?", a: "Hohe Flexibilität, da Speicher dynamisch zwischen Daten und Programmen aufgeteilt werden kann, sowie einfacherer und günstigerer Aufbau." }
+    ]},
+    { name: "Harvard-Architektur & Vergleich", prio: "mittel", cards: [
+      { q: "Was unterscheidet die Harvard- von der Von-Neumann-Architektur?", a: "Harvard nutzt getrennte Speicherbereiche und getrennte Busse für Programme und Daten (paralleler Zugriff möglich), Von-Neumann nutzt einen gemeinsamen Speicher und Bus.", svg: DIAGRAMS.harvard },
+      { q: "Welche Vor- und Nachteile hat die Harvard-Architektur?", a: "Vorteile: höhere Geschwindigkeit durch parallelen Zugriff, kein Bus-Engpass, gut für Echtzeitsysteme. Nachteile: komplexere Hardware, weniger flexible Speicheraufteilung." },
+      { q: "Nenne Beispiele für Harvard-Architektur-Systeme.", a: "Mikrocontroller (PIC, Arduino/Atmel AVR), digitale Signalprozessoren (DSPs), ARM Cortex-M (modifizierte Harvard-Architektur), eingebettete Systeme." }
+    ]},
+    { name: "RISC/CISC, Pipelining, Taktfrequenz", prio: "mittel", cards: [
+      { q: "Was unterscheidet RISC von CISC grundsätzlich?", a: "RISC (Reduced Instruction Set Computer): wenige, einfache Befehle, schnelle Ausführung, energieeffizienter. CISC (Complex Instruction Set Computer): viele komplexe Befehle, mehr Funktionalität pro Befehl, aber höherer Energieverbrauch.", svg: DIAGRAMS.riscvscisc },
+      { q: "Was ist Pipelining und welchen Vorteil bringt es?", a: "Überlappende Ausführung mehrerer Befehle in aufeinanderfolgenden Verarbeitungsstufen (z. B. Fetch, Decode, Execute), wodurch der Befehlsdurchsatz erhöht wird, ohne die Taktfrequenz zu steigern.", svg: DIAGRAMS.pipelining },
+      { q: "Wie hoch ist die typische Taktfrequenz eines aktuellen Prozessors?", a: "Meist im Bereich von ca. 2–5 GHz für Consumer-CPUs, teils höher im Turbo-Modus." }
+    ]},
+    { name: "Zahlensysteme umrechnen", prio: "hoch", cards: [
+      { q: "Wie rechnet man eine Dezimalzahl in Binär um?", a: "Fortlaufende Division durch 2, die Reste (von unten nach oben gelesen) ergeben die Binärzahl. Beispiel: 13 → 1101." },
+      { q: "Rechne dein Alter in Binär um (Beispielrechnung 25).", a: "25 = 16+8+1 = 2⁴+2³+2⁰ → Binär: 11001." },
+      { q: "Wie funktioniert die Umrechnung Binär → Hexadezimal?", a: "Binärzahl in 4er-Blöcke von rechts gruppieren, jeden Block einzeln in eine Hex-Ziffer (0–F) umwandeln. Beispiel: 1101 1010 → D A → 0xDA." },
+      { q: "Was ist der Unterschied zwischen Bit und Byte?", a: "1 Bit = kleinste Informationseinheit (0 oder 1). 1 Byte = 8 Bit, kleinste adressierbare Speichereinheit." }
     ]},
     { name: "ER-Modell", prio: "hoch", cards: [
       { q: "Was beschreibt ein ER-Modell?", a: "Abbildung von Daten und ihren Beziehungen als Entitäten, Attribute und Relationen – Grundlage für die Datenbankmodellierung.", svg: DIAGRAMS.ermodell },
@@ -1219,24 +1152,91 @@ week3: {
       { q: "Was ist Virtualisierung und welchen Vorteil bringt sie?", a: "Abstraktion physischer Hardware, um mehrere virtuelle Maschinen auf einer physischen Maschine zu betreiben. Vorteil: bessere Ressourcenauslastung, Isolation, Flexibilität." },
       { q: "Was ist der Unterschied zwischen VM und Container?", a: "VM: vollständiges eigenes Betriebssystem pro Instanz (Hypervisor-basiert), ressourcenintensiver. Container: teilen sich den Betriebssystem-Kernel des Hosts, leichtgewichtiger und schneller startbar (z. B. Docker).", svg: DIAGRAMS.vmcontainer },
       { q: "Was ist ein Cluster und wofür wird es eingesetzt?", a: "Verbund mehrerer Rechner, die zusammenarbeiten, um Leistung und/oder Ausfallsicherheit zu erhöhen (z. B. Load-Balancing-Cluster, High-Availability-Cluster)." }
+    ]}
+  ]
+},
+week3: {
+  label: "Woche 3", range: "17.–21.8. (Mo–Fr)", color: "teal",
+  topics: [
+    { name: "OOP-Säulen", prio: "hoch", cards: [
+      { q: "Was ist Kapselung (Encapsulation)?", a: "Bündelung von Daten und Methoden in einer Klasse, Zugriff von außen wird über definierte Schnittstellen (z. B. public/private) kontrolliert." },
+      { q: "Was ist Vererbung (Inheritance)?", a: "Eine Klasse (Subklasse) übernimmt Eigenschaften und Methoden einer anderen Klasse (Superklasse) und kann sie erweitern oder überschreiben." },
+      { q: "Was ist Polymorphie (Polymorphism)?", a: "Objekte unterschiedlicher Klassen können über dieselbe Schnittstelle angesprochen werden, verhalten sich aber je nach tatsächlichem Typ unterschiedlich (z. B. überschriebene Methoden)." },
+      { q: "Was ist Abstraktion?", a: "Reduktion auf die wesentlichen Eigenschaften eines Objekts, Ausblenden von Implementierungsdetails, z. B. über abstrakte Klassen oder Interfaces." },
+      { q: "Wie hängen die vier Säulen zusammen?", a: "Abstraktion definiert das Wesentliche, Kapselung schützt die Umsetzung, Vererbung ermöglicht Wiederverwendung, Polymorphie erlaubt flexible Nutzung verschiedener Implementierungen über eine gemeinsame Schnittstelle." }
     ]},
-    { name: "Beamten-/Tarifrecht", prio: "mittel", cards: [
-      { q: "Was ist der Kernunterschied zwischen Beamten und Angestellten im öffentlichen Dienst?", a: "Beamte: besonderes öffentlich-rechtliches Dienstverhältnis (BeamtStG), kein Streikrecht, Treuepflicht, Versorgung nach Alimentationsprinzip. Angestellte: privatrechtlicher Arbeitsvertrag nach Tarifrecht (TVöD), mit Kündigungsschutz nach KSchG." },
-      { q: "Was bedeutet das Alimentationsprinzip bei Beamten?", a: "Der Dienstherr ist verpflichtet, dem Beamten und seiner Familie eine angemessene Versorgung zu gewähren – auch im Ruhestand (verfassungsrechtlich verankert, Art. 33 GG).", svg: DIAGRAMS.alimentation },
-      { q: "Welche gesetzliche Grundlage regelt den Kündigungsschutz für Angestellte im öffentlichen Dienst?", a: "Kündigungsschutzgesetz (KSchG) in Verbindung mit dem Tarifvertrag für den öffentlichen Dienst (TVöD)." }
+    { name: "UML-Klassendiagramm", prio: "hoch", cards: [
+      { q: "Aus welchen drei Bereichen besteht eine Klasse im UML-Klassendiagramm?", a: "Klassenname (oben), Attribute (Mitte), Methoden/Operationen (unten).", svg: DIAGRAMS.klassendiagramm },
+      { q: "Wie werden Sichtbarkeiten im Klassendiagramm notiert?", a: "+ = public, − = private, # = protected, ~ = package/paket-sichtbar.", svg: DIAGRAMS.sichtbarkeiten },
+      { q: "Welche Beziehungsarten gibt es im Klassendiagramm und wie sehen sie aus?", a: "Assoziation (einfache Linie), Aggregation (Linie mit leerer Raute, 'hat-ein', lose Beziehung), Komposition (Linie mit gefüllter Raute, starke Abhängigkeit), Vererbung/Generalisierung (Linie mit leerem Dreieck-Pfeil).", svg: DIAGRAMS.beziehungsarten },
+      { q: "Wie wird Kardinalität im Klassendiagramm dargestellt?", a: "An den Linienenden werden Zahlen/Bereiche notiert, z. B. 1, 0..1, 1..*, 0..* für die Anzahl möglicher Beziehungen zwischen den Klassen.", svg: DIAGRAMS.klassenkardinalitaet },
+      { q: "Zeichne skizzenhaft: eine Klasse 'Kunde' die mehrere 'Bestellung'-Objekte hat (1:n).", a: "Zwei Rechtecke (Kunde, Bestellung) verbunden durch eine Linie mit Kardinalität '1' an Kunde und '0..*' an Bestellung, ggf. mit Raute für Aggregation/Komposition je nach Abhängigkeitsstärke.", svg: DIAGRAMS.kundebestellung }
     ]},
-    { name: "BPMN", prio: "mittel", cards: [
-      { q: "Was ist BPMN und wozu dient es?", a: "Business Process Model and Notation: Standard zur grafischen, standardisierten Modellierung von Geschäftsprozessen für Fachanwender und IT.", svg: DIAGRAMS.bpmn },
-      { q: "Nenne die Hauptelemente von BPMN.", a: "Ereignisse (Start, Zwischen-, Endereignis), Aktivitäten (Task, Sub-Prozess), Gateways (exklusiv/inklusiv/parallel zur Ablaufsteuerung), Sequenz- und Nachrichtenflüsse.", svg: DIAGRAMS.bpmnelemente },
-      { q: "Was unterscheidet Pools von Lanes in BPMN?", a: "Pools stellen ganze Organisationen/Systeme dar, Lanes darin repräsentieren Rollen, Abteilungen oder Funktionseinheiten innerhalb eines Pools.", svg: DIAGRAMS.bpmnpoolslanes }
+    { name: "Objektdiagramm, Use-Case, Aggregation/Komposition", prio: "mittel", cards: [
+      { q: "Was ist der Unterschied zwischen Klassen- und Objektdiagramm?", a: "Klassendiagramm zeigt die generelle Struktur (Klassen, Beziehungen, Kardinalitäten). Objektdiagramm zeigt eine konkrete Momentaufnahme mit tatsächlichen Objektinstanzen und ihren Werten.", svg: DIAGRAMS.objektdiagramm },
+      { q: "Was zeigt ein Use-Case-Diagramm?", a: "Die funktionalen Anforderungen eines Systems aus Nutzersicht: Akteure (Personen/Systeme) und die Anwendungsfälle (Use Cases), mit denen sie interagieren.", svg: DIAGRAMS.usecase },
+      { q: "Was ist der Unterschied zwischen Aggregation und Komposition?", a: "Aggregation: lose 'hat-ein'-Beziehung, Teile können unabhängig vom Ganzen existieren (leere Raute). Komposition: starke Abhängigkeit, Teile existieren nur mit dem Ganzen und werden mit ihm zerstört (gefüllte Raute).", svg: DIAGRAMS.aggkomp }
     ]},
-    { name: "RAID, Datenstrukturen", prio: "niedrig", cards: [
-      { q: "Was ist der Zweck von RAID-Systemen?", a: "Zusammenschluss mehrerer Festplatten zur Erhöhung von Datensicherheit (Redundanz) und/oder Geschwindigkeit, z. B. RAID 1 (Spiegelung) oder RAID 5 (Striping mit Parität).", svg: DIAGRAMS.raid },
-      { q: "Was ist der Unterschied zwischen einer verketteten Liste und einem Binärbaum bezüglich der Suche?", a: "Liste: lineare Suche, im schlechtesten Fall O(n). Binärer Suchbaum: bei ausgeglichenem Baum O(log n), da bei jedem Schritt die Suchmenge halbiert wird.", svg: DIAGRAMS.listevsbaum }
+    { name: "OOP vs. prozedural, Sichtbarkeiten", prio: "hoch", cards: [
+      { q: "Was ist der grundlegende Unterschied zwischen objektorientierter und prozeduraler Programmierung?", a: "Prozedural: Programm als Abfolge von Funktionen/Prozeduren, die auf Daten zugreifen. Objektorientiert: Daten und zugehörige Funktionen werden in Objekten/Klassen gekapselt." },
+      { q: "Erkläre die Sichtbarkeitsmodifikatoren public, private, protected.", a: "public: von überall zugreifbar. private: nur innerhalb der eigenen Klasse zugreifbar. protected: innerhalb der Klasse und ihrer Subklassen zugreifbar." },
+      { q: "Was ist ein praktischer Vorteil der OOP gegenüber prozeduraler Programmierung?", a: "Bessere Wartbarkeit und Wiederverwendbarkeit durch Kapselung und Vererbung, klarere Modellierung realer Sachverhalte als Objekte." }
     ]},
-    { name: "Lasten-/Pflichtenheft, Systemanalyse", prio: "niedrig", cards: [
-      { q: "Was unterscheidet Lastenheft und Pflichtenheft?", a: "Lastenheft: vom Auftraggeber formuliert, beschreibt das 'Was' (Anforderungen/Ziele). Pflichtenheft: vom Auftragnehmer erstellt, beschreibt das 'Wie' (konkrete Umsetzung der Anforderungen)." },
-      { q: "Was ist der Zweck einer Systemanalyse zu Projektbeginn?", a: "Erhebung und Analyse der Ist-Situation sowie der Anforderungen, um eine fundierte Grundlage für Planung, Aufwandsschätzung und Systementwurf zu schaffen." }
+    { name: "Programmierparadigmen", prio: "mittel", cards: [
+      { q: "Nenne die wichtigsten Programmierparadigmen im Überblick.", a: "Imperativ/prozedural (Schritt-für-Schritt-Anweisungen), objektorientiert (Objekte/Klassen), funktional (Funktionen ohne Seiteneffekte), deklarativ (Beschreibung des 'Was', nicht des 'Wie', z. B. SQL)." },
+      { q: "Was zeichnet funktionale Programmierung aus?", a: "Funktionen als zentrale Bausteine, Vermeidung von Seiteneffekten und veränderlichem Zustand, Funktionen können als Werte übergeben werden." },
+      { q: "Nenne ein Beispiel für deklarative Programmierung.", a: "SQL: man beschreibt, welche Daten man haben möchte (SELECT ... WHERE ...), nicht wie die Datenbank sie beschafft." }
+    ]},
+    { name: "CIA-Schutzziele", prio: "hoch", cards: [
+      { q: "Was bedeuten die drei CIA-Schutzziele?", a: "Confidentiality (Vertraulichkeit): kein unbefugter Zugriff. Integrity (Integrität): Schutz vor unbefugter Veränderung. Availability (Verfügbarkeit): Systeme/Daten sind bei Bedarf zugänglich.", svg: DIAGRAMS.ciatriade },
+      { q: "Wie setzt man die CIA-Schutzziele am Beispiel eines Webservers konkret um?", a: "Vertraulichkeit: Verschlüsselung (TLS/HTTPS), Zugriffskontrollen. Integrität: Prüfsummen, Signaturen, Schutz vor Manipulation. Verfügbarkeit: Redundanz, Load Balancing, DDoS-Schutz, Backups." },
+      { q: "Welche ergänzenden Schutzziele gibt es neben CIA?", a: "Authentizität (Echtheit des Absenders), Nachweisbarkeit/Verbindlichkeit (Non-Repudiation), teils auch Zurechenbarkeit." },
+      { q: "Was passiert, wenn nur die Verfügbarkeit, aber nicht die Integrität geschützt ist?", a: "Das System bleibt erreichbar, aber Daten könnten unbemerkt manipuliert werden (z. B. durch einen Man-in-the-Middle-Angriff) – der Nutzer erhält falsche, aber verfügbare Informationen." }
+    ]},
+    { name: "DSGVO, Datenschutz vs. Datensicherheit", prio: "hoch", cards: [
+      { q: "Was ist der Unterschied zwischen Datenschutz und Datensicherheit?", a: "Datenschutz: Schutz personenbezogener Daten vor missbräuchlicher Verwendung (rechtlicher Fokus, z. B. DSGVO). Datensicherheit: technischer Schutz aller Daten vor Verlust, Manipulation, unbefugtem Zugriff (unabhängig vom Personenbezug)." },
+      { q: "Was sind zentrale Grundsätze der DSGVO?", a: "Rechtmäßigkeit, Zweckbindung, Datenminimierung, Richtigkeit, Speicherbegrenzung, Integrität/Vertraulichkeit, Rechenschaftspflicht.", svg: DIAGRAMS.dsgvo },
+      { q: "Welche Rechte haben Betroffene nach der DSGVO?", a: "Auskunftsrecht, Recht auf Berichtigung, Recht auf Löschung ('Recht auf Vergessenwerden'), Recht auf Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruchsrecht." },
+      { q: "Was versteht man unter dem Recht auf informationelle Selbstbestimmung?", a: "Grundrecht (aus dem Volkszählungsurteil abgeleitet), wonach jeder selbst über die Preisgabe und Verwendung seiner personenbezogenen Daten bestimmen darf." }
+    ]},
+    { name: "Verschlüsselung, PKI", prio: "hoch", cards: [
+      { q: "Was ist der Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung?", a: "Symmetrisch: ein gemeinsamer Schlüssel für Ver- und Entschlüsselung (z. B. AES) – schnell, aber Schlüsselaustausch ist heikel. Asymmetrisch: Schlüsselpaar aus öffentlichem und privatem Schlüssel (z. B. RSA) – sicherer Austausch, aber langsamer.", svg: DIAGRAMS.verschluesselung },
+      { q: "Was ist eine PKI (Public Key Infrastructure)?", a: "System zur Verwaltung digitaler Zertifikate und Schlüssel, stellt sicher, dass ein öffentlicher Schlüssel eindeutig einer Identität zugeordnet werden kann.", svg: DIAGRAMS.pki },
+      { q: "Welche Rollen gibt es innerhalb einer PKI?", a: "Zertifizierungsstelle (CA, stellt Zertifikate aus), Registrierungsstelle (RA, prüft Identitäten), Nutzer/Teilnehmer, Verzeichnisdienste (speichern/veröffentlichen Zertifikate)." },
+      { q: "Wofür wird eine digitale Signatur verwendet?", a: "Zum Nachweis der Authentizität und Integrität eines Dokuments/einer Nachricht – erstellt mit dem privaten Schlüssel des Absenders, prüfbar mit dessen öffentlichem Schlüssel." }
+    ]},
+    { name: "ITIL, ISMS, IT-Grundschutz", prio: "mittel", cards: [
+      { q: "Was ist ITIL und wofür steht es?", a: "Framework für IT-Service-Management (ITSM), Fokus auf effiziente IT-Prozesse entlang des Service Lifecycle (Strategie, Design, Transition, Betrieb, kontinuierliche Verbesserung)." },
+      { q: "Was ist ein ISMS und auf welcher Norm basiert es häufig?", a: "Informationssicherheits-Managementsystem: systematischer Ansatz zur Planung, Umsetzung, Überwachung und Verbesserung der Informationssicherheit, häufig basierend auf ISO/IEC 27001." },
+      { q: "Was ist der IT-Grundschutz des BSI und welches Ziel verfolgt er?", a: "Standard des BSI für strukturierte, risikoorientierte Absicherung von IT-Systemen. Ziel: systematische Erhöhung von Vertraulichkeit, Integrität und Verfügbarkeit als Basis für Audits/Zertifizierungen." }
+    ]},
+    { name: "Vertragsarten", prio: "hoch", cards: [
+      { q: "Was unterscheidet einen Werkvertrag von einem Dienstvertrag?", a: "Werkvertrag: geschuldet wird ein konkretes Ergebnis/Erfolg (z. B. fertige Software). Dienstvertrag: geschuldet wird die Tätigkeit/das Bemühen selbst, kein Erfolg garantiert (z. B. laufende Beratung, Wartung)." },
+      { q: "Was ist ein Kaufvertrag und wodurch kommt er zustande?", a: "Vertrag über den Erwerb von Eigentum an einer Sache gegen Bezahlung. Zustandekommen durch übereinstimmende Willenserklärungen: Angebot und Annahme." },
+      { q: "Nenne weitere IT-relevante Vertragstypen.", a: "Mietvertrag/Leasing (Nutzung von Hardware/Cloud gegen Entgelt), Lizenzvertrag (Nutzungsrechte an Software), Service Level Agreement/SLA (Qualität, Verfügbarkeit, Reaktionszeiten)." },
+      { q: "Was sind typische Inhalte eines IT-Vertrags?", a: "Leistungsbeschreibung, Gegenleistung/Preis, Laufzeit und Kündigungsmodalitäten, Haftung und Gewährleistung, Datenschutz- und Sicherheitsanforderungen." }
+    ]},
+    { name: "Vertragszustandekommen", prio: "hoch", cards: [
+      { q: "Wie kommt ein Vertrag rechtlich zustande?", a: "Durch zwei übereinstimmende Willenserklärungen: Angebot (Antrag) und Annahme." },
+      { q: "Was bedeutet 'invitatio ad offerendum'?", a: "Aufforderung zur Abgabe eines Angebots (kein bindendes Angebot selbst), z. B. Schaufensterauslage oder Werbeanzeige – der Kunde gibt das eigentliche Angebot ab, der Verkäufer nimmt an oder lehnt ab." },
+      { q: "Was passiert rechtlich bei einem Scherzgeschäft?", a: "Eine Willenserklärung ohne ernsthaften Rechtsbindungswillen, die der Erklärende in der Erwartung abgibt, der Mangel werde erkannt (§ 118 BGB) – die Erklärung ist nichtig, kann aber Schadensersatzpflicht auslösen, wenn der Empfänger auf die Ernsthaftigkeit vertraut hat." }
+    ]},
+    { name: "Ausbildungsvertrag, AGB, SLA", prio: "mittel", cards: [
+      { q: "Was muss ein Ausbildungsvertrag mindestens enthalten?", a: "Art, Ziel und Dauer der Ausbildung, Ausbildungsort, Ausbildungsvergütung, Arbeitszeit, Probezeit, Urlaubsanspruch, Kündigungsvoraussetzungen." },
+      { q: "Was sind AGB und wofür werden sie eingesetzt?", a: "Allgemeine Geschäftsbedingungen: vorformulierte Vertragsbedingungen, die eine Partei der anderen bei Vertragsschluss stellt, um Massengeschäfte einheitlich zu regeln." },
+      { q: "Was regelt ein SLA und was sind typische Inhalte?", a: "Service Level Agreement: Vereinbarung über Qualität, Verfügbarkeit, Reaktionszeiten und Support. Typisch: Uptime-Garantien, Performance-Kriterien, Eskalationsprozesse, Reporting." }
+    ]},
+    { name: "Bilanz Grundlagen", prio: "hoch", cards: [
+      { q: "Was zeigt eine Bilanz und wie ist sie aufgebaut?", a: "Gegenüberstellung von Aktiva (Vermögen) und Passiva (Kapital) zu einem Stichtag. Aktiva: Anlagevermögen, Umlaufvermögen. Passiva: Eigenkapital, Fremdkapital.", svg: DIAGRAMS.bilanz },
+      { q: "Nenne je zwei Beispiele für Anlagevermögen, Umlaufvermögen, Eigenkapital und Fremdkapital.", a: "Anlagevermögen: Maschinen, Gebäude. Umlaufvermögen: Kasse, Vorräte. Eigenkapital: Gezeichnetes Kapital, Gewinnrücklagen. Fremdkapital: Bankdarlehen, Verbindlichkeiten aus Lieferungen.", svg: DIAGRAMS.bilanzbeispiele },
+      { q: "Wie wird eine Schenkung von 50.000€ per Überweisung in der Bilanz eingeordnet?", a: "Aktivseite: Erhöhung der Kasse/Bank (Umlaufvermögen). Passivseite: Erhöhung des Eigenkapitals (da kein Rückzahlungsanspruch besteht).", svg: DIAGRAMS.bilanzschenkung },
+      { q: "Was besagt die Bilanzgleichung?", a: "Aktiva = Passiva, also Summe des Vermögens entspricht immer der Summe des Kapitals (Eigen- + Fremdkapital).", svg: DIAGRAMS.bilanzgleichung },
+      { q: "Was ist der Unterschied zwischen Bilanz und Jahresabrechnung?", a: "Jahresabrechnung = Bilanz + Gewinn- und Verlustrechnung (GuV); gibt zusätzlich Aufschluss über den Geschäftserfolg der Periode, nicht nur den Vermögensstand am Stichtag." }
+    ]},
+    { name: "GuV, Deckungsbeitrag, Break-Even", prio: "mittel", cards: [
+      { q: "Wie wird der Deckungsbeitrag berechnet und wofür wird er genutzt?", a: "Deckungsbeitrag = Erlöse − variable Kosten. Zeigt den Beitrag eines Produkts zur Deckung der fixen Kosten; Grundlage für Preiskalkulation und Produktrentabilität." },
+      { q: "Was unterscheidet DB1, DB2 und DB3?", a: "Stufen der Deckungsbeitragsrechnung mit zunehmender Kostenzurechnung: DB1 (Stückebene), DB2 (Produktgruppenebene), DB3 (Gesamtunternehmensebene)." },
+      { q: "Wie wird der Break-Even-Point berechnet?", a: "Break-Even-Point = Fixkosten / Deckungsbeitrag pro Stück. Punkt, an dem die Erlöse genau die Gesamtkosten decken (Gewinn = 0)." }
     ]}
   ]
 },
