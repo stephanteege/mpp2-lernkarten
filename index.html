@@ -192,6 +192,14 @@ objektdiagramm: `<svg viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg">
 <line x1="190" y1="60" x2="230" y2="60" stroke="#1f1e1c" stroke-width="1.5"/>
 </svg>`,
 
+magischesdreieck: `<svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+<polygon points="160,20 30,240 290,240" fill="none" stroke="#5F5E5A" stroke-width="2"/>
+<rect x="120" y="0" width="80" height="26" rx="5" fill="#E6F1FB" stroke="#185FA5"/><text x="160" y="18" font-size="10" text-anchor="middle" fill="#0C447C">Zeit</text>
+<rect x="0" y="240" width="90" height="26" rx="5" fill="#E1F5EE" stroke="#0F6E56"/><text x="45" y="258" font-size="10" text-anchor="middle" fill="#085041">Kosten</text>
+<rect x="230" y="240" width="90" height="26" rx="5" fill="#FAEEDA" stroke="#854F0B"/><text x="275" y="258" font-size="10" text-anchor="middle" fill="#633806">Qualität/Umfang</text>
+<text x="160" y="150" font-size="9" text-anchor="middle" fill="#6b6a63">Projekt</text>
+</svg>`,
+
 bilanz: `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
 <text x="100" y="20" font-size="13" font-weight="600" text-anchor="middle" fill="#1f1e1c">Aktiva</text>
 <text x="300" y="20" font-size="13" font-weight="600" text-anchor="middle" fill="#1f1e1c">Passiva</text>
@@ -285,6 +293,50 @@ vonneumann: `<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
 <text x="245" y="118" font-size="9" fill="#993C1D">Ein Bus (Flaschenhals)</text>
 <line x1="100" y1="110" x2="140" y2="60" stroke="#5F5E5A" stroke-width="1.5"/>
 <line x1="280" y1="110" x2="240" y2="60" stroke="#5F5E5A" stroke-width="1.5"/>
+</svg>`,
+
+befehlszyklus: `<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+<circle cx="190" cy="100" r="80" fill="none" stroke="#c7c4b8" stroke-dasharray="4,3"/>
+<rect x="150" y="10" width="80" height="30" rx="6" fill="#E6F1FB" stroke="#185FA5"/><text x="190" y="30" font-size="9" text-anchor="middle" fill="#0C447C">1. Fetch</text>
+<rect x="260" y="85" width="80" height="30" rx="6" fill="#E1F5EE" stroke="#0F6E56"/><text x="300" y="105" font-size="9" text-anchor="middle" fill="#085041">2. Decode</text>
+<rect x="150" y="160" width="80" height="30" rx="6" fill="#FAEEDA" stroke="#854F0B"/><text x="190" y="180" font-size="9" text-anchor="middle" fill="#633806">3. Execute</text>
+<rect x="40" y="85" width="80" height="30" rx="6" fill="#F1EBFB" stroke="#6E3FA3"/><text x="80" y="105" font-size="9" text-anchor="middle" fill="#3E2568">4. Store</text>
+<text x="190" y="105" font-size="8" text-anchor="middle" fill="#6b6a63">Program Counter++</text>
+<path d="M225 20 A80 80 0 0 1 295 90" stroke="#5F5E5A" fill="none" marker-end="url(#arrow)"/>
+<path d="M300 118 A80 80 0 0 1 225 165" stroke="#5F5E5A" fill="none" marker-end="url(#arrow)"/>
+<path d="M155 175 A80 80 0 0 1 85 118" stroke="#5F5E5A" fill="none" marker-end="url(#arrow)"/>
+<path d="M80 82 A80 80 0 0 1 148 22" stroke="#5F5E5A" fill="none" marker-end="url(#arrow)"/>
+<defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5F5E5A"/></marker></defs>
+</svg>`,
+
+speicherhierarchie: `<svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
+<rect x="120" y="10" width="100" height="26" fill="#E6F1FB" stroke="#185FA5"/><text x="170" y="27" font-size="9" text-anchor="middle" fill="#0C447C">Register</text>
+<rect x="95" y="46" width="150" height="26" fill="#E1F5EE" stroke="#0F6E56"/><text x="170" y="63" font-size="9" text-anchor="middle" fill="#085041">Cache (L1/L2/L3)</text>
+<rect x="70" y="82" width="200" height="26" fill="#FAEEDA" stroke="#854F0B"/><text x="170" y="99" font-size="9" text-anchor="middle" fill="#633806">Arbeitsspeicher (RAM)</text>
+<rect x="45" y="118" width="250" height="26" fill="#FAECE7" stroke="#B5341A"/><text x="170" y="135" font-size="9" text-anchor="middle" fill="#712B13">Festplatte / SSD</text>
+<rect x="20" y="154" width="300" height="26" fill="#F1EFE8" stroke="#5F5E5A"/><text x="170" y="171" font-size="9" text-anchor="middle" fill="#2C2C2A">Externe Speicher / Archiv</text>
+<text x="330" y="30" font-size="7.5" fill="#6b6a63" transform="rotate(90 330 30)">schnell/teuer/klein</text>
+<text x="330" y="200" font-size="7.5" fill="#6b6a63" transform="rotate(90 330 200)">langsam/günstig/groß</text>
+</svg>`,
+
+bussysteme: `<svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="20" y="20" width="90" height="34" rx="6" fill="#E6F1FB" stroke="#185FA5"/><text x="65" y="41" font-size="9" text-anchor="middle" fill="#0C447C">CPU</text>
+<rect x="250" y="20" width="90" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56"/><text x="295" y="41" font-size="9" text-anchor="middle" fill="#085041">Speicher</text>
+<line x1="110" y1="30" x2="250" y2="30" stroke="#185FA5" stroke-width="4"/><text x="180" y="24" font-size="8" text-anchor="middle" fill="#0C447C">Datenbus</text>
+<line x1="110" y1="42" x2="250" y2="42" stroke="#0F6E56" stroke-width="4"/><text x="180" y="55" font-size="8" text-anchor="middle" fill="#085041">Adressbus</text>
+<line x1="110" y1="54" x2="250" y2="54" stroke="#854F0B" stroke-width="4"/><text x="180" y="68" font-size="8" text-anchor="middle" fill="#633806">Steuerbus</text>
+<text x="180" y="100" font-size="8" text-anchor="middle" fill="#6b6a63">Datenbus: Nutzdaten · Adressbus: wohin/woher · Steuerbus: Lese-/Schreib-/Taktsignale</text>
+</svg>`,
+
+bussystemverbindung: `<svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="140" y="15" width="100" height="34" rx="6" fill="#E6F1FB" stroke="#185FA5"/><text x="190" y="36" font-size="9" text-anchor="middle" fill="#0C447C">CPU</text>
+<rect x="140" y="115" width="100" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56"/><text x="190" y="136" font-size="9" text-anchor="middle" fill="#085041">Speicher</text>
+<rect x="10" y="65" width="90" height="34" rx="6" fill="#F1EFE8" stroke="#5F5E5A"/><text x="55" y="86" font-size="9" text-anchor="middle" fill="#2C2C2A">Eingabe</text>
+<rect x="280" y="65" width="90" height="34" rx="6" fill="#F1EFE8" stroke="#5F5E5A"/><text x="325" y="86" font-size="9" text-anchor="middle" fill="#2C2C2A">Ausgabe</text>
+<line x1="190" y1="49" x2="190" y2="115" stroke="#993C1D" stroke-width="4"/>
+<line x1="100" y1="82" x2="140" y2="49" stroke="#5F5E5A" stroke-width="1.5"/>
+<line x1="280" y1="82" x2="240" y2="49" stroke="#5F5E5A" stroke-width="1.5"/>
+<text x="240" y="90" font-size="8" fill="#993C1D">Daten-/Adress-/Steuerbus (gemeinsam bei Von-Neumann)</text>
 </svg>`,
 
 harvard: `<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
@@ -1029,7 +1081,8 @@ week1: {
       { q: "Welche Aufgabe hat die Transportschicht (Layer 4)?", a: "Sicherer Datentransport zwischen Endsystemen, Segmentierung großer Datenmengen, Fehlererkennung/-korrektur, Flusskontrolle und Multiplexing (TCP, UDP).", svg: DIAGRAMS.osidatentransport },
       { q: "Wie unterscheidet sich das TCP/IP-Modell vom OSI-Modell?", a: "TCP/IP hat nur 4 Schichten (Network Interface, Internet, Transport, Application) statt 7. OSI ist ein theoretisches Referenzmodell, TCP/IP wird praktisch genutzt; einige OSI-Schichten werden im TCP/IP-Modell zusammengefasst.", svg: DIAGRAMS.osivstcpip },
       { q: "Nenne je einen typischen Angriff auf der Sicherungs-, Netzwerk- und Anwendungsschicht.", a: "Sicherung: MAC-Spoofing/ARP-Spoofing. Netzwerk: IP-Spoofing, DDoS. Anwendung: SQL-Injection, Cross-Site-Scripting (XSS)." },
-      { q: "Auf welcher Schicht arbeitet ein Router und auf welcher ein Switch?", a: "Router: Netzwerkschicht (Layer 3, Routing anhand IP-Adressen). Switch: Sicherungsschicht (Layer 2, Weiterleitung anhand MAC-Adressen).", svg: DIAGRAMS.osirouterswitch }
+      { q: "Auf welcher Schicht arbeitet ein Router und auf welcher ein Switch?", a: "Router: Netzwerkschicht (Layer 3, Routing anhand IP-Adressen). Switch: Sicherungsschicht (Layer 2, Weiterleitung anhand MAC-Adressen).", svg: DIAGRAMS.osirouterswitch },
+      { q: "Was ist die Aufgabe der Sitzungsschicht (Schicht 5) im OSI-Modell?", a: "Auf- und Abbau sowie Verwaltung von Sitzungen (Sessions) zwischen zwei Kommunikationspartnern: Synchronisation des Datenaustauschs, Wiederaufnahme unterbrochener Verbindungen an definierten Prüfpunkten. In der Praxis (TCP/IP-Modell) wird diese Funktion meist von der Anwendungsschicht mit übernommen." }
     ]},
     { name: "TCP/IP-Modell, TCP vs. UDP", prio: "hoch", cards: [
       { q: "Was ist der Hauptunterschied zwischen TCP und UDP?", a: "TCP: verbindungsorientiert, zuverlässig, mit Fehlerkorrektur und Flusskontrolle (z. B. Webseiten, E-Mail). UDP: verbindungslos, schneller, ohne Zustellgarantie (z. B. Streaming, VoIP, Online-Gaming)." },
@@ -1040,7 +1093,14 @@ week1: {
       { q: "Wie viele Adressen bietet IPv4 und warum reicht das nicht mehr aus?", a: "IPv4 ist 32 Bit lang → ca. 4,3 Milliarden Adressen (2^32). Durch die wachsende Zahl vernetzter Geräte sind die Adressen weitgehend erschöpft.", svg: DIAGRAMS.ipadresse },
       { q: "Was ist der zentrale Vorteil von IPv6 gegenüber IPv4?", a: "128 Bit Adressraum (statt 32 Bit) → praktisch unbegrenzte Anzahl an Adressen, zudem vereinfachtes Header-Format und integrierte Sicherheitsfunktionen (IPSec)." },
       { q: "Was bedeutet CIDR-Notation, z. B. /24?", a: "Classless Inter-Domain Routing: die Zahl gibt an, wie viele Bits der Adresse für das Netzwerk reserviert sind. /24 = 24 Bit Netzanteil, 8 Bit für Hosts → 256 Adressen (254 nutzbar).", svg: DIAGRAMS.cidr },
-      { q: "Was ist der Unterschied zwischen öffentlicher und privater IP-Adresse?", a: "Private IP-Adressen (z. B. 192.168.x.x) sind nur innerhalb eines lokalen Netzwerks gültig, öffentliche IP-Adressen sind weltweit eindeutig und im Internet erreichbar." }
+      { q: "Was ist der Unterschied zwischen öffentlicher und privater IP-Adresse?", a: "Private IP-Adressen (z. B. 192.168.x.x) sind nur innerhalb eines lokalen Netzwerks gültig, öffentliche IP-Adressen sind weltweit eindeutig und im Internet erreichbar." },
+      { q: "Vergleiche IPv4 und IPv6 direkt: Gemeinsamkeiten und Unterschiede.", a: "Gemeinsamkeiten: beide identifizieren Geräte eindeutig im Netzwerk, beide werden für Routing verwendet, Koexistenz über Übergangstechniken (Dual Stack, Tunneling) möglich. Unterschiede: IPv4 = 32 Bit (~4,3 Mrd. Adressen, meist dezimal z. B. 192.168.0.1), IPv6 = 128 Bit (praktisch unbegrenzt, hexadezimal z. B. 2001:0db8::1); IPv6 hat ein vereinfachtes Header-Format, integriertes IPSec, keine Notwendigkeit für NAT und unterstützt Auto-Konfiguration von Adressen." }
+    ]},
+    { name: "WLAN, Vermittlungsarten, Mehrfachzugriffe", prio: "mittel", cards: [
+      { q: "Wie funktioniert WLAN grundlegend und welches Zugriffsverfahren nutzt es?", a: "Kabellose Datenübertragung per Funkwellen zwischen Endgeräten und einem Access Point nach dem Standard IEEE 802.11. Da beim Senden nicht gleichzeitig zugehört werden kann (keine Kollisionserkennung wie bei Kabel), nutzt WLAN CSMA/CA (Collision Avoidance): das Medium wird vor dem Senden abgehört und die Übertragung ggf. reserviert, um Kollisionen von vornherein zu vermeiden." },
+      { q: "Was ist der Unterschied zwischen Leitungsvermittlung und Paketvermittlung?", a: "Leitungsvermittlung: für die Dauer der Verbindung wird ein fester, exklusiver Übertragungsweg reserviert (z. B. klassisches Telefonnetz) – garantierte Bandbreite, aber ineffiziente Auslastung. Paketvermittlung: Daten werden in Pakete zerlegt, die unabhängig voneinander und ggf. über unterschiedliche Wege durchs Netz geleitet werden (z. B. Internet/IP) – effizientere Nutzung der Leitungen, keine feste Bandbreitenreservierung." },
+      { q: "Wie werden große Datenmengen (z. B. Videos) übers Netzwerk verschickt?", a: "Große Datenmengen werden in kleinere Segmente/Pakete zerlegt (Segmentierung auf Transportschicht, Fragmentierung auf Netzwerkschicht bei zu großer MTU), jedes Paket erhält Kennungen zur richtigen Reihenfolge, wird einzeln über das Netz geroutet und beim Empfänger wieder zusammengesetzt (Reassembly). Bei TCP zusätzlich mit Bestätigung und erneuter Übertragung verlorener Pakete." },
+      { q: "Was bedeutet 'Mehrfachzugriff' in Netzwerken und welche Verfahren gibt es neben CSMA?", a: "Verfahren, die regeln, wie sich mehrere Teilnehmer ein gemeinsames Übertragungsmedium teilen. Neben CSMA (Carrier Sense Multiple Access) gibt es z. B. TDMA (Time Division Multiple Access – feste Zeitschlitze pro Teilnehmer) und FDMA (Frequency Division Multiple Access – feste Frequenzbänder pro Teilnehmer), beide häufig im Mobilfunk eingesetzt." }
     ]},
     { name: "Hub, Switch, Router", prio: "hoch", cards: [
       { q: "Was ist der Unterschied zwischen Hub und Switch?", a: "Hub: leitet Daten ungefiltert an alle angeschlossenen Geräte weiter (Layer 1, keine Adressierung). Switch: leitet Daten gezielt anhand der MAC-Adresse nur an den Zielport weiter (Layer 2).", svg: DIAGRAMS.hubswitchrouter },
@@ -1089,9 +1149,12 @@ week1: {
       { q: "Wie unterstützt Kanban die kontinuierliche Verbesserung im Sinne von PDCA?", a: "Durch sichtbaren Arbeitsfluss und WIP-Begrenzung werden Engpässe schnell erkannt (Check) und Prozessanpassungen (Act) direkt im laufenden Betrieb vorgenommen." }
     ]},
     { name: "OZG, EGovG, RegMoG", prio: "hoch", cards: [
+      { q: "Was versteht man allgemein unter eGovernment?", a: "Nutzung von Informations- und Kommunikationstechnologien zur Abwicklung von Verwaltungsprozessen und zur digitalen Bereitstellung von Verwaltungsleistungen für Bürger, Unternehmen und andere Behörden – Ziel: effizientere, transparentere und leichter zugängliche Verwaltung." },
       { q: "Was ist das Ziel des Onlinezugangsgesetzes (OZG) und seit wann gilt es?", a: "Seit 2017: Verpflichtung von Bund, Ländern und Kommunen, Verwaltungsleistungen digital über Verwaltungsportale anzubieten. Umfasst rund 575 Leistungen in 14 Lebens- und 5 Geschäftslagen." },
+      { q: "Was ändert sich mit dem OZG 2.0 (Onlinezugangsgesetz-Novelle)?", a: "Die OZG-Novelle (OZG 2.0, seit 2024) verzichtet auf feste Umsetzungsfristen und Leistungskataloge, fokussiert stattdessen auf Nachnutzung bereits digitalisierter EfA-Leistungen, verpflichtende Standards (z. B. für Formulare/Bezahlfunktionen) und den Aufbau eines Servicekontos für Bund und Länder." },
       { q: "Was ist der 'Einer-für-alle' (EfA)-Ansatz beim OZG?", a: "Ein Bundesland entwickelt eine digitale Lösung für eine Verwaltungsleistung, andere Länder können diese Lösung nachnutzen, statt jeweils eigene zu bauen." },
       { q: "Was regelt das E-Government-Gesetz (EGovG) und seit wann?", a: "Seit 2013: fördert elektronische Verwaltung, u. a. elektronische Aktenführung (E-Akte), elektronische Kommunikation (De-Mail), einheitliche Schnittstellen zwischen Behörden." },
+      { q: "Was regelt das ThürEGovG (Thüringer E-Government-Gesetz) und welche 'harten Fakten' sollte man kennen?", a: "Landesgesetz, das die Vorgaben des Bundes-EGovG für Thüringen konkretisiert. Zentrale Punkte: Verpflichtung zur Bereitstellung eines einheitlichen Verwaltungsportals, elektronische Aktenführung (E-Akte) als Regelfall, Möglichkeit zum Einscannen und Ersetzen von Papierakten (ersetzendes Scannen), elektronische Kommunikationswege mit Behörden (z. B. De-Mail/Servicekonto), sowie Barrierefreiheit digitaler Angebote." },
       { q: "Was ist das Ziel des Registermodernisierungsgesetzes (RegMoG) und welches Prinzip steht dahinter?", a: "Seit 2021: Vernetzung/Modernisierung der Register zur effizienteren Datennutzung. Zentrales Prinzip: 'Once-Only' – Bürger geben Daten nur einmal an, Verwaltung nutzt sie mehrfach (über die Steuer-ID als Ordnungsmerkmal)." },
       { q: "Was besagt das EVA-Prinzip und wo ordnet es sich europarechtlich ein?", a: "EVA = Eingabe – Verarbeitung – Ausgabe: Grundprinzip der Datenverarbeitung, wonach jedes System Daten entgegennimmt (Eingabe), diese verarbeitet und ein Ergebnis liefert (Ausgabe). Im Verwaltungskontext ist es die technische Grundlage automatisierter Bescheide/Verfahren. Europarechtlicher Bezug: bei vollautomatisierten Entscheidungen (reine EVA-Verarbeitung ohne menschliches Zutun) greifen die Vorgaben aus Art. 22 DSGVO – Betroffene haben das Recht, nicht ausschließlich einer automatisierten Entscheidung mit rechtlicher Wirkung unterworfen zu werden, sofern keine Ausnahme (z. B. gesetzliche Grundlage, Einwilligung) vorliegt." }
     ]},
@@ -1103,7 +1166,10 @@ week1: {
     { name: "Beamten-/Tarifrecht", prio: "mittel", cards: [
       { q: "Was ist der Kernunterschied zwischen Beamten und Angestellten im öffentlichen Dienst?", a: "Beamte: besonderes öffentlich-rechtliches Dienstverhältnis (BeamtStG), kein Streikrecht, Treuepflicht, Versorgung nach Alimentationsprinzip. Angestellte: privatrechtlicher Arbeitsvertrag nach Tarifrecht (TVöD), mit Kündigungsschutz nach KSchG." },
       { q: "Was bedeutet das Alimentationsprinzip bei Beamten?", a: "Der Dienstherr ist verpflichtet, dem Beamten und seiner Familie eine angemessene Versorgung zu gewähren – auch im Ruhestand (verfassungsrechtlich verankert, Art. 33 GG).", svg: DIAGRAMS.alimentation },
-      { q: "Welche gesetzliche Grundlage regelt den Kündigungsschutz für Angestellte im öffentlichen Dienst?", a: "Kündigungsschutzgesetz (KSchG) in Verbindung mit dem Tarifvertrag für den öffentlichen Dienst (TVöD)." }
+      { q: "Welche gesetzliche Grundlage regelt den Kündigungsschutz für Angestellte im öffentlichen Dienst?", a: "Kündigungsschutzgesetz (KSchG) in Verbindung mit dem Tarifvertrag für den öffentlichen Dienst (TVöD)." },
+      { q: "Was sind Gebietskörperschaften und welche Ebenen gibt es in Deutschland?", a: "Körperschaften des öffentlichen Rechts mit einem festgelegten räumlichen Gebiet und eigener Hoheitsgewalt (Selbstverwaltungsrecht). Drei Ebenen: Bund, Länder und Kommunen (Gemeinden, Landkreise/Kreisfreie Städte) – jede Ebene hat eigene Aufgaben, Organe und Finanzhoheit im Rahmen der verfassungsmäßigen Ordnung." },
+      { q: "Was regelt das Vergaberecht und wozu dient es?", a: "Regeln für die Beschaffung von Bau-, Liefer- und Dienstleistungen durch öffentliche Auftraggeber (Behörden). Ziel: transparenter, wirtschaftlicher und diskriminierungsfreier Wettbewerb um öffentliche Aufträge. Wichtige Verfahrensarten: offenes Verfahren (öffentliche Ausschreibung), beschränkte Ausschreibung, freihändige Vergabe – je nach Auftragswert gelten unterschiedliche Schwellenwerte und Vorschriften (z. B. GWB, VgV, UVgO)." },
+      { q: "Nenne zentrale Grundsätze, an die sich die (IT-)Verwaltung halten muss.", a: "Rechtmäßigkeit des Verwaltungshandelns (Gesetzmäßigkeit), Wirtschaftlichkeit und Sparsamkeit, Verhältnismäßigkeit, Transparenz, Datenschutz/Datensicherheit, Barrierefreiheit digitaler Angebote, sowie das Once-Only-Prinzip und die Interoperabilität von IT-Systemen zwischen Behörden." }
     ]},
     { name: "BPMN", prio: "mittel", cards: [
       { q: "Was ist BPMN und wozu dient es?", a: "Business Process Model and Notation: Standard zur grafischen, standardisierten Modellierung von Geschäftsprozessen für Fachanwender und IT.", svg: DIAGRAMS.bpmn },
@@ -1170,6 +1236,25 @@ week2: {
       { q: "Was ist Pipelining und welchen Vorteil bringt es?", a: "Überlappende Ausführung mehrerer Befehle in aufeinanderfolgenden Verarbeitungsstufen (z. B. Fetch, Decode, Execute), wodurch der Befehlsdurchsatz erhöht wird, ohne die Taktfrequenz zu steigern.", svg: DIAGRAMS.pipelining },
       { q: "Wie hoch ist die typische Taktfrequenz eines aktuellen Prozessors?", a: "Meist im Bereich von ca. 2–5 GHz für Consumer-CPUs, teils höher im Turbo-Modus." }
     ]},
+    { name: "Befehlszyklus, Speicherhierarchie, Interrupts", prio: "mittel", cards: [
+      { q: "Beschreibe den Befehlszyklus (Fetch-Decode-Execute-Zyklus) einer CPU.", a: "1. Fetch: Befehl wird aus dem Speicher anhand des Befehlszählers (Program Counter) geladen. 2. Decode: Steuerwerk entschlüsselt den Befehl. 3. Execute: ALU/Steuerwerk führen den Befehl aus. 4. (Store: Ergebnis wird ggf. zurückgeschrieben.) Danach wird der Befehlszähler erhöht und der Zyklus beginnt erneut.", svg: DIAGRAMS.befehlszyklus },
+      { q: "Was ist die Speicherhierarchie und wie ist sie aufgebaut?", a: "Anordnung von Speichertypen nach Geschwindigkeit, Kosten und Kapazität: Register (schnellster, kleinster, teuerster) → Cache (L1/L2/L3) → Arbeitsspeicher (RAM) → Festplatte/SSD → externe Speicher/Archiv (langsamster, größter, günstigster). Ziel: schnelle, häufig genutzte Daten möglichst nah an der CPU halten.", svg: DIAGRAMS.speicherhierarchie },
+      { q: "Was ist ein Interrupt und wozu dient er?", a: "Ein Unterbrechungssignal, das den normalen Programmablauf der CPU stoppt, um ein dringendes Ereignis sofort zu behandeln (z. B. Tastatureingabe, Netzwerkpaket, Hardwarefehler). Nach Abarbeitung der Interrupt-Routine wird der ursprüngliche Programmzustand wiederhergestellt und fortgesetzt." },
+      { q: "Was ist der Unterschied zwischen ROM und RAM?", a: "ROM (Read-Only Memory): nichtflüchtiger Speicher, Inhalt bleibt auch ohne Strom erhalten, meist nur lesbar (z. B. BIOS/Firmware). RAM (Random Access Memory): flüchtiger Arbeitsspeicher, Inhalt geht bei Stromverlust verloren, schneller Lese-/Schreibzugriff für laufende Programme und Daten." },
+      { q: "Was versteht man allgemein unter 'Memory' im Rechnerkontext und welche Arten gibt es?", a: "Speicher zur Ablage von Daten und Programmen. Hauptarten: Primärspeicher (Arbeitsspeicher/RAM, flüchtig, schnell), Sekundärspeicher (Festplatte/SSD, nichtflüchtig, langsamer), Cache (sehr schnell, zwischen CPU und RAM), Register (in der CPU selbst, am schnellsten)." }
+    ]},
+    { name: "Bussysteme", prio: "mittel", cards: [
+      { q: "Was ist ein Bussystem und welche Bus-Arten unterscheidet man?", a: "Ein Bussystem verbindet Komponenten eines Rechners zum Datenaustausch. Hauptarten: Datenbus (überträgt die eigentlichen Daten), Adressbus (überträgt Speicheradressen, gibt an 'wohin/woher'), Steuerbus (überträgt Steuersignale wie Lese-/Schreibbefehle, Takt).", svg: DIAGRAMS.bussysteme },
+      { q: "Zeichne/beschreibe, wie CPU, Speicher und Ein-/Ausgabe über Busse verbunden sind.", a: "CPU ist über Datenbus, Adressbus und Steuerbus mit Arbeitsspeicher und den Ein-/Ausgabeeinheiten verbunden. Bei Von-Neumann teilen sich Programm und Daten denselben Bus (Flaschenhals), bei Harvard existieren getrennte Busse für Programme und Daten.", svg: DIAGRAMS.bussystemverbindung }
+    ]},
+    { name: "Hardware-Schnittstellen & Speichermedien", prio: "niedrig", cards: [
+      { q: "Erkläre kurz PCI und SATA.", a: "PCI (Peripheral Component Interconnect): interner Bus-Standard zum Anschluss von Erweiterungskarten (Grafik-, Netzwerkkarten) an das Mainboard, heute meist als PCIe (PCI Express). SATA (Serial ATA): Schnittstellenstandard zum Anschluss von Festplatten/SSDs ans Mainboard, löste das ältere parallele ATA/IDE ab." },
+      { q: "Erkläre kurz SCSI und USB.", a: "SCSI (Small Computer System Interface): älterer Standard zum Anschluss mehrerer Peripheriegeräte (v. a. Festplatten, Server/Storage-Bereich), weitgehend von SATA/SAS abgelöst. USB (Universal Serial Bus): weit verbreiteter serieller Standard für externe Geräte (Speicher, Eingabegeräte, Peripherie), unterstützt Hot-Plugging und verschiedene Geschwindigkeitsklassen (USB 2.0/3.x/4)." },
+      { q: "Erkläre kurz HDMI und DDR.", a: "HDMI (High Definition Multimedia Interface): digitale Schnittstelle zur Übertragung von Bild und Ton in hoher Qualität (z. B. PC an Monitor/TV). DDR (Double Data Rate): Bauart von Arbeitsspeicher (RAM), bei der Daten sowohl bei steigender als auch fallender Taktflanke übertragen werden → doppelte effektive Datenrate gegenüber SDR." },
+      { q: "Was ist der Unterschied zwischen HD und SSD?", a: "HD/HDD (Hard Disk Drive): magnetische, mechanische Festplatte mit rotierenden Scheiben und Schreib-/Lesekopf – günstiger pro GB, aber langsamer und mechanisch störanfälliger. SSD (Solid State Drive): Speicher auf Flash-Speicher-Basis ohne bewegliche Teile – deutlich schneller, robuster, aber teurer pro GB." },
+      { q: "Was ist RFID und wofür wird es genutzt?", a: "Radio-Frequency Identification: Technik zur berührungslosen Identifikation/Datenübertragung über Funkwellen zwischen einem Transponder (Tag) und einem Lesegerät, z. B. für Zutrittskontrollen, Warenwirtschaft, kontaktloses Bezahlen." },
+      { q: "Was ist ASCII?", a: "American Standard Code for Information Interchange: Zeichenkodierungsstandard, der 128 Zeichen (Buchstaben, Ziffern, Sonderzeichen, Steuerzeichen) jeweils auf einen 7-Bit-Wert abbildet – Grundlage vieler späterer Kodierungen wie UTF-8." }
+    ]},
     { name: "Zahlensysteme umrechnen", prio: "hoch", cards: [
       { q: "Wie rechnet man eine Dezimalzahl in Binär um?", a: "Fortlaufende Division durch 2, die Reste (von unten nach oben gelesen) ergeben die Binärzahl. Beispiel: 13 → 1101." },
       { q: "Rechne dein Alter in Binär um (Beispielrechnung 25).", a: "25 = 16+8+1 = 2⁴+2³+2⁰ → Binär: 11001." },
@@ -1182,10 +1267,29 @@ week2: {
       { q: "Wie wird eine n:m-Beziehung in ein relationales Schema umgesetzt?", a: "Über eine Zwischentabelle (Verknüpfungstabelle), die die Primärschlüssel beider beteiligter Tabellen als Fremdschlüssel enthält.", svg: DIAGRAMS.ernmauflösung },
       { q: "Wie hängen ER-Modell und Objektorientierung zusammen?", a: "Entitäten entsprechen Klassen, Attribute entsprechen Eigenschaften, Beziehungen entsprechen Assoziationen, Generalisierung/Spezialisierung entspricht Vererbung." }
     ]},
+    { name: "DBMS-Grundlagen, Datenunabhängigkeit", prio: "mittel", cards: [
+      { q: "Was ist ein Datenbankmanagementsystem (DBMS) und welche Aufgaben hat es?", a: "Software zur Verwaltung von Datenbanken: Speichern, Abfragen, Ändern und Löschen von Daten, Sicherstellung von Konsistenz, Zugriffskontrolle, Mehrbenutzerbetrieb und Ausfallsicherheit (z. B. MySQL, PostgreSQL, Oracle)." },
+      { q: "Was bedeutet Datenunabhängigkeit in Datenbanksystemen?", a: "Trennung zwischen der logischen Struktur der Daten (wie Anwendungen die Daten sehen) und der physischen Speicherung. Änderungen an der physischen Speicherung (z. B. Index hinzufügen) wirken sich nicht auf Anwendungsprogramme aus (physische Datenunabhängigkeit); Änderungen am logischen Schema wirken sich nicht auf einzelne Anwendungssichten aus (logische Datenunabhängigkeit)." },
+      { q: "Was sind die drei Ebenen des Datenbankentwurfs?", a: "1. Konzeptioneller Entwurf: fachliches ER-Modell, unabhängig von Technik. 2. Logischer Entwurf: Umsetzung in ein konkretes Datenmodell (z. B. relationales Schema mit Tabellen). 3. Physischer Entwurf: technische Umsetzung im DBMS (Indizes, Speicherorganisation, Performance-Optimierung)." },
+      { q: "Was besagen die ACID-Eigenschaften einer Datenbank-Transaktion?", a: "Atomicity (Atomarität): Transaktion wird ganz oder gar nicht ausgeführt. Consistency (Konsistenz): Datenbank bleibt in einem gültigen Zustand. Isolation: parallele Transaktionen beeinflussen sich nicht gegenseitig. Durability (Dauerhaftigkeit): einmal bestätigte Änderungen bleiben auch nach einem Systemausfall erhalten." },
+      { q: "Was ist referentielle Integrität?", a: "Sicherstellung, dass Fremdschlüssel-Beziehungen zwischen Tabellen konsistent bleiben – z. B. darf kein Datensatz auf einen nicht existierenden Datensatz einer anderen Tabelle verweisen. Wird vom DBMS über Fremdschlüssel-Constraints durchgesetzt." }
+    ]},
     { name: "SQL Grundlagen", prio: "mittel", cards: [
       { q: "Wie sieht eine einfache SELECT-Abfrage aus, die alle Kunden aus Berlin liefert?", a: "SELECT * FROM Kunden WHERE Stadt = 'Berlin';" },
       { q: "Wie fügt man mit SQL einen neuen Datensatz ein?", a: "INSERT INTO Tabelle (Spalte1, Spalte2) VALUES (Wert1, Wert2);" },
       { q: "Was macht ein JOIN und nenne einen Grundtyp.", a: "Verknüpft Zeilen aus zwei oder mehr Tabellen anhand eines gemeinsamen Schlüssels. INNER JOIN liefert nur Zeilen, die in beiden Tabellen übereinstimmende Werte haben." }
+    ]},
+    { name: "Betriebssystem, Compiler/Interpreter, Sprachen", prio: "niedrig", cards: [
+      { q: "Was sind die Kernaufgaben eines Betriebssystems?", a: "Verwaltung der Hardware-Ressourcen (Prozessor, Speicher, Ein-/Ausgabegeräte), Bereitstellung einer einheitlichen Schnittstelle für Anwendungsprogramme, Prozess- und Speicherverwaltung, Dateiverwaltung, Nutzerverwaltung/Rechtevergabe (z. B. Windows, Linux, macOS)." },
+      { q: "Was ist der Unterschied zwischen Compiler und Interpreter?", a: "Compiler: übersetzt den gesamten Quellcode vor der Ausführung in Maschinencode (schneller zur Laufzeit, z. B. C/C++). Interpreter: liest und führt den Quellcode Zeile für Zeile zur Laufzeit aus, ohne vollständige Vorab-Übersetzung (flexibler, aber langsamer, z. B. Python, JavaScript)." },
+      { q: "Was ist die Backus-Naur-Form (BNF)?", a: "Eine formale Notation zur Beschreibung der Syntax (Grammatik) von Programmiersprachen und formalen Sprachen, bestehend aus Regeln der Form Symbol ::= Ausdruck, die rekursiv definieren, welche Zeichenketten zur Sprache gehören." },
+      { q: "Was ist ein endlicher Automat und wofür wird er genutzt?", a: "Ein abstraktes Modell mit endlich vielen Zuständen, das anhand von Eingaben zwischen Zuständen wechselt (Zustandsübergänge). Wird u. a. zur Beschreibung von Sprachen/Grammatiken, in Compilern (lexikalische Analyse) und zur Modellierung von Abläufen (z. B. Ampelsteuerung, Workflow-Zustände) eingesetzt." },
+      { q: "Kurz erklärt: was sind HTML, CSS und C++?", a: "HTML (HyperText Markup Language): Auszeichnungssprache zur Strukturierung von Webseiteninhalten. CSS (Cascading Style Sheets): Sprache zur Gestaltung/Formatierung von HTML-Inhalten (Layout, Farben, Schriften). C++: kompilierte, objektorientierte Programmiersprache mit hoher Performance, u. a. für Systemsoftware, Spiele, eingebettete Systeme." }
+    ]},
+    { name: "Sortieralgorithmen, Datenkompression, Filesysteme", prio: "niedrig", cards: [
+      { q: "Nenne zwei klassische Sortieralgorithmen und ihre grundlegende Funktionsweise.", a: "Bubble Sort: vergleicht wiederholt benachbarte Elemente und vertauscht sie bei falscher Reihenfolge, bis die Liste sortiert ist (einfach, aber ineffizient, O(n²)). Quicksort: wählt ein Pivot-Element, teilt die Liste in kleinere/größere Elemente auf und sortiert die Teile rekursiv (im Schnitt deutlich schneller, O(n log n))." },
+      { q: "Was ist Datenkompression und welche zwei Grundarten gibt es?", a: "Reduktion der Datenmenge zur Speicher-/Übertragungsersparnis. Verlustfreie Kompression: Originaldaten können exakt wiederhergestellt werden (z. B. ZIP, PNG) – wichtig bei Texten/Programmen. Verlustbehaftete Kompression: entfernt für den Menschen kaum wahrnehmbare Informationen dauerhaft, höhere Kompressionsrate (z. B. JPEG, MP3)." },
+      { q: "Was ist ein Dateisystem (z. B. FAT) und wozu dient es?", a: "Struktur, mit der ein Betriebssystem Dateien auf einem Speichermedium organisiert, benennt und wiederfindet (Verzeichnisse, Metadaten, Speicherorte). FAT (File Allocation Table): einfaches, älteres Dateisystem mit einer Tabelle, die verzeichnet, welche Speicherblöcke zu welcher Datei gehören – weit verbreitet bei USB-Sticks/SD-Karten wegen breiter Kompatibilität." }
     ]},
     { name: "Data Warehouse, BI, ETL", prio: "mittel", cards: [
       { q: "Was ist ein Data Warehouse?", a: "Zentrale, historisierte Datenbank, die Daten aus verschiedenen Quellsystemen konsolidiert für Analyse- und Reportingzwecke (Business Intelligence)." },
@@ -1232,7 +1336,10 @@ week3: {
     { name: "Objektdiagramm, Use-Case, Aggregation/Komposition", prio: "mittel", cards: [
       { q: "Was ist der Unterschied zwischen Klassen- und Objektdiagramm?", a: "Klassendiagramm zeigt die generelle Struktur (Klassen, Beziehungen, Kardinalitäten). Objektdiagramm zeigt eine konkrete Momentaufnahme mit tatsächlichen Objektinstanzen und ihren Werten.", svg: DIAGRAMS.objektdiagramm },
       { q: "Was zeigt ein Use-Case-Diagramm?", a: "Die funktionalen Anforderungen eines Systems aus Nutzersicht: Akteure (Personen/Systeme) und die Anwendungsfälle (Use Cases), mit denen sie interagieren.", svg: DIAGRAMS.usecase },
-      { q: "Was ist der Unterschied zwischen Aggregation und Komposition?", a: "Aggregation: lose 'hat-ein'-Beziehung, Teile können unabhängig vom Ganzen existieren (leere Raute). Komposition: starke Abhängigkeit, Teile existieren nur mit dem Ganzen und werden mit ihm zerstört (gefüllte Raute).", svg: DIAGRAMS.aggkomp }
+      { q: "Was ist der Unterschied zwischen Aggregation und Komposition?", a: "Aggregation: lose 'hat-ein'-Beziehung, Teile können unabhängig vom Ganzen existieren (leere Raute). Komposition: starke Abhängigkeit, Teile existieren nur mit dem Ganzen und werden mit ihm zerstört (gefüllte Raute).", svg: DIAGRAMS.aggkomp },
+      { q: "Was ist eine einfache Assoziation im Klassendiagramm und wie unterscheidet sie sich von Aggregation/Komposition?", a: "Eine Assoziation ist die allgemeinste, neutrale Beziehung zwischen zwei Klassen (einfache Linie ohne Raute) – sie sagt nur aus, dass ein Zusammenhang besteht, ohne Aussage über Besitzverhältnis oder Lebensdauer. Aggregation und Komposition sind speziellere Formen der Assoziation, die zusätzlich ein 'Ganzes-Teil'-Verhältnis mit unterschiedlicher Bindungsstärke ausdrücken." },
+      { q: "Was ist der Unterschied zwischen Struktur- und Verhaltensdiagrammen in UML?", a: "Strukturdiagramme zeigen den statischen Aufbau eines Systems, z. B. Klassendiagramm, Objektdiagramm, Komponentendiagramm. Verhaltensdiagramme zeigen dynamische Abläufe/Interaktionen über Zeit, z. B. Use-Case-Diagramm, Sequenzdiagramm, Aktivitätsdiagramm, Zustandsdiagramm." },
+      { q: "Zeichne/beschreibe ein etwas komplexeres Klassendiagramm-Beispiel: 'Bibliothek' verwaltet mehrere 'Buch'-Objekte, ein 'Buch' kann von einem 'Nutzer' ausgeliehen werden.", a: "Drei Klassen: Bibliothek (1) — Komposition (gefüllte Raute) — Buch (0..*): Bücher existieren nur als Teil der Bibliothek. Nutzer (0..*) — Assoziation (einfache Linie mit Kardinalität) — Buch (0..*): ein Nutzer kann mehrere Bücher ausleihen, ein Buch ist zu einem Zeitpunkt bei höchstens einem Nutzer (0..1 auf der Buch-Seite zur konkreten Ausleihe)." }
     ]},
     { name: "OOP vs. prozedural, Sichtbarkeiten", prio: "hoch", cards: [
       { q: "Was ist der grundlegende Unterschied zwischen objektorientierter und prozeduraler Programmierung?", a: "Prozedural: Programm als Abfolge von Funktionen/Prozeduren, die auf Daten zugreifen. Objektorientiert: Daten und zugehörige Funktionen werden in Objekten/Klassen gekapselt." },
@@ -1261,7 +1368,8 @@ week3: {
       { q: "Was ist der Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung?", a: "Symmetrisch: ein gemeinsamer Schlüssel für Ver- und Entschlüsselung (z. B. AES) – schnell, aber Schlüsselaustausch ist heikel. Asymmetrisch: Schlüsselpaar aus öffentlichem und privatem Schlüssel (z. B. RSA) – sicherer Austausch, aber langsamer.", svg: DIAGRAMS.verschluesselung },
       { q: "Was ist eine PKI (Public Key Infrastructure)?", a: "System zur Verwaltung digitaler Zertifikate und Schlüssel, stellt sicher, dass ein öffentlicher Schlüssel eindeutig einer Identität zugeordnet werden kann.", svg: DIAGRAMS.pki },
       { q: "Welche Rollen gibt es innerhalb einer PKI?", a: "Zertifizierungsstelle (CA, stellt Zertifikate aus), Registrierungsstelle (RA, prüft Identitäten), Nutzer/Teilnehmer, Verzeichnisdienste (speichern/veröffentlichen Zertifikate)." },
-      { q: "Wofür wird eine digitale Signatur verwendet?", a: "Zum Nachweis der Authentizität und Integrität eines Dokuments/einer Nachricht – erstellt mit dem privaten Schlüssel des Absenders, prüfbar mit dessen öffentlichem Schlüssel." }
+      { q: "Wofür wird eine digitale Signatur verwendet?", a: "Zum Nachweis der Authentizität und Integrität eines Dokuments/einer Nachricht – erstellt mit dem privaten Schlüssel des Absenders, prüfbar mit dessen öffentlichem Schlüssel." },
+      { q: "Was ist eine Hashfunktion und wofür wird sie in der IT-Sicherheit genutzt?", a: "Eine Einwegfunktion, die beliebig lange Eingaben auf einen Wert fester Länge (Hashwert/Prüfsumme) abbildet – nicht umkehrbar und kollisionsresistent (idealerweise). Anwendungen: Integritätsprüfung von Dateien/Nachrichten (Änderung erzeugt anderen Hash), sichere Passwortspeicherung (Speicherung des Hashes statt Klartext) und Grundlage digitaler Signaturen (signiert wird der Hash, nicht das ganze Dokument)." }
     ]},
     { name: "ITIL, ISMS, IT-Grundschutz", prio: "mittel", cards: [
       { q: "Was ist ITIL und wofür steht es?", a: "Framework für IT-Service-Management (ITSM), Fokus auf effiziente IT-Prozesse entlang des Service Lifecycle (Strategie, Design, Transition, Betrieb, kontinuierliche Verbesserung)." },
@@ -1289,12 +1397,19 @@ week3: {
       { q: "Nenne je zwei Beispiele für Anlagevermögen, Umlaufvermögen, Eigenkapital und Fremdkapital.", a: "Anlagevermögen: Maschinen, Gebäude. Umlaufvermögen: Kasse, Vorräte. Eigenkapital: Gezeichnetes Kapital, Gewinnrücklagen. Fremdkapital: Bankdarlehen, Verbindlichkeiten aus Lieferungen.", svg: DIAGRAMS.bilanzbeispiele },
       { q: "Wie wird eine Schenkung von 50.000€ per Überweisung in der Bilanz eingeordnet?", a: "Aktivseite: Erhöhung der Kasse/Bank (Umlaufvermögen). Passivseite: Erhöhung des Eigenkapitals (da kein Rückzahlungsanspruch besteht).", svg: DIAGRAMS.bilanzschenkung },
       { q: "Was besagt die Bilanzgleichung?", a: "Aktiva = Passiva, also Summe des Vermögens entspricht immer der Summe des Kapitals (Eigen- + Fremdkapital).", svg: DIAGRAMS.bilanzgleichung },
-      { q: "Was ist der Unterschied zwischen Bilanz und Jahresabrechnung?", a: "Jahresabrechnung = Bilanz + Gewinn- und Verlustrechnung (GuV); gibt zusätzlich Aufschluss über den Geschäftserfolg der Periode, nicht nur den Vermögensstand am Stichtag." }
+      { q: "Was ist der Unterschied zwischen Bilanz und Jahresabrechnung?", a: "Jahresabrechnung = Bilanz + Gewinn- und Verlustrechnung (GuV); gibt zusätzlich Aufschluss über den Geschäftserfolg der Periode, nicht nur den Vermögensstand am Stichtag." },
+      { q: "Was ist ein Jahresabschluss und woraus besteht er?", a: "Der Jahresabschluss fasst am Ende eines Geschäftsjahres die wirtschaftliche Lage eines Unternehmens zusammen. Bestandteile bei Kapitalgesellschaften: Bilanz (Vermögens-/Kapitallage zum Stichtag), Gewinn- und Verlustrechnung/GuV (Erfolg der Periode) und Anhang; bei größeren Unternehmen zusätzlich Lagebericht." },
+      { q: "Was sind Rechnungsabgrenzungsposten (RAP) und Rückstellungen?", a: "Rechnungsabgrenzungsposten: gleichen zeitliche Unterschiede zwischen Zahlung und wirtschaftlicher Zugehörigkeit einer Periode aus (z. B. im Dezember gezahlte Miete für Januar → aktiver RAP). Rückstellungen: Passivposten für ungewisse künftige Verpflichtungen, deren Höhe/Fälligkeit noch nicht sicher feststeht (z. B. Rückstellung für drohende Prozesskosten)." }
     ]},
     { name: "GuV, Deckungsbeitrag, Break-Even", prio: "mittel", cards: [
       { q: "Wie wird der Deckungsbeitrag berechnet und wofür wird er genutzt?", a: "Deckungsbeitrag = Erlöse − variable Kosten. Zeigt den Beitrag eines Produkts zur Deckung der fixen Kosten; Grundlage für Preiskalkulation und Produktrentabilität." },
       { q: "Was unterscheidet DB1, DB2 und DB3?", a: "Stufen der Deckungsbeitragsrechnung mit zunehmender Kostenzurechnung: DB1 (Stückebene), DB2 (Produktgruppenebene), DB3 (Gesamtunternehmensebene)." },
-      { q: "Wie wird der Break-Even-Point berechnet?", a: "Break-Even-Point = Fixkosten / Deckungsbeitrag pro Stück. Punkt, an dem die Erlöse genau die Gesamtkosten decken (Gewinn = 0)." }
+      { q: "Rechenbeispiel: Ein Produkt kostet 20€ variable Kosten und wird für 50€ verkauft, Fixkosten liegen bei 9.000€. Wie hoch ist der Deckungsbeitrag pro Stück und der Break-Even-Point?", a: "Deckungsbeitrag pro Stück = 50€ − 20€ = 30€. Break-Even-Point = Fixkosten / DB pro Stück = 9.000€ / 30€ = 300 Stück. Ab dem 301. verkauften Stück wird Gewinn erzielt." },
+      { q: "Wie wird der Break-Even-Point berechnet?", a: "Break-Even-Point = Fixkosten / Deckungsbeitrag pro Stück. Punkt, an dem die Erlöse genau die Gesamtkosten decken (Gewinn = 0)." },
+      { q: "Was sind Kostenarten und wie werden sie grob unterteilt?", a: "Kostenarten erfassen, welche Kosten in welcher Höhe angefallen sind. Grundunterteilungen: fixe Kosten (unabhängig von der Produktionsmenge, z. B. Miete) vs. variable Kosten (abhängig von der Menge, z. B. Materialkosten); sowie Einzelkosten (einem Produkt direkt zurechenbar, z. B. Material) vs. Gemeinkosten (nicht direkt zurechenbar, z. B. Verwaltung)." },
+      { q: "Was sind Herstellungskosten und was zählt dazu?", a: "Alle Kosten, die direkt und indirekt der Herstellung eines Produkts zugerechnet werden: Materialeinzelkosten, Fertigungseinzelkosten sowie anteilige Material- und Fertigungsgemeinkosten. Vertriebs- und Verwaltungskosten zählen NICHT zu den Herstellungskosten." },
+      { q: "Was zeigen Liquidität und Rentabilität und worin unterscheiden sie sich?", a: "Liquidität: Fähigkeit eines Unternehmens, seinen kurzfristigen Zahlungsverpflichtungen jederzeit nachzukommen (Zahlungsfähigkeit) – z. B. Liquidität 1./2./3. Grades als Kennzahlen. Rentabilität: Verhältnis von Gewinn zu eingesetztem Kapital, misst die Wirtschaftlichkeit (z. B. Eigenkapitalrentabilität, Gesamtkapitalrentabilität). Ein Unternehmen kann rentabel, aber trotzdem kurzfristig illiquide sein (und umgekehrt)." },
+      { q: "Was ist der ROI (Return on Investment) und wie wird er berechnet?", a: "Kennzahl zur Beurteilung der Rentabilität einer Investition: ROI = Gewinn / eingesetztes Kapital (× 100 für Prozentwert). Zeigt, wie effizient eingesetztes Kapital Gewinn erwirtschaftet – wichtig für Investitionsentscheidungen und Wirtschaftlichkeitsvergleiche." }
     ]}
   ]
 },
@@ -1303,7 +1418,9 @@ optional: {
   topics: [
     { name: "Projektmanagement", prio: "niedrig", cards: [
       { q: "Was ist der Zweck der Netzplantechnik im Projektmanagement?", a: "Darstellung von Vorgängen, ihren Abhängigkeiten und zeitlichem Ablauf, um den kritischen Pfad (die zeitbestimmende Vorgangskette) zu ermitteln." },
-      { q: "Was umfasst Projektcontrolling?", a: "Laufende Überwachung von Terminen, Kosten und Qualität eines Projekts sowie Steuerung bei Abweichungen vom Plan." }
+      { q: "Was umfasst Projektcontrolling?", a: "Laufende Überwachung von Terminen, Kosten und Qualität eines Projekts sowie Steuerung bei Abweichungen vom Plan." },
+      { q: "Was ist das 'Magische Dreieck' im Projektmanagement?", a: "Die drei zentralen, sich gegenseitig beeinflussenden Steuerungsgrößen eines Projekts: Zeit, Kosten und Qualität/Leistungsumfang. Eine Verbesserung einer Größe geht meist zulasten mindestens einer anderen (z. B. schnellere Fertigstellung → höhere Kosten oder geringerer Umfang).", svg: DIAGRAMS.magischesdreieck },
+      { q: "Welche Ressourcen muss eine Projektleitung bei einem Projekt vor allem im Blick behalten?", a: "Personal (Verfügbarkeit, Qualifikation, Auslastung der Teammitglieder), Zeit (Termine, kritischer Pfad, Meilensteine) und Kosten (Budget, Kostenverfolgung, Abweichungsanalyse) – entspricht den drei Ecken des Magischen Dreiecks, ergänzt um die Steuerung von Risiken und Kommunikation im Projektteam." }
     ]},
     { name: "Systemanalyse/-entwurf", prio: "niedrig", cards: [
       { q: "Was ist Requirements Engineering?", a: "Systematisches Erheben, Dokumentieren, Prüfen und Verwalten von Anforderungen an ein System während der Analysephase." },
@@ -1324,7 +1441,10 @@ optional: {
     { name: "Volkswirtschaftslehre", prio: "niedrig", cards: [
       { q: "Was zeigt der einfache Wirtschaftskreislauf?", a: "Den Güter- und Geldfluss zwischen den Wirtschaftssubjekten, z. B. Haushalte liefern Produktionsfaktoren an Unternehmen und erhalten dafür Einkommen, Unternehmen liefern Güter gegen Konsumausgaben." },
       { q: "Nenne die drei klassischen Marktformen.", a: "Polypol (viele Anbieter, viele Nachfrager), Oligopol (wenige Anbieter), Monopol (ein Anbieter)." },
-      { q: "Erkläre die drei Marktformen jeweils mit einem Beispiel und ihrer Preiswirkung.", a: "Polypol: viele kleine Anbieter, kein Einzelner beeinflusst den Preis, z. B. Wochenmarkt/Landwirtschaft → Preis bildet sich frei über Angebot/Nachfrage. Oligopol: wenige große Anbieter mit gegenseitiger Abhängigkeit, z. B. Mobilfunkanbieter/Tankstellen → Preise oft ähnlich, Gefahr von Absprachen. Monopol: ein einziger Anbieter ohne Konkurrenz, z. B. früher Deutsche Bahn im Fernverkehr, heute z. B. lokale Netzbetreiber → Anbieter kann Preis weitgehend selbst bestimmen (daher oft reguliert)." }
+      { q: "Erkläre die drei Marktformen jeweils mit einem Beispiel und ihrer Preiswirkung.", a: "Polypol: viele kleine Anbieter, kein Einzelner beeinflusst den Preis, z. B. Wochenmarkt/Landwirtschaft → Preis bildet sich frei über Angebot/Nachfrage. Oligopol: wenige große Anbieter mit gegenseitiger Abhängigkeit, z. B. Mobilfunkanbieter/Tankstellen → Preise oft ähnlich, Gefahr von Absprachen. Monopol: ein einziger Anbieter ohne Konkurrenz, z. B. früher Deutsche Bahn im Fernverkehr, heute z. B. lokale Netzbetreiber → Anbieter kann Preis weitgehend selbst bestimmen (daher oft reguliert)." },
+      { q: "Was versteht man unter dem Homo Oeconomicus?", a: "Modellannahme der Wirtschaftswissenschaften: ein rein rational handelnder Mensch, der über vollständige Informationen verfügt und stets versucht, seinen eigenen Nutzen (Gewinn/Zufriedenheit) zu maximieren. Dient als vereinfachtes Erklärungsmodell für ökonomisches Verhalten, wird aber wegen seiner Realitätsferne (Emotionen, begrenzte Rationalität) kritisiert." },
+      { q: "Was besagt das Paretoprinzip (80/20-Regel)?", a: "Mit etwa 20% des Gesamtaufwands lassen sich bereits etwa 80% der Ergebnisse erzielen; die restlichen 20% der Ergebnisse erfordern unverhältnismäßig viel (80%) zusätzlichen Aufwand. Wird häufig zur Priorisierung genutzt (z. B. Fokus auf die wichtigsten 20% der Aufgaben/Kunden mit dem größten Wirkungsgrad)." },
+      { q: "Was ist der Unterschied zwischen Effizienz und Effektivität?", a: "Effektivität: 'die richtigen Dinge tun' – das gesetzte Ziel wird erreicht, unabhängig vom Ressourcenaufwand. Effizienz: 'die Dinge richtig tun' – ein Ziel wird mit möglichst geringem Ressourcenaufwand (Zeit, Kosten, Personal) erreicht. Ein Vorgehen kann effektiv, aber ineffizient sein (Ziel erreicht, aber mit viel zu hohem Aufwand) und umgekehrt." }
     ]},
     { name: "Corporate Governance / Controlling", prio: "niedrig", cards: [
       { q: "Was versteht man unter Corporate Governance?", a: "Rahmenwerk aus Regeln und Prozessen zur verantwortungsvollen Leitung und Kontrolle eines Unternehmens, mit Fokus auf Transparenz und Interessenausgleich der Stakeholder." },
